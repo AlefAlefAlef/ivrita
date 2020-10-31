@@ -30,7 +30,7 @@ export default class Ivrita {
       }
 
       if (newVal !== node.data) {
-        node.data = newVal;
+        node.data = `${newVal}`;
       }
     });
   }
@@ -54,11 +54,36 @@ export default class Ivrita {
     }
   }
 
-  static genderize(text, gender) {
+  static genderize(text, gender, doneFunc) {
     let genderized = text;
-    rules.forEach(([pattern, male, female]) => {
-      genderized = genderized.replace(pattern, gender === Ivrita.FEMALE ? female : male);
+    let prev = text;
+    const used = [];
+    rules.forEach(([pattern, male, female, neutral]) => {
+      let replacement;
+      switch (gender) {
+        case Ivrita.FEMALE:
+          replacement = female;
+          break;
+
+        case Ivrita.MALE:
+          replacement = male;
+          break;
+
+        case Ivrita.NEUTRAL:
+        default:
+          if (neutral) replacement = neutral;
+          else replacement = `${male}/${female}`;
+          break;
+      }
+      genderized = genderized.replace(pattern, replacement);
+      if (typeof doneFunc !== 'undefined' && prev !== genderized) {
+        used.push(pattern);
+        prev = genderized;
+      }
     });
+    if (typeof doneFunc !== 'undefined') {
+      doneFunc(used);
+    }
     return genderized;
   }
 }
