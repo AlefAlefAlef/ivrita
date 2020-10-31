@@ -1,8 +1,8 @@
 const SEP = '[\\\\/.]';
 const EXTSEP = '[\\\\./—־-]';
-const HEB = '[א-ת]';
+const HEB = '[א-ת\'׳״"]';
 const FIN = '[ןףךםץ]';
-const B = '(?=^|$|\b|[^א-ת?\u0590-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\u05EF-\u05F2\uFB2A-\uFB4F])'; // Boundary, like "\b" in regex. All unicode characters which can be part of a hebrew word
+const B = '(?=^|$|\b|[^א-ת\'׳״"?\u0590-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\u05EF-\u05F2\uFB2A-\uFB4F])'; // Boundary, like "\b" in regex. All unicode characters which can be part of a hebrew word
 
 export default [
   // Whole Words
