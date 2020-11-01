@@ -408,4 +408,7 @@ test('Unchanged', () => {
 
   expect(Ivrita.genderize('מע”מ', Ivrita.FEMALE)).toBe('מע”מ'); // unchanged
   expect(Ivrita.genderize('מע”מ', Ivrita.MALE)).toBe('מע”מ'); // unchanged
+
+  expect(Ivrita.genderize('פ', Ivrita.FEMALE)).toBe('פ'); // unchanged
+  expect(Ivrita.genderize('פ', Ivrita.MALE)).toBe('פ'); // unchanged
 });
