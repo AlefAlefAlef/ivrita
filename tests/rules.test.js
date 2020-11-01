@@ -402,4 +402,10 @@ test('Unchanged', () => {
 
   expect(Ivrita.genderize('תפקיד/ים', Ivrita.FEMALE)).toBe('תפקיד/ים'); // unchanged
   expect(Ivrita.genderize('תפקיד/ים', Ivrita.MALE)).toBe('תפקיד/ים'); // unchanged
+
+  expect(Ivrita.genderize('דרושים׳', Ivrita.FEMALE)).toBe('דרושים׳'); // unchanged
+  expect(Ivrita.genderize('דרושים׳', Ivrita.MALE)).toBe('דרושים׳'); // unchanged
+
+  expect(Ivrita.genderize('מע”מ', Ivrita.FEMALE)).toBe('מע”מ'); // unchanged
+  expect(Ivrita.genderize('מע”מ', Ivrita.MALE)).toBe('מע”מ'); // unchanged
 });
