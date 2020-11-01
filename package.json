@@ -1,0 +1,41 @@
+{
+  "name": "ivrita",
+  "version": "1.0.0",
+  "description": "Ivrita is an open-source set of typographic tools for gender equality in Hebrew",
+  "main": "src/ivrita.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "test": "jest",
+    "test-watch": "jest --watch --notify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlefAlefAlef/ivrita.git"
+  },
+  "author": "Reuven Karasik and Avraham Cornfeld",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/AlefAlefAlef/ivrita/issues"
+  },
+  "homepage": "https://github.com/AlefAlefAlef/ivrita#readme",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.1.0",
+    "jest": "^26.6.1",
+    "jest-cli": "^26.6.1",
+    "webpack": "^5.3.2",
+    "webpack-cli": "^4.1.0"
+  }
+}
