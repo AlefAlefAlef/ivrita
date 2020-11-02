@@ -11,6 +11,9 @@ test('Whole words', () => {
   expect(Ivrita.genderize('איש/אשת', Ivrita.MALE)).toBe('איש');
   expect(Ivrita.genderize('אשת/איש', Ivrita.FEMALE)).toBe('אשת');
   expect(Ivrita.genderize('אשת/איש', Ivrita.MALE)).toBe('איש');
+  expect(Ivrita.genderize('גבר/אישה', Ivrita.FEMALE)).toBe('אישה');
+  expect(Ivrita.genderize('גבר/אישה', Ivrita.MALE)).toBe('גבר');
+  expect(Ivrita.genderize('איש/אישה', Ivrita.MALE)).toBe('איש');
 
   // Female
   expect(Ivrita.genderize('רוצ/י', Ivrita.FEMALE)).toBe('רוצי');

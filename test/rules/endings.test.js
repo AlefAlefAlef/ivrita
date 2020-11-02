@@ -57,11 +57,17 @@ test('Word endings', () => {
   expect(Ivrita.genderize('עשה/תה', Ivrita.FEMALE)).toBe('עשתה');
   expect(Ivrita.genderize('עשה/תה', Ivrita.MALE)).toBe('עשה');
 
-  expect(Ivrita.genderize('הלווה/תה', Ivrita.FEMALE)).toBe('הלוותה');
-  expect(Ivrita.genderize('הלווה/תה', Ivrita.MALE)).toBe('הלווה');
-
   expect(Ivrita.genderize('בכה/תה', Ivrita.FEMALE)).toBe('בכתה');
   expect(Ivrita.genderize('בכה/תה', Ivrita.MALE)).toBe('בכה');
+
+  expect(Ivrita.genderize('רצ/תה', Ivrita.FEMALE)).toBe('רצתה');
+  expect(Ivrita.genderize('רצ/תה', Ivrita.MALE)).toBe('רצה');
+
+  expect(Ivrita.genderize('כפ/תה', Ivrita.FEMALE)).toBe('כפתה');
+  expect(Ivrita.genderize('כפ/תה', Ivrita.MALE)).toBe('כפה');
+
+  expect(Ivrita.genderize('הלווה/תה', Ivrita.FEMALE)).toBe('הלוותה');
+  expect(Ivrita.genderize('הלווה/תה', Ivrita.MALE)).toBe('הלווה');
 
   expect(Ivrita.genderize('יקירי/תי', Ivrita.FEMALE)).toBe('יקירתי');
   expect(Ivrita.genderize('יקירי/תי', Ivrita.MALE)).toBe('יקירי');

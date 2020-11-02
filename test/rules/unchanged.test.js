@@ -12,9 +12,6 @@ test('Multiple words slash', () => {
   expect(Ivrita.genderize('אבן/בתיאבון', Ivrita.FEMALE)).toBe('אבן/בתיאבון');
   expect(Ivrita.genderize('אבן/בתיאבון', Ivrita.MALE)).toBe('אבן/בתיאבון');
 
-  expect(Ivrita.genderize('גבר/אישה', Ivrita.FEMALE)).toBe('גבר/אישה');
-  expect(Ivrita.genderize('גבר/אישה', Ivrita.MALE)).toBe('גבר/אישה');
-
   expect(Ivrita.genderize('יספרו/נהרו', Ivrita.FEMALE)).toBe('יספרו/נהרו'); // unchanged
   expect(Ivrita.genderize('יספרו/נהרו', Ivrita.MALE)).toBe('יספרו/נהרו'); // unchanged
 
