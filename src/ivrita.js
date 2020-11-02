@@ -1,5 +1,9 @@
 import rules from './rules';
 
+const PROTECTED = '__IVRITA_PROTECTED__';
+const UNMATCHED = '{__IVRITA_UNMATCHED__}';
+const protectedRegexp = new RegExp(`\\{${PROTECTED}:(\\d+):${PROTECTED}\\}`, 'g');
+
 export default class Ivrita {
   static NEUTRAL = 0;
 
@@ -54,9 +58,21 @@ export default class Ivrita {
     }
   }
 
-  static genderize(text, gender, doneFunc) {
-    let genderized = text;
-    let prev = text;
+  static genderize(originalText, gender, doneFunc) {
+    let genderized = originalText;
+    const bracedStrings = [];
+    if (genderized.includes(UNMATCHED) || genderized.includes(PROTECTED)) {
+      return originalText;
+    }
+
+    if (genderized.includes('{')) {
+      // Remove braced parts from text and save them aside
+      genderized = genderized.replace(/\{(.*?)\}/g, (matched, string, index) => {
+        bracedStrings[index] = string;
+        return `{${PROTECTED}:${index}:${PROTECTED}}`;
+      });
+    }
+    let prev = originalText;
     const used = [];
     rules.forEach(([pattern, male, female, neutral]) => {
       let replacement;
@@ -81,6 +97,23 @@ export default class Ivrita {
         prev = genderized;
       }
     });
+
+    if (bracedStrings.length) {
+      // Bring back braced parts
+      genderized = genderized.replace(protectedRegexp, (matched, group) => {
+        const parsedIndex = parseInt(group, 10);
+        if (bracedStrings[parsedIndex]) {
+          return bracedStrings[parsedIndex];
+        }
+        return UNMATCHED;
+      });
+    }
+
+    // We failed, revert back to original text
+    if (genderized.includes(UNMATCHED) || genderized.includes(PROTECTED)) {
+      return originalText;
+    }
+
     if (typeof doneFunc !== 'undefined') {
       doneFunc(used);
     }
