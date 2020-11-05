@@ -45,4 +45,7 @@ test('Final letters and abbreviations', () => {
 
   expect(Ivrita.genderize('פ', Ivrita.FEMALE)).toBe('פ'); // unchanged
   expect(Ivrita.genderize('פ', Ivrita.MALE)).toBe('פ'); // unchanged
+
+  expect(Ivrita.genderize('דסקטופ', Ivrita.FEMALE)).toBe('דסקטופ'); // unchanged
+  expect(Ivrita.genderize('דסקטופ', Ivrita.MALE)).toBe('דסקטופ'); // unchanged
 });

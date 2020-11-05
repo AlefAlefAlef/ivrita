@@ -20,8 +20,3 @@ test('Brackets inside braces', () => {
   expect(Ivrita.genderize('{[בן|בת]}', Ivrita.FEMALE)).toBe('[בן|בת]');
   expect(Ivrita.genderize('{[בן|בת]}', Ivrita.MALE)).toBe('[בן|בת]');
 });
-
-test('Strings with Ivrita constants stay the same', () => {
-  expect(Ivrita.genderize('מי שכתב/ה את הטקסט הזה לא {רצה/תה} שיהיה לנו קל {__IVRITA_PROTECTED__:333:__IVRITA_PROTECTED__}', Ivrita.MALE)).toBe('מי שכתב/ה את הטקסט הזה לא {רצה/תה} שיהיה לנו קל {__IVRITA_PROTECTED__:333:__IVRITA_PROTECTED__}');
-  expect(Ivrita.genderize('מי שכתב/ה את הטקסט הזה לא {רצה/תה} שיהיה לנו קל {__IVRITA_PROTECTED__:333:__IVRITA_PROTECTED__}', Ivrita.FEMALE)).toBe('מי שכתב/ה את הטקסט הזה לא {רצה/תה} שיהיה לנו קל {__IVRITA_PROTECTED__:333:__IVRITA_PROTECTED__}');
-});
