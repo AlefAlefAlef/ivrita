@@ -191,6 +191,9 @@ test('Word endings', () => {
   expect(Ivrita.genderize('פנויים/ות', Ivrita.FEMALE)).toBe('פנויות');
   expect(Ivrita.genderize('פנויים/ות', Ivrita.MALE)).toBe('פנויים');
 
+  expect(Ivrita.genderize('ערביים/ות', Ivrita.FEMALE)).toBe('ערביות');
+  expect(Ivrita.genderize('ערביים/ות', Ivrita.MALE)).toBe('ערביים');
+
   expect(Ivrita.genderize('סטודנטים/ות', Ivrita.FEMALE)).toBe('סטודנטיות');
   expect(Ivrita.genderize('סטודנטים/ות', Ivrita.MALE)).toBe('סטודנטים');
   expect(Ivrita.genderize('סטודנטים/יות', Ivrita.FEMALE)).toBe('סטודנטיות');
