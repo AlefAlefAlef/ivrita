@@ -27,7 +27,7 @@
 Installing the library on your website requires 3 steps:
 1. Include the minified JS file:
     ```html
-    <script src="https://ivrita.alefalefalef.co.il/dist/ivrita.min.js"></script>
+    <script src="https://ivrita.alefalefalef.co.il/ivrita.min.js"></script>
     ```
 2. Initialize the Ivrita object:
     ```JavaScript
