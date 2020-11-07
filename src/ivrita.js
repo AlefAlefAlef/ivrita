@@ -1,18 +1,25 @@
-import rules from './rules';
+import rules, { SEP } from './rules';
+
+const separatorRegex = new RegExp(SEP);
 
 const PROTECTED = '__IVRITA_PROTECTED__';
 const protectedRegexp = new RegExp(`\\{${PROTECTED}:(\\d+):${PROTECTED}\\}`, 'g');
 
 export default class Ivrita {
-  static NEUTRAL = 0;
+  static ORIGINAL = 0;
 
   static MALE = 1;
 
   static FEMALE = 2;
 
+  static NEUTRAL = 3;
+
   relevantNodes = [];
 
+  elem = {};
+
   constructor(elem = document.body) {
+    this.element = elem;
     if (elem instanceof HTMLElement) {
       this.registerTextNodes(elem);
     } else {
@@ -23,17 +30,17 @@ export default class Ivrita {
   setMode(gender) {
     this.relevantNodes.forEach(([node, original]) => {
       let newVal;
-      switch (gender) {
-        case Ivrita.NEUTRAL:
-          newVal = original;
-          break;
 
-        default:
-          newVal = Ivrita.genderize(original, gender);
+      if (gender === Ivrita.ORIGINAL) {
+        newVal = original;
+      } else if (gender === Ivrita.NEUTRAL && !original.includes('{') && !original.includes('[')) {
+        newVal = original;
+      } else {
+        newVal = Ivrita.genderize(original, gender);
       }
 
       if (newVal !== node.data) {
-        node.data = `${newVal}`;
+        node.data = newVal;
       }
     });
   }
@@ -45,7 +52,7 @@ export default class Ivrita {
       NodeFilter.SHOW_TEXT,
       {
         acceptNode: (node) => (
-          (node.textContent.length > 0 && node.textContent.trim())
+          (node.textContent.trim().length > 0 && separatorRegex.test(node.textContent))
             ? NodeFilter.FILTER_ACCEPT
             : NodeFilter.FILTER_SKIP),
       },
