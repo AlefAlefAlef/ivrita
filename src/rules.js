@@ -1,6 +1,6 @@
 export const SEP = '[\\\\/.]';
+export const HEB = '[א-ת]';
 const EXTSEP = '[\\\\./—־-]';
-const HEB = '[א-ת]';
 const G = '\'‎"”׳״'; // "Gershayim"
 const W = `[א-ת${G}]`;
 const FIN = '[ןףךםץ]';
