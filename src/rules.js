@@ -1,4 +1,4 @@
-const SEP = '[\\\\/.]';
+export const SEP = '[\\\\/.]';
 const EXTSEP = '[\\\\./—־-]';
 const HEB = '[א-ת]';
 const G = '\'‎"”׳״'; // "Gershayim"
