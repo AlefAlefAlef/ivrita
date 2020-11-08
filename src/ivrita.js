@@ -25,6 +25,7 @@ export default class Ivrita {
     } else {
       throw new Error(`Passed argument is not an HTMLElement. Did you mean: 'document.querySelector("${elem.toString()}")'?`);
     }
+    this.setFontFeatureSettings(true);
   }
 
   setMode(gender) {
@@ -62,6 +63,24 @@ export default class Ivrita {
     while ((currentNode = walk.nextNode())) {
       this.relevantNodes.push([currentNode, currentNode.data]);
     }
+  }
+
+  setFontFeatureSettings(isActive) {
+    const originalFFS = this.element.style.fontFeatureSettings;
+    let result = originalFFS.slice();
+
+    if (isActive) {
+      if (!originalFFS.includes('titl')) {
+        if (originalFFS) { // Only add a space if property exists
+          result += ', ';
+        }
+        result += '"titl"';
+      }
+    } else if (originalFFS.includes('titl')) {
+      result = originalFFS.replace(/(, )?"?'?titl"?'?/, '');
+    }
+
+    this.element.style.fontFeatureSettings = result;
   }
 
   static genderize(originalText, gender, doneFunc) {
