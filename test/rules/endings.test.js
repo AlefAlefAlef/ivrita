@@ -260,9 +260,21 @@ test('Word endings', () => {
 
   expect(Ivrita.genderize('צרפתים/ות', Ivrita.FEMALE)).toBe('צרפתיות');
   expect(Ivrita.genderize('צרפתים/ות', Ivrita.MALE)).toBe('צרפתים');
-
+  
   expect(Ivrita.genderize('יהודים/ות', Ivrita.FEMALE)).toBe('יהודיות');
   expect(Ivrita.genderize('יהודים/ות', Ivrita.MALE)).toBe('יהודים');
   expect(Ivrita.genderize('יהודיים/ות', Ivrita.FEMALE)).toBe('יהודיות');
   expect(Ivrita.genderize('יהודיים/ות', Ivrita.MALE)).toBe('יהודיים');
+
+  expect(Ivrita.genderize('עקוב/י', Ivrita.FEMALE)).toBe('עקבי');
+  expect(Ivrita.genderize('עקוב/י', Ivrita.MALE)).toBe('עקוב');
+
+  expect(Ivrita.genderize('צור/י', Ivrita.FEMALE)).toBe('צרי');
+  expect(Ivrita.genderize('צור/י', Ivrita.MALE)).toBe('צור');
+
+  expect(Ivrita.genderize('ראה/י', Ivrita.FEMALE)).toBe('ראי');
+  expect(Ivrita.genderize('ראה/י', Ivrita.MALE)).toBe('ראה');
+
+  expect(Ivrita.genderize('ודא/י', Ivrita.FEMALE)).toBe('ודאי');
+  expect(Ivrita.genderize('ודא/י', Ivrita.MALE)).toBe('ודא');
 });
