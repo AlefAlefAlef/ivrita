@@ -33,6 +33,13 @@ export default class Ivrita {
       throw new Error(`Passed argument is not an HTMLElement. Did you mean: 'document.querySelector("${elem.toString()}")'?`);
     }
     this.setFontFeatureSettings(true);
+
+    this.observer = new MutationObserver(this.onElementChange.bind(this));
+    this.observer.observe(this.element, {
+      childList: true,
+      subtree: true,
+      characterData: true,
+    });
   }
 
   destroy() {
@@ -80,6 +87,15 @@ export default class Ivrita {
     while ((currentNode = walk.nextNode())) {
       this.relevantNodes.push([currentNode, currentNode.data]);
     }
+  }
+
+  onElementChange(mutationsList) {
+    // aeslint-disable-next-line no-restricted-syntax
+    mutationsList.map((mutation) => this.relevantNodes.push(
+      ...Array.from(mutation.addedNodes)
+        .filter((n) => n.nodeType === Node.TEXT_NODE)
+        .map((node) => [node, node.data]),
+    ));
   }
 
   setFontFeatureSettings(isActive) {
