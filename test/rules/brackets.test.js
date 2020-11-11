@@ -20,3 +20,9 @@ test('Three parameters', () => {
   expect(Ivrita.genderize('[בן|בת|ילד]', Ivrita.MALE)).toBe('בן');
   expect(Ivrita.genderize('[בן|בת|ילד]', Ivrita.NEUTRAL)).toBe('ילד');
 });
+
+test('Partial options', () => {
+  expect(Ivrita.genderize('תוכל[|י|ו]', Ivrita.FEMALE)).toBe('תוכלי');
+  expect(Ivrita.genderize('תוכל[|י|ו]', Ivrita.MALE)).toBe('תוכל');
+  expect(Ivrita.genderize('תוכל[|י|ו]', Ivrita.NEUTRAL)).toBe('תוכלו');
+});
