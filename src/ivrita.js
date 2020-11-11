@@ -15,11 +15,17 @@ export default class Ivrita {
 
   static NEUTRAL = 3;
 
+  static GENDERS = [this.ORIGINAL, this.MALE, this.FEMALE, this.NEUTRAL];
+
+  static instances = new WeakMap();
+
   relevantNodes = [];
 
   elem = {};
 
   constructor(elem = document.body) {
+    this.constructor.instances.set(elem, this);
+
     this.element = elem;
     if (elem instanceof HTMLElement) {
       this.registerTextNodes(elem);
@@ -29,16 +35,24 @@ export default class Ivrita {
     this.setFontFeatureSettings(true);
   }
 
-  setMode(gender) {
+  destroy() {
+    this.setMode(this.constructor.ORIGINAL);
+    this.setFontFeatureSettings(false);
+    this.observer.disconnect();
+    this.constructor.instances.set(this.element, null);
+  }
+
+  setMode(gender = this.constructor.NEUTRAL) {
+    this.mode = gender;
     this.relevantNodes.forEach(([node, original]) => {
       let newVal;
 
-      if (gender === Ivrita.ORIGINAL) {
+      if (gender === this.constructor.ORIGINAL) {
         newVal = original;
-      } else if (gender === Ivrita.NEUTRAL && !original.includes('{') && !original.includes('[')) {
+      } else if (gender === this.constructor.NEUTRAL && !original.includes('{') && !original.includes('[')) {
         newVal = original;
       } else {
-        newVal = Ivrita.genderize(original, gender);
+        newVal = this.constructor.genderize(original, gender);
       }
 
       if (newVal !== node.data) {
@@ -103,15 +117,15 @@ export default class Ivrita {
     rules.forEach(([pattern, male, female, neutral]) => {
       let replacement;
       switch (gender) {
-        case Ivrita.FEMALE:
+        case this.FEMALE:
           replacement = female;
           break;
 
-        case Ivrita.MALE:
+        case this.MALE:
           replacement = male;
           break;
 
-        case Ivrita.NEUTRAL:
+        case this.NEUTRAL:
         default:
           if (neutral) replacement = neutral;
           else replacement = `${male}/${female}`;
