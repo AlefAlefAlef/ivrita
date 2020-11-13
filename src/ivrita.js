@@ -38,7 +38,9 @@ export default class Ivrita {
   destroy() {
     this.setMode(this.constructor.ORIGINAL);
     this.setFontFeatureSettings(false);
-    this.observer.disconnect();
+    if (this.observer) {
+      this.observer.disconnect();
+    }
     this.constructor.instances.set(this.element, null);
   }
 
