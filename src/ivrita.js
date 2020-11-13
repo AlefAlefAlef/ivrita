@@ -100,6 +100,10 @@ export default class Ivrita {
     this.element.style.fontFeatureSettings = result;
   }
 
+  getFontFeatureSettings() {
+    return this.element.style.fontFeatureSettings.includes('titl');
+  }
+
   static genderize(originalText, gender, doneFunc) {
     let genderized = originalText;
     const bracedStrings = [];
