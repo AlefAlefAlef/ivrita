@@ -11,7 +11,11 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
+  globals: {
+    jQuery: true,
+  },
   rules: {
     'no-param-reassign': [2, { props: false }],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/setup-jest.js'] }], // Allow importing jQuery in Jest setup file
   },
 };

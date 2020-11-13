@@ -21,17 +21,30 @@ export default class Ivrita {
 
   relevantNodes = [];
 
-  elem = {};
+  elements = [];
 
   constructor(elem = document.body) {
-    this.constructor.instances.set(elem, this);
-
-    this.element = elem;
-    if (elem instanceof HTMLElement) {
-      this.registerTextNodes(elem);
+    if (elem instanceof NodeList) {
+      this.elements = Array.from(elem);
+    } else if (elem instanceof HTMLElement) {
+      this.elements = [elem];
+    } else if (typeof jQuery === 'function' && elem instanceof jQuery && typeof elem.toArray === 'function') {
+      this.elements = elem.toArray();
     } else {
       throw new Error(`Passed argument is not an HTMLElement. Did you mean: 'document.querySelector("${elem.toString()}")'?`);
     }
+
+    const existingInstance = this.constructor.instances.get(this.elements);
+    if (existingInstance) {
+      return existingInstance;
+    }
+
+    this.constructor.instances.set(this.elements, this);
+
+    this.elements.forEach((el) => {
+      this.registerTextNodes(el);
+    });
+
     this.setFontFeatureSettings(true);
   }
 
@@ -41,7 +54,9 @@ export default class Ivrita {
     if (this.observer) {
       this.observer.disconnect();
     }
-    this.constructor.instances.set(this.element, null);
+    this.elements.forEach((el) => {
+      this.constructor.instances.set(el, null);
+    });
   }
 
   setMode(gender = this.constructor.NEUTRAL) {
@@ -85,25 +100,27 @@ export default class Ivrita {
   }
 
   setFontFeatureSettings(isActive) {
-    const originalFFS = this.element.style.fontFeatureSettings;
-    let result = originalFFS.slice();
+    this.elements.forEach((el) => {
+      const originalFFS = el.style.fontFeatureSettings;
+      let result = originalFFS.slice();
 
-    if (isActive) {
-      if (!originalFFS.includes('titl')) {
-        if (originalFFS) { // Only add a space if property exists
-          result += ', ';
+      if (isActive) {
+        if (!originalFFS.includes('titl')) {
+          if (originalFFS) { // Only add a space if property exists
+            result += ', ';
+          }
+          result += '"titl"';
         }
-        result += '"titl"';
+      } else if (originalFFS.includes('titl')) {
+        result = originalFFS.replace(/(, )?"?'?titl"?'?/, '');
       }
-    } else if (originalFFS.includes('titl')) {
-      result = originalFFS.replace(/(, )?"?'?titl"?'?/, '');
-    }
 
-    this.element.style.fontFeatureSettings = result;
+      el.style.fontFeatureSettings = result;
+    });
   }
 
   getFontFeatureSettings() {
-    return this.element.style.fontFeatureSettings.includes('titl');
+    return this.elements.filter((el) => el.style.fontFeatureSettings.includes('titl')).length;
   }
 
   static genderize(originalText, gender, doneFunc) {
@@ -162,4 +179,8 @@ export default class Ivrita {
     }
     return genderized;
   }
+}
+
+if (typeof jQuery === 'function') {
+  jQuery.fn.ivrita = () => new Ivrita(this);
 }
