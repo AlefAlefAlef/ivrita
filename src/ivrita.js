@@ -128,10 +128,12 @@ export default class Ivrita {
         case this.NEUTRAL:
         default:
           if (neutral) replacement = neutral;
-          else replacement = `${male}/${female}`;
           break;
       }
-      genderized = genderized.replace(pattern, replacement);
+      if (replacement !== undefined) {
+        genderized = genderized.replace(pattern, replacement);
+      }
+
       if (typeof doneFunc !== 'undefined' && prev !== genderized) {
         used.push(pattern);
         prev = genderized;

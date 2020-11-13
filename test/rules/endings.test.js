@@ -260,7 +260,7 @@ test('Word endings', () => {
 
   expect(Ivrita.genderize('צרפתים/ות', Ivrita.FEMALE)).toBe('צרפתיות');
   expect(Ivrita.genderize('צרפתים/ות', Ivrita.MALE)).toBe('צרפתים');
-  
+
   expect(Ivrita.genderize('יהודים/ות', Ivrita.FEMALE)).toBe('יהודיות');
   expect(Ivrita.genderize('יהודים/ות', Ivrita.MALE)).toBe('יהודים');
   expect(Ivrita.genderize('יהודיים/ות', Ivrita.FEMALE)).toBe('יהודיות');
