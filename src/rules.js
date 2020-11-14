@@ -1,10 +1,12 @@
 export const SEP = '[\\\\/.]';
 export const HEB = '[א-ת]';
-const EXTSEP = '[\\\\./—־-]';
-const G = '\'‎"”׳״'; // "Gershayim"
+export const EXTSEP = '[\\\\./—־-]';
+export const G = '\'‎"”׳״'; // "Gershayim"
 const W = `[א-ת${G}]`;
 const FIN = '[ןףךםץ]';
 const B = `(?=^|$|\b|[^א-ת${G}?\u0590-\u05BD\u05BF\u05C1-\u05C2\u05C4-\u05C7\u05EF-\u05F2\uFB2A-\uFB4F])`; // Boundary, like "\b" in regex. All unicode characters which can be part of a hebrew word
+
+export const SYNTAX = [EXTSEP, '\\[', '\\{', '\\('].join('|');
 
 // Marks are used by early rules to specify a position in a text
 // which should be addressed later by later rules.

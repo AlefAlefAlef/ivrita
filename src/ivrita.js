@@ -1,7 +1,7 @@
-import rules, { SEP, HEB } from './rules';
+import rules, { HEB, SYNTAX } from './rules';
 
-const separatorRegex = new RegExp(SEP);
 const hebrewRegex = new RegExp(HEB);
+const ivritaSyntaxRegex = new RegExp(SYNTAX);
 
 const PROTECTED = '__IVRITA_PROTECTED__';
 const protectedRegexp = new RegExp(`\\{${PROTECTED}:(\\d+):${PROTECTED}\\}`, 'g');
@@ -88,8 +88,8 @@ export default class Ivrita {
       {
         acceptNode: (node) => (
           (node.textContent.trim().length > 0
-          && hebrewRegex.test(node.textContent)
-          && separatorRegex.test(node.textContent))
+          && hebrewRegex.test(node.textContent) // Test for Hebrew Letters
+          && ivritaSyntaxRegex.test(node.textContent)) // Test for Ivrita Syntax
             ? NodeFilter.FILTER_ACCEPT
             : NodeFilter.FILTER_SKIP),
       },
