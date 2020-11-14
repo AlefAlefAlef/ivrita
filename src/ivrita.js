@@ -17,7 +17,7 @@ export default class Ivrita {
 
   static GENDERS = [this.ORIGINAL, this.MALE, this.FEMALE, this.NEUTRAL];
 
-  static instances = new WeakMap();
+  static instances = new Map();
 
   relevantNodes = [];
 
