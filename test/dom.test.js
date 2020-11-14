@@ -71,6 +71,15 @@ test('jQuery function', () => {
   expect(bold.innerHTML).toBe('פונים');
 });
 
+test('jQuery function with gender', () => {
+  document.body.innerHTML = template;
+
+  jQuery('#content').ivrita(Ivrita.MALE);
+  const bold = document.querySelector('#content p b');
+
+  expect(bold.innerHTML).toBe('פונים');
+});
+
 test('Bad element passed to constructor', () => {
   document.body.innerHTML = template;
   expect(() => {

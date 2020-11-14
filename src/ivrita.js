@@ -76,6 +76,8 @@ export default class Ivrita {
         node.data = newVal;
       }
     });
+
+    return this;
   }
 
   registerTextNodes(element) {
@@ -117,6 +119,8 @@ export default class Ivrita {
 
       el.style.fontFeatureSettings = result;
     });
+
+    return this;
   }
 
   getFontFeatureSettings() {
@@ -182,5 +186,11 @@ export default class Ivrita {
 }
 
 if (typeof jQuery === 'function') {
-  jQuery.fn.ivrita = () => new Ivrita(this);
+  jQuery.fn.ivrita = (gender) => {
+    const i = new Ivrita(this);
+    if (typeof gender !== 'undefined') {
+      i.setMode(gender);
+    }
+    return i;
+  };
 }
