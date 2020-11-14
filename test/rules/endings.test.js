@@ -41,6 +41,9 @@ test('Word endings', () => {
   expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
   expect(genderize('צאו/נה', MALE)).toBe('צאו');
 
+  expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
+  expect(genderize('צאו/נה', MALE)).toBe('צאו');
+
   expect(genderize('צאו/תצאנה', FEMALE)).toBe('תצאנה');
   expect(genderize('צאו/תצאנה', MALE)).toBe('צאו');
 
@@ -257,6 +260,25 @@ test('Word endings', () => {
   expect(genderize('ישראלים/ות', MALE)).toBe('ישראלים');
   expect(genderize('ישראליים/ות', FEMALE)).toBe('ישראליות');
   expect(genderize('ישראליים/ות', MALE)).toBe('ישראליים');
+
+  expect(genderize('ברברים/ות', FEMALE)).toBe('ברבריות');
+  expect(genderize('ברברים/ות', MALE)).toBe('ברברים');
+  expect(genderize('ברבארים/ות', FEMALE)).toBe('ברבאריות');
+  expect(genderize('ברבארים/ות', MALE)).toBe('ברבארים');
+
+  expect(genderize('סחים/ות', FEMALE)).toBe('סחיות');
+  expect(genderize('סחים/ות', MALE)).toBe('סחים');
+  expect(genderize('סאחים/ות', FEMALE)).toBe('סאחיות');
+  expect(genderize('סאחים/ות', MALE)).toBe('סאחים');
+
+  expect(genderize('ח"כים/ות', FEMALE)).toBe('ח"כיות');
+  expect(genderize('ח"כים/ות', MALE)).toBe('ח"כים');
+
+  expect(genderize('משת”פים/ות', FEMALE)).toBe('משת”פיות');
+  expect(genderize('משת”פים/ות', MALE)).toBe('משת”פים');
+
+  expect(genderize('כשהגננים/ות', FEMALE)).toBe('כשהגננות');
+  expect(genderize('כשהגננים/ות', MALE)).toBe('כשהגננים');
 
   expect(genderize('ברברים/ות', FEMALE)).toBe('ברבריות');
   expect(genderize('ברברים/ות', MALE)).toBe('ברברים');

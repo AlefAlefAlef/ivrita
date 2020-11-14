@@ -1,5 +1,5 @@
 import { genderize, NEUTRAL, ORIGINAL } from './ivrita';
-import { HEB, SYNTAX } from './rules';
+import { HEB, SYNTAX } from './utils/characters';
 
 const hebrewRegex = new RegExp(HEB);
 const ivritaSyntaxRegex = new RegExp(SYNTAX);
