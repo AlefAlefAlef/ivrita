@@ -35,6 +35,9 @@ test('Word endings', () => {
   expect(Ivrita.genderize('שלח/י', Ivrita.FEMALE)).toBe('שלחי');
   expect(Ivrita.genderize('שלח/י', Ivrita.MALE)).toBe('שלח');
 
+  expect(Ivrita.genderize('כתוב/י', Ivrita.FEMALE)).toBe('כתבי');
+  expect(Ivrita.genderize('כתוב/י', Ivrita.MALE)).toBe('כתוב');
+
   expect(Ivrita.genderize('צאו/נה', Ivrita.FEMALE)).toBe('צאונה');
   expect(Ivrita.genderize('צאו/נה', Ivrita.MALE)).toBe('צאו');
 
@@ -254,6 +257,25 @@ test('Word endings', () => {
   expect(Ivrita.genderize('ישראלים/ות', Ivrita.MALE)).toBe('ישראלים');
   expect(Ivrita.genderize('ישראליים/ות', Ivrita.FEMALE)).toBe('ישראליות');
   expect(Ivrita.genderize('ישראליים/ות', Ivrita.MALE)).toBe('ישראליים');
+
+  expect(Ivrita.genderize('ברברים/ות', Ivrita.FEMALE)).toBe('ברבריות');
+  expect(Ivrita.genderize('ברברים/ות', Ivrita.MALE)).toBe('ברברים');
+  expect(Ivrita.genderize('ברבארים/ות', Ivrita.FEMALE)).toBe('ברבאריות');
+  expect(Ivrita.genderize('ברבארים/ות', Ivrita.MALE)).toBe('ברבארים');
+
+  expect(Ivrita.genderize('סחים/ות', Ivrita.FEMALE)).toBe('סחיות');
+  expect(Ivrita.genderize('סחים/ות', Ivrita.MALE)).toBe('סחים');
+  expect(Ivrita.genderize('סאחים/ות', Ivrita.FEMALE)).toBe('סאחיות');
+  expect(Ivrita.genderize('סאחים/ות', Ivrita.MALE)).toBe('סאחים');
+
+  expect(Ivrita.genderize('ח"כים/ות', Ivrita.FEMALE)).toBe('ח"כיות');
+  expect(Ivrita.genderize('ח"כים/ות', Ivrita.MALE)).toBe('ח"כים');
+
+  expect(Ivrita.genderize('משת”פים/ות', Ivrita.FEMALE)).toBe('משת”פיות');
+  expect(Ivrita.genderize('משת”פים/ות', Ivrita.MALE)).toBe('משת”פים');
+
+  expect(Ivrita.genderize('כשהגננים/ות', Ivrita.FEMALE)).toBe('כשהגננות');
+  expect(Ivrita.genderize('כשהגננים/ות', Ivrita.MALE)).toBe('כשהגננים');
 
   expect(Ivrita.genderize('ארגנטינאים/ות', Ivrita.FEMALE)).toBe('ארגנטינאיות');
   expect(Ivrita.genderize('ארגנטינאים/ות', Ivrita.MALE)).toBe('ארגנטינאים');

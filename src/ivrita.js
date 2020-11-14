@@ -1,4 +1,5 @@
-import rules, { HEB, SYNTAX } from './rules';
+import rules from './rules';
+import { HEB, SYNTAX } from './utils/characters';
 
 const hebrewRegex = new RegExp(HEB);
 const ivritaSyntaxRegex = new RegExp(SYNTAX);
