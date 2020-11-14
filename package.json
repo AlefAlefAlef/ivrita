@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Ivrita is an open-source set of typographic tools for gender equality in Hebrew",
   "main": "src/ivrita.js",
+  "browser": "src/element.js",
   "directories": {
     "example": "examples"
   },

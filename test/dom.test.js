@@ -1,4 +1,7 @@
-import Ivrita from '../src/ivrita';
+import Ivrita from '../src/element';
+import {
+  FEMALE, MALE, NEUTRAL, ORIGINAL,
+} from '../src/ivrita';
 
 const template = `
   <div id="content">
@@ -13,19 +16,19 @@ test('DOM plug-in', () => {
   const ivrita = new Ivrita();
 
   // Female
-  ivrita.setMode(Ivrita.FEMALE);
+  ivrita.setMode(FEMALE);
   expect(paragraph.innerHTML).toBe('מתכנתות רבות <u>מרגישות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
 
   // Male
-  ivrita.setMode(Ivrita.MALE);
+  ivrita.setMode(MALE);
   expect(paragraph.innerHTML).toBe('מעצבים רבים <u>מרגישים</u> <i>תסכול</i>, כאשר <b>פונים</b> אליהם שלא בשפתם.');
 
   // Neutral
-  ivrita.setMode(Ivrita.NEUTRAL);
+  ivrita.setMode(NEUTRAL);
   expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u>מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
 
   // Back to original
-  ivrita.setMode(Ivrita.ORIGINAL);
+  ivrita.setMode(ORIGINAL);
   expect(paragraph.innerHTML).toBe('[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u>מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
 });
 
@@ -34,7 +37,7 @@ test('Single element passed to constructor', () => {
   const ivrita = new Ivrita(document.querySelector('#content'));
   const bold = document.querySelector('#content p b');
 
-  ivrita.setMode(Ivrita.MALE);
+  ivrita.setMode(MALE);
   expect(bold.innerHTML).toBe('פונים');
 });
 
@@ -45,7 +48,7 @@ test('Multiple elements passed to constructor', () => {
   const underlined = document.querySelector('#content p u');
   const italic = document.querySelector('#content p i');
 
-  ivrita.setMode(Ivrita.MALE);
+  ivrita.setMode(MALE);
   expect(bold.innerHTML).toBe('פונים');
   expect(underlined.innerHTML).toBe('מרגישים');
   expect(italic.innerHTML).toBe('תסכול');
@@ -57,7 +60,7 @@ test('jQuery element passed to constructor', () => {
   const ivrita = new Ivrita(jQuery('#content'));
   const bold = document.querySelector('#content p b');
 
-  ivrita.setMode(Ivrita.MALE);
+  ivrita.setMode(MALE);
   expect(bold.innerHTML).toBe('פונים');
 });
 
@@ -67,14 +70,14 @@ test('jQuery function', () => {
   const ivrita = jQuery('#content').ivrita();
   const bold = document.querySelector('#content p b');
 
-  ivrita.setMode(Ivrita.MALE);
+  ivrita.setMode(MALE);
   expect(bold.innerHTML).toBe('פונים');
 });
 
 test('jQuery function with gender', () => {
   document.body.innerHTML = template;
 
-  jQuery('#content').ivrita(Ivrita.MALE);
+  jQuery('#content').ivrita(MALE);
   const bold = document.querySelector('#content p b');
 
   expect(bold.innerHTML).toBe('פונים');

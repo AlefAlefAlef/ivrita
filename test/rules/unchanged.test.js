@@ -1,51 +1,51 @@
-import Ivrita from '../../src/ivrita';
+import { genderize, FEMALE, MALE } from '../../src/ivrita';
 
 test('Multiple options slash', () => {
-  expect(Ivrita.genderize('ו/או', Ivrita.FEMALE)).toBe('ו/או');
-  expect(Ivrita.genderize('ו/או', Ivrita.MALE)).toBe('ו/או');
+  expect(genderize('ו/או', FEMALE)).toBe('ו/או');
+  expect(genderize('ו/או', MALE)).toBe('ו/או');
 
-  expect(Ivrita.genderize('או/או', Ivrita.FEMALE)).toBe('או/או');
-  expect(Ivrita.genderize('או/או', Ivrita.MALE)).toBe('או/או');
+  expect(genderize('או/או', FEMALE)).toBe('או/או');
+  expect(genderize('או/או', MALE)).toBe('או/או');
 });
 
 test('Multiple words slash', () => {
-  expect(Ivrita.genderize('אבן/בתיאבון', Ivrita.FEMALE)).toBe('אבן/בתיאבון');
-  expect(Ivrita.genderize('אבן/בתיאבון', Ivrita.MALE)).toBe('אבן/בתיאבון');
+  expect(genderize('אבן/בתיאבון', FEMALE)).toBe('אבן/בתיאבון');
+  expect(genderize('אבן/בתיאבון', MALE)).toBe('אבן/בתיאבון');
 
-  expect(Ivrita.genderize('יספרו/נהרו', Ivrita.FEMALE)).toBe('יספרו/נהרו'); // unchanged
-  expect(Ivrita.genderize('יספרו/נהרו', Ivrita.MALE)).toBe('יספרו/נהרו'); // unchanged
+  expect(genderize('יספרו/נהרו', FEMALE)).toBe('יספרו/נהרו'); // unchanged
+  expect(genderize('יספרו/נהרו', MALE)).toBe('יספרו/נהרו'); // unchanged
 
-  expect(Ivrita.genderize('הלו/להבה', Ivrita.FEMALE)).toBe('הלו/להבה'); // unchanged
-  expect(Ivrita.genderize('הלו/להבה', Ivrita.MALE)).toBe('הלו/להבה'); // unchanged
+  expect(genderize('הלו/להבה', FEMALE)).toBe('הלו/להבה'); // unchanged
+  expect(genderize('הלו/להבה', MALE)).toBe('הלו/להבה'); // unchanged
 
-  expect(Ivrita.genderize('בכה/תהום/שלום', Ivrita.FEMALE)).toBe('בכה/תהום/שלום'); // unchanged
-  expect(Ivrita.genderize('בכה/תהום/שלום', Ivrita.MALE)).toBe('בכה/תהום/שלום'); // unchanged
+  expect(genderize('בכה/תהום/שלום', FEMALE)).toBe('בכה/תהום/שלום'); // unchanged
+  expect(genderize('בכה/תהום/שלום', MALE)).toBe('בכה/תהום/שלום'); // unchanged
 
-  expect(Ivrita.genderize('יזם/יתד', Ivrita.FEMALE)).toBe('יזם/יתד'); // unchanged
-  expect(Ivrita.genderize('יזם/יתד', Ivrita.MALE)).toBe('יזם/יתד'); // unchanged
+  expect(genderize('יזם/יתד', FEMALE)).toBe('יזם/יתד'); // unchanged
+  expect(genderize('יזם/יתד', MALE)).toBe('יזם/יתד'); // unchanged
 
-  expect(Ivrita.genderize('יזמים/יותר', Ivrita.FEMALE)).toBe('יזמים/יותר'); // unchanged
-  expect(Ivrita.genderize('יזמים/יותר', Ivrita.MALE)).toBe('יזמים/יותר'); // unchanged
+  expect(genderize('יזמים/יותר', FEMALE)).toBe('יזמים/יותר'); // unchanged
+  expect(genderize('יזמים/יותר', MALE)).toBe('יזמים/יותר'); // unchanged
 
-  expect(Ivrita.genderize('ים/הר', Ivrita.FEMALE)).toBe('ים/הר'); // unchanged
-  expect(Ivrita.genderize('ים/הר', Ivrita.MALE)).toBe('ים/הר'); // unchanged
+  expect(genderize('ים/הר', FEMALE)).toBe('ים/הר'); // unchanged
+  expect(genderize('ים/הר', MALE)).toBe('ים/הר'); // unchanged
 });
 
 test('Singular/Plural slash', () => {
-  expect(Ivrita.genderize('תפקיד/ים', Ivrita.FEMALE)).toBe('תפקיד/ים'); // unchanged
-  expect(Ivrita.genderize('תפקיד/ים', Ivrita.MALE)).toBe('תפקיד/ים'); // unchanged
+  expect(genderize('תפקיד/ים', FEMALE)).toBe('תפקיד/ים'); // unchanged
+  expect(genderize('תפקיד/ים', MALE)).toBe('תפקיד/ים'); // unchanged
 });
 
 test('Final letters and abbreviations', () => {
-  expect(Ivrita.genderize('דרושים׳', Ivrita.FEMALE)).toBe('דרושים׳'); // unchanged
-  expect(Ivrita.genderize('דרושים׳', Ivrita.MALE)).toBe('דרושים׳'); // unchanged
+  expect(genderize('דרושים׳', FEMALE)).toBe('דרושים׳'); // unchanged
+  expect(genderize('דרושים׳', MALE)).toBe('דרושים׳'); // unchanged
 
-  expect(Ivrita.genderize('מע”מ', Ivrita.FEMALE)).toBe('מע”מ'); // unchanged
-  expect(Ivrita.genderize('מע”מ', Ivrita.MALE)).toBe('מע”מ'); // unchanged
+  expect(genderize('מע”מ', FEMALE)).toBe('מע”מ'); // unchanged
+  expect(genderize('מע”מ', MALE)).toBe('מע”מ'); // unchanged
 
-  expect(Ivrita.genderize('פ', Ivrita.FEMALE)).toBe('פ'); // unchanged
-  expect(Ivrita.genderize('פ', Ivrita.MALE)).toBe('פ'); // unchanged
+  expect(genderize('פ', FEMALE)).toBe('פ'); // unchanged
+  expect(genderize('פ', MALE)).toBe('פ'); // unchanged
 
-  expect(Ivrita.genderize('דסקטופ', Ivrita.FEMALE)).toBe('דסקטופ'); // unchanged
-  expect(Ivrita.genderize('דסקטופ', Ivrita.MALE)).toBe('דסקטופ'); // unchanged
+  expect(genderize('דסקטופ', FEMALE)).toBe('דסקטופ'); // unchanged
+  expect(genderize('דסקטופ', MALE)).toBe('דסקטופ'); // unchanged
 });

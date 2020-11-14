@@ -1,4 +1,4 @@
-import Ivrita from '../src/ivrita';
+import Ivrita from '../src/element';
 
 test('OpenType setting on clean element', () => {
   const el = document.createElement('p');

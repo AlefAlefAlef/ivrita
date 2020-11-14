@@ -1,5 +1,5 @@
-import Ivrita from '../../src/ivrita';
+import { genderize, FEMALE } from '../../src/ivrita';
 
 test('Skip niqqud words', () => {
-  expect(Ivrita.genderize('מעצּבֻּ/תֻ', Ivrita.FEMALE)).toBe('מעצּבֻּ/תֻ');
+  expect(genderize('מעצּבֻּ/תֻ', FEMALE)).toBe('מעצּבֻּ/תֻ');
 });
