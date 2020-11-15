@@ -1,4 +1,4 @@
-import { G } from './utils/characters';
+import { G, MAKAF } from './utils/characters';
 
 // For most verbs, we follow the rules of:
 // כתוב/י => Vav before last letter => Vav removed => כתבי
@@ -47,8 +47,7 @@ export const pluralsWithExtraYod = [
   'אקדמ',
   'אדריכל',
   'ירושלמ',
-  'תל אביב',
-  'תל־אביב',
+  `תל([${MAKAF}]| )אביב`,
   'יהוד',
   'ערב',
   'אשכנז',

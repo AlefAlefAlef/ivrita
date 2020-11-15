@@ -258,6 +258,11 @@ test('Word endings', () => {
   expect(Ivrita.genderize('ישראליים/ות', Ivrita.FEMALE)).toBe('ישראליות');
   expect(Ivrita.genderize('ישראליים/ות', Ivrita.MALE)).toBe('ישראליים');
 
+  expect(Ivrita.genderize('תל אביבים/ות', Ivrita.FEMALE)).toBe('תל אביביות');
+  expect(Ivrita.genderize('תל אביבים/ות', Ivrita.MALE)).toBe('תל אביבים');
+  expect(Ivrita.genderize('תל־אביבים/ות', Ivrita.FEMALE)).toBe('תל־אביביות');
+  expect(Ivrita.genderize('תל־אביבים/ות', Ivrita.MALE)).toBe('תל־אביבים');
+
   expect(Ivrita.genderize('ברברים/ות', Ivrita.FEMALE)).toBe('ברבריות');
   expect(Ivrita.genderize('ברברים/ות', Ivrita.MALE)).toBe('ברברים');
   expect(Ivrita.genderize('ברבארים/ות', Ivrita.FEMALE)).toBe('ברבאריות');
