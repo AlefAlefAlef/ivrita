@@ -36,7 +36,6 @@ export const pluralsWithoutExtraYod = [
   'רופא',
 ];
 
-
 // And these are the exceptions which *do*:
 export const pluralsWithExtraYod = [
   'יזמ',
@@ -67,5 +66,4 @@ export const pluralsWithExtraYod = [
   `עו([${G}])ד`,
   `עו([${G}])ס`,
   `רו([${G}])ח`,
-  
 ];
