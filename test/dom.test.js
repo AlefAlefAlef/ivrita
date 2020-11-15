@@ -1,4 +1,6 @@
 import Ivrita from '../src/element';
+import TextNode from '../src/node';
+
 import {
   FEMALE, MALE, NEUTRAL, ORIGINAL,
 } from '../src/ivrita';
@@ -30,6 +32,16 @@ test('DOM plug-in', () => {
   // Back to original
   ivrita.setMode(ORIGINAL);
   expect(paragraph.innerHTML).toBe('[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u>מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+
+  // Back to male
+  ivrita.setMode(MALE);
+  expect(paragraph.innerHTML).toBe('מעצבים רבים <u>מרגישים</u> <i>תסכול</i>, כאשר <b>פונים</b> אליהם שלא בשפתם.');
+
+  // Destroy
+  ivrita.destroy();
+  expect(paragraph.innerHTML).toBe('[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u>מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+
+  expect(ivrita.nodes.size).toEqual(0);
 });
 
 test('Single element passed to constructor', () => {
@@ -89,4 +101,20 @@ test('Bad element passed to constructor', () => {
     // eslint-disable-next-line no-new
     new Ivrita('#content'); // Should be DOMElement, not string
   }).toThrow(Error);
+});
+
+test('Node singletons', () => {
+  const textNodeRegister = jest.spyOn(TextNode.instances, 'set');
+
+  document.body.innerHTML = template;
+  const ivrita = new Ivrita(document.querySelector('#content'));
+  ivrita.setMode(FEMALE);
+
+  const bold = document.querySelector('#content p b');
+  const ivrita2 = new Ivrita(bold);
+  ivrita2.setMode(MALE);
+  expect(document.getElementById('content').textContent.trim()).toBe('מתכנתות רבות מרגישות תסכול, כאשר פונים אליהן שלא בשפתן.');
+  expect(ivrita.nodes.size).toEqual(4);
+  expect(ivrita2.nodes.size).toEqual(1);
+  expect(textNodeRegister).toHaveBeenCalledTimes(4);
 });

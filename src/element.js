@@ -1,13 +1,26 @@
-import { genderize, NEUTRAL, ORIGINAL } from './ivrita';
+import {
+  MALE, FEMALE, NEUTRAL, ORIGINAL, GENDERS,
+} from './ivrita';
+import TextNode from './node';
 import { HEB, SYNTAX } from './utils/characters';
 
 const hebrewRegex = new RegExp(HEB);
 const ivritaSyntaxRegex = new RegExp(SYNTAX);
 
 export default class Element {
-  relevantNodes = [];
+  nodes = new Set();
 
   elements = [];
+
+  static GENDERS = GENDERS;
+
+  static MALE = MALE;
+
+  static FEMALE = FEMALE;
+
+  static NEUTRAL = NEUTRAL;
+
+  static ORIGINAL = ORIGINAL;
 
   static instances = new WeakMap();
 
@@ -20,6 +33,12 @@ export default class Element {
       this.elements = elem.toArray();
     } else {
       throw new Error(`Passed argument is not an HTMLElement. Did you mean: 'document.querySelector("${elem.toString()}")'?`);
+    }
+
+    if (this.elements.length === 1 && this.constructor.instances.has(this.elements[0])) {
+      const preExistingInstance = this.constructor.instances.get(this.elements[0]);
+      preExistingInstance.registerTextNodes(this.elements[0]); // Make sure all nodes are registered
+      return preExistingInstance;
     }
 
     this.elements.forEach((el) => {
@@ -36,29 +55,15 @@ export default class Element {
     if (this.observer) {
       this.observer.disconnect();
     }
+    this.nodes.clear();
     this.elements.forEach((el) => {
-      this.constructor.instances.set(el, null);
+      this.constructor.instances.delete(el);
     });
   }
 
   setMode(gender = NEUTRAL) {
     this.mode = gender;
-    this.relevantNodes.forEach(([node, original]) => {
-      let newVal;
-
-      if (gender === ORIGINAL) {
-        newVal = original;
-      } else if (gender === NEUTRAL && !original.includes('{') && !original.includes('[')) {
-        newVal = original;
-      } else {
-        newVal = genderize(original, gender);
-      }
-
-      if (newVal !== node.data) {
-        node.data = newVal;
-      }
-    });
-
+    this.nodes.forEach((node) => node.setMode(gender));
     return this;
   }
 
@@ -69,17 +74,18 @@ export default class Element {
       NodeFilter.SHOW_TEXT,
       {
         acceptNode: (node) => (
-          (node.textContent.trim().length > 0
-          && hebrewRegex.test(node.textContent) // Test for Hebrew Letters
-          && ivritaSyntaxRegex.test(node.textContent)) // Test for Ivrita Syntax
-            ? NodeFilter.FILTER_ACCEPT
-            : NodeFilter.FILTER_SKIP),
+          TextNode.instances.has(node) || (
+            (node.textContent.trim().length > 0
+            && hebrewRegex.test(node.textContent) // Test for Hebrew Letters
+            && ivritaSyntaxRegex.test(node.textContent)) // Test for Ivrita Syntax
+              ? NodeFilter.FILTER_ACCEPT
+              : NodeFilter.FILTER_SKIP)),
       },
     );
 
     // eslint-disable-next-line no-cond-assign
     while ((currentNode = walk.nextNode())) {
-      this.relevantNodes.push([currentNode, currentNode.data]);
+      this.nodes.add(new TextNode(currentNode));
     }
   }
 
