@@ -277,4 +277,10 @@ test('Word endings', () => {
 
   expect(Ivrita.genderize('ודא/י', Ivrita.FEMALE)).toBe('ודאי');
   expect(Ivrita.genderize('ודא/י', Ivrita.MALE)).toBe('ודא');
+
+  expect(Ivrita.genderize('בחר/י', Ivrita.FEMALE)).toBe('בחרי');
+  expect(Ivrita.genderize('בחר/י', Ivrita.MALE)).toBe('בחר');
+
+  expect(Ivrita.genderize('תוכל/י', Ivrita.FEMALE)).toBe('תוכלי');
+  expect(Ivrita.genderize('תוכל/י', Ivrita.MALE)).toBe('תוכל');
 });
