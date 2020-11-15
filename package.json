@@ -14,8 +14,10 @@
     "test-watch": "jest --watch --notify"
   },
   "jest": {
-    "setupFiles": ["./test/setup-jest.js"]
- },
+    "setupFiles": [
+      "./test/setup-jest.js"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AlefAlefAlef/ivrita.git"

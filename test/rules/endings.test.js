@@ -321,4 +321,10 @@ test('Word endings', () => {
 
   expect(genderize('ודא/י', FEMALE)).toBe('ודאי');
   expect(genderize('ודא/י', MALE)).toBe('ודא');
+
+  expect(genderize('בחר/י', FEMALE)).toBe('בחרי');
+  expect(genderize('בחר/י', MALE)).toBe('בחר');
+
+  expect(genderize('תוכל/י', FEMALE)).toBe('תוכלי');
+  expect(genderize('תוכל/י', MALE)).toBe('תוכל');
 });

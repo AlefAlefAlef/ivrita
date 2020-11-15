@@ -15,24 +15,44 @@ export const nonChangingVerbsFemale = [
   'שים',
   'ודא',
   'שלח',
+  'לחץ',
+  'בחר',
+  'קרא',
+  'לך',
+  'קפוץ',
+  'שתף',
+  'תוכל',
 ];
 
 // Most plurals don't need an extra Yod on their female form: מורים->מורות
-// When the word ends with נ or ט, it usually needs one, so there's a rule for that.
+// When the word ends with א, נ or ט, it usually needs one, so there's a rule for that.
 // These are the exceptions which *do not* need an extra Yod:
-export const pluralsWithoutExtraYod = ['גננ'];
+export const pluralsWithoutExtraYod = [
+  'גננ',
+  'מאמנ',
+  'מרא',
+  'מלא',
+  'מתרא',
+  'מתרא',
+  'רופא',
+];
+
 // And these are the exceptions which *do*:
 export const pluralsWithExtraYod = [
-  'סטודנט',
   'יזמ',
   'מומח',
-  'מכונא',
   'ישראל',
+  'מצר',
+  'אוסטרל',
+  'אקדמ',
+  'אדריכל',
+  'ירושלמ',
+  'תל אביב',
+  'תל־אביב',
   'יהוד',
   'ערב',
   'אשכנז',
   'מזרח',
-  'רוס',
   'רוס',
   'ספרד',
   'סלאב',
@@ -43,4 +63,8 @@ export const pluralsWithExtraYod = [
   'ס(א?)ח',
   `ח([${G}])כ`,
   `משת([${G}])פ`,
+  `מנכ([${G}])ל`,
+  `עו([${G}])ד`,
+  `עו([${G}])ס`,
+  `רו([${G}])ח`,
 ];

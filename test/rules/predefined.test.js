@@ -48,4 +48,7 @@ test('Whole words', () => {
 
   expect(genderize('אחד/ת, אחד/אחת, אחת/אחד', FEMALE)).toBe('אחת, אחת, אחת');
   expect(genderize('אחד/ת, אחד/אחת, אחת/אחד', MALE)).toBe('אחד, אחד, אחד');
+
+  expect(genderize('יקירי/תי', FEMALE)).toBe('יקירתי');
+  expect(genderize('יקירי/תי', MALE)).toBe('יקירי');
 });
