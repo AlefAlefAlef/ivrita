@@ -50,6 +50,30 @@ test('Word endings', () => {
   expect(genderize('יספרו/תספרנה', FEMALE)).toBe('תספרנה');
   expect(genderize('יספרו/תספרנה', MALE)).toBe('יספרו');
 
+  expect(genderize('הלבישו/נה', FEMALE)).toBe('הלבשנה');
+  expect(genderize('הלבישו/נה', MALE)).toBe('הלבישו');
+
+  expect(genderize('החזיקו/נה', FEMALE)).toBe('החזקנה');
+  expect(genderize('החזיקו/נה', MALE)).toBe('החזיקו');
+
+  expect(genderize('הביאו/נה', FEMALE)).toBe('הבאנה');
+  expect(genderize('הביאו/נה', MALE)).toBe('הביאו');
+
+  expect(genderize('החטיפו/נה', FEMALE)).toBe('החטפנה');
+  expect(genderize('החטיפו/נה', MALE)).toBe('החטיפו');
+
+  expect(genderize('הניחו/נה', FEMALE)).toBe('הנחנה');
+  expect(genderize('הניחו/נה', MALE)).toBe('הניחו');
+
+  expect(genderize('השתיקו/נה', FEMALE)).toBe('השתקנה');
+  expect(genderize('השתיקו/נה', MALE)).toBe('השתיקו');
+
+  expect(genderize('העיפו/נה', FEMALE)).toBe('העפנה');
+  expect(genderize('העיפו/נה', MALE)).toBe('העיפו');
+
+  expect(genderize('הניחו/נה', FEMALE)).toBe('הנחנה');
+  expect(genderize('הניחו/נה', MALE)).toBe('הניחו');
+
   // Third person
   expect(genderize('לו/ה', FEMALE)).toBe('לה');
   expect(genderize('לו/ה', MALE)).toBe('לו');
