@@ -89,10 +89,10 @@ test('jQuery function', () => {
 test('jQuery function with gender', () => {
   document.body.innerHTML = template;
 
-  jQuery('#content').ivrita(MALE);
-  const bold = document.querySelector('#content p b');
+  jQuery('#content p b').ivrita(MALE);
+  const p = document.querySelector('#content p');
 
-  expect(bold.innerHTML).toBe('פונים');
+  expect(p.textContent).toBe('[מעצבים|מתכנתות|הייטקיסטים] רבים/ות מרגישים/ות תסכול, כאשר פונים אליהם/ן שלא בשפתם/ן.');
 });
 
 test('Bad element passed to constructor', () => {

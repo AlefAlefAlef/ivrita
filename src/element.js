@@ -119,7 +119,7 @@ export default class IvritaElement {
 }
 
 if (typeof jQuery === 'function') {
-  jQuery.fn.ivrita = (gender) => {
+  jQuery.fn.ivrita = function ivritajQueryFn(gender) {
     const i = new IvritaElement(this);
     if (typeof gender !== 'undefined') {
       i.setMode(gender);
