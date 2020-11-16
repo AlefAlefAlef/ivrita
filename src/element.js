@@ -7,7 +7,7 @@ import { HEB, SYNTAX } from './utils/characters';
 const hebrewRegex = new RegExp(HEB);
 const ivritaSyntaxRegex = new RegExp(SYNTAX);
 
-export default class Element {
+export default class IvritaElement {
   nodes = new Set();
 
   elements = [];
@@ -118,7 +118,7 @@ export default class Element {
 
 if (typeof jQuery === 'function') {
   jQuery.fn.ivrita = (gender) => {
-    const i = new Element(this);
+    const i = new IvritaElement(this);
     if (typeof gender !== 'undefined') {
       i.setMode(gender);
     }
