@@ -1,54 +1,54 @@
-import Ivrita from '../../src/ivrita';
+import { genderize, FEMALE, MALE } from '../../src/ivrita';
 
 test('Whole words', () => {
-  expect(Ivrita.genderize('אנשי/ות עסקים', Ivrita.FEMALE)).toBe('נשות עסקים');
-  expect(Ivrita.genderize('אנשי/ות עסקים', Ivrita.MALE)).toBe('אנשי עסקים');
+  expect(genderize('אנשי/ות עסקים', FEMALE)).toBe('נשות עסקים');
+  expect(genderize('אנשי/ות עסקים', MALE)).toBe('אנשי עסקים');
 
-  expect(Ivrita.genderize('א.נשים', Ivrita.FEMALE)).toBe('נשים');
-  expect(Ivrita.genderize('א.נשים', Ivrita.MALE)).toBe('אנשים');
+  expect(genderize('א.נשים', FEMALE)).toBe('נשים');
+  expect(genderize('א.נשים', MALE)).toBe('אנשים');
 
-  expect(Ivrita.genderize('איש/אשת', Ivrita.FEMALE)).toBe('אשת');
-  expect(Ivrita.genderize('איש/אשת', Ivrita.MALE)).toBe('איש');
-  expect(Ivrita.genderize('אשת/איש', Ivrita.FEMALE)).toBe('אשת');
-  expect(Ivrita.genderize('אשת/איש', Ivrita.MALE)).toBe('איש');
-  expect(Ivrita.genderize('גבר/אישה', Ivrita.FEMALE)).toBe('אישה');
-  expect(Ivrita.genderize('גבר/אישה', Ivrita.MALE)).toBe('גבר');
-  expect(Ivrita.genderize('איש/אישה', Ivrita.MALE)).toBe('איש');
+  expect(genderize('איש/אשת', FEMALE)).toBe('אשת');
+  expect(genderize('איש/אשת', MALE)).toBe('איש');
+  expect(genderize('אשת/איש', FEMALE)).toBe('אשת');
+  expect(genderize('אשת/איש', MALE)).toBe('איש');
+  expect(genderize('גבר/אישה', FEMALE)).toBe('אישה');
+  expect(genderize('גבר/אישה', MALE)).toBe('גבר');
+  expect(genderize('איש/אישה', MALE)).toBe('איש');
 
   // Female
-  expect(Ivrita.genderize('רוצ/י', Ivrita.FEMALE)).toBe('רוצי');
-  expect(Ivrita.genderize('רוצ/י', Ivrita.MALE)).toBe('רוץ');
+  expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
+  expect(genderize('רוצ/י', MALE)).toBe('רוץ');
 
-  expect(Ivrita.genderize('קומ/י', Ivrita.FEMALE)).toBe('קומי');
-  expect(Ivrita.genderize('קומ/י', Ivrita.MALE)).toBe('קום');
+  expect(genderize('קומ/י', FEMALE)).toBe('קומי');
+  expect(genderize('קומ/י', MALE)).toBe('קום');
 
-  expect(Ivrita.genderize('עופ/י', Ivrita.FEMALE)).toBe('עופי');
-  expect(Ivrita.genderize('עופ/י', Ivrita.MALE)).toBe('עוף');
+  expect(genderize('עופ/י', FEMALE)).toBe('עופי');
+  expect(genderize('עופ/י', MALE)).toBe('עוף');
 
-  expect(Ivrita.genderize('שים/י', Ivrita.FEMALE)).toBe('שימי');
-  expect(Ivrita.genderize('שים/י', Ivrita.MALE)).toBe('שים');
+  expect(genderize('שים/י', FEMALE)).toBe('שימי');
+  expect(genderize('שים/י', MALE)).toBe('שים');
 
-  expect(Ivrita.genderize('אח/ות', Ivrita.FEMALE)).toBe('אחות');
-  expect(Ivrita.genderize('אח/ות', Ivrita.MALE)).toBe('אח');
+  expect(genderize('אח/ות', FEMALE)).toBe('אחות');
+  expect(genderize('אח/ות', MALE)).toBe('אח');
 
-  expect(Ivrita.genderize('לו/לה, לה/לו', Ivrita.FEMALE)).toBe('לה, לה');
-  expect(Ivrita.genderize('לו/לה, לה/לו', Ivrita.MALE)).toBe('לו, לו');
+  expect(genderize('לו/לה, לה/לו', FEMALE)).toBe('לה, לה');
+  expect(genderize('לו/לה, לה/לו', MALE)).toBe('לו, לו');
 
-  expect(Ivrita.genderize('בן/בת, בת/בן', Ivrita.FEMALE)).toBe('בת, בת');
-  expect(Ivrita.genderize('בן/בת, בת/בן', Ivrita.MALE)).toBe('בן, בן');
+  expect(genderize('בן/בת, בת/בן', FEMALE)).toBe('בת, בת');
+  expect(genderize('בן/בת, בת/בן', MALE)).toBe('בן, בן');
 
-  expect(Ivrita.genderize('הוא/היא, היא/הוא', Ivrita.FEMALE)).toBe('היא, היא');
-  expect(Ivrita.genderize('הוא/היא, היא/הוא', Ivrita.MALE)).toBe('הוא, הוא');
+  expect(genderize('הוא/היא, היא/הוא', FEMALE)).toBe('היא, היא');
+  expect(genderize('הוא/היא, היא/הוא', MALE)).toBe('הוא, הוא');
 
-  expect(Ivrita.genderize('אנשי/ות', Ivrita.FEMALE)).toBe('נשות');
-  expect(Ivrita.genderize('אנשי/ות', Ivrita.MALE)).toBe('אנשי');
+  expect(genderize('אנשי/ות', FEMALE)).toBe('נשות');
+  expect(genderize('אנשי/ות', MALE)).toBe('אנשי');
 
-  expect(Ivrita.genderize('מישהו/י', Ivrita.FEMALE)).toBe('מישהי');
-  expect(Ivrita.genderize('מישהו/י', Ivrita.MALE)).toBe('מישהו');
+  expect(genderize('מישהו/י', FEMALE)).toBe('מישהי');
+  expect(genderize('מישהו/י', MALE)).toBe('מישהו');
 
-  expect(Ivrita.genderize('אחד/ת, אחד/אחת, אחת/אחד', Ivrita.FEMALE)).toBe('אחת, אחת, אחת');
-  expect(Ivrita.genderize('אחד/ת, אחד/אחת, אחת/אחד', Ivrita.MALE)).toBe('אחד, אחד, אחד');
+  expect(genderize('אחד/ת, אחד/אחת, אחת/אחד', FEMALE)).toBe('אחת, אחת, אחת');
+  expect(genderize('אחד/ת, אחד/אחת, אחת/אחד', MALE)).toBe('אחד, אחד, אחד');
 
-  expect(Ivrita.genderize('יקירי/תי', Ivrita.FEMALE)).toBe('יקירתי');
-  expect(Ivrita.genderize('יקירי/תי', Ivrita.MALE)).toBe('יקירי');
+  expect(genderize('יקירי/תי', FEMALE)).toBe('יקירתי');
+  expect(genderize('יקירי/תי', MALE)).toBe('יקירי');
 });

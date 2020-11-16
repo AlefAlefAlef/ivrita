@@ -1,5 +1,5 @@
-import Ivrita from '../../src/ivrita';
+import { genderize, NEUTRAL } from '../../src/ivrita';
 
 test('No multiple slashes on neutral', () => {
-  expect(Ivrita.genderize('הקלד/י', Ivrita.NEUTRAL)).toBe('הקלד/י'); // unchanged
+  expect(genderize('הקלד/י', NEUTRAL)).toBe('הקלד/י'); // unchanged
 });

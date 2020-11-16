@@ -1,7 +1,7 @@
-import Ivrita from '../../src/ivrita';
+import { genderize, MALE } from '../../src/ivrita';
 
 test('All separators', () => {
-  expect(Ivrita.genderize('את/ה', Ivrita.MALE)).toBe('אתה');
-  expect(Ivrita.genderize('את.ה', Ivrita.MALE)).toBe('אתה');
-  expect(Ivrita.genderize('את\\ה', Ivrita.MALE)).toBe('אתה');
+  expect(genderize('את/ה', MALE)).toBe('אתה');
+  expect(genderize('את.ה', MALE)).toBe('אתה');
+  expect(genderize('את\\ה', MALE)).toBe('אתה');
 });
