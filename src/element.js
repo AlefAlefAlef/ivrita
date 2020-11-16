@@ -92,18 +92,20 @@ export default class IvritaElement {
   setFontFeatureSettings(isActive) {
     this.elements.forEach((el) => {
       const originalFFS = el.style.fontFeatureSettings;
-      let result = originalFFS.slice();
+      let result = originalFFS.slice().replace('normal', '');
 
       if (isActive) {
-        if (!originalFFS.includes('titl')) {
-          if (originalFFS) { // Only add a space if property exists
+        if (!result.includes('titl')) {
+          if (result) { // Only add a space if property exists
             result += ', ';
           }
           result += '"titl"';
         }
-      } else if (originalFFS.includes('titl')) {
-        result = originalFFS.replace(/(, )?"?'?titl"?'?/, '');
+      } else if (result.includes('titl')) {
+        result = result.replace(/(, )?"?'?titl"?'?/, '');
       }
+
+      if (!result) result = 'normal';
 
       el.style.fontFeatureSettings = result;
     });

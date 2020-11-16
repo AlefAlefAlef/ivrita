@@ -11,7 +11,7 @@ test('OpenType setting on clean element', () => {
 
   ivrita.setFontFeatureSettings(false);
 
-  expect(el.style.fontFeatureSettings).toEqual('');
+  expect(el.style.fontFeatureSettings).toEqual('normal');
 });
 
 test('OpenType setting on element with pre-existing settings', () => {
