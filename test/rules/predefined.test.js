@@ -15,19 +15,6 @@ test('Whole words', () => {
   expect(genderize('גבר/אישה', MALE)).toBe('גבר');
   expect(genderize('איש/אישה', MALE)).toBe('איש');
 
-  // Female
-  expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
-  expect(genderize('רוצ/י', MALE)).toBe('רוץ');
-
-  expect(genderize('קומ/י', FEMALE)).toBe('קומי');
-  expect(genderize('קומ/י', MALE)).toBe('קום');
-
-  expect(genderize('עופ/י', FEMALE)).toBe('עופי');
-  expect(genderize('עופ/י', MALE)).toBe('עוף');
-
-  expect(genderize('שים/י', FEMALE)).toBe('שימי');
-  expect(genderize('שים/י', MALE)).toBe('שים');
-
   expect(genderize('אח/ות', FEMALE)).toBe('אחות');
   expect(genderize('אח/ות', MALE)).toBe('אח');
 

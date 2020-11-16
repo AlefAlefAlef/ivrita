@@ -5,7 +5,9 @@ import {
 import {
   finnables, toFin, toNotFin,
 } from './utils/finals';
-import { nonChangingVerbsFemale, pluralsWithoutExtraYod, pluralsWithExtraYod } from './wordlists';
+import {
+  custom, verbsFemaleExtraYod, pluralsWithoutExtraYod, pluralsWithExtraYod,
+} from './wordlists';
 
 // Marks are used by early rules to specify a position in a text
 // which should be addressed later by later rules.
@@ -25,30 +27,17 @@ const regexize = (p) => {
 
 export default [
   // Whole Words
-  [`א${EXTSEP}נשים`, 'אנשים', 'נשים'], // א.נשים
-  [`א${EXTSEP}נשי(?!ם)`, 'אנשי', 'נשות'], // א.נשי
-  [`את${SEP}ה`, 'אתה', 'את'], // את/ה
-  [`איש${SEP}אשת`, 'איש', 'אשת'], // איש/אשת
-  [`אשת${SEP}איש`, 'איש', 'אשת'], // אשת/איש
-  [`(גבר|איש)${SEP}אישה`, '$1', 'אישה'], // גבר/אישה, איש/אישה
-  [`אח${SEP}ות${B}`, 'אח', 'אחות'], // אח/ות
-  [`ל(ו|ה)${SEP}ל(ו|ה)${B}`, 'לו', 'לה'], // לו/לה, לה/לו
-  [`ב(ן|ת)${SEP}ב(ן|ת)${B}`, 'בן', 'בת'], // בת/בן, בן/בת
-  [`ה(ו|י)א${SEP}ה(ו|י)א${B}`, 'הוא', 'היא'], // הוא/היא, היא/הוא
-  [`אנשי${SEP}ות${B}`, 'אנשי', 'נשות'], // אנשי/ות
-  [`מישהו${SEP}י${B}`, 'מישהו', 'מישהי'], // מישהו/י
-  [`אחד${SEP}(אח)?ת${B}`, 'אחד', 'אחת'], // אחד/ת, אחד/אחת
-  [`אחת${SEP}(אח)?ד${B}`, 'אחד', 'אחת'], // אחת/ד, אחת/אחד
+  ...custom,
 
-  // רוץ/י => רוץ, רוצי
-  ...nonChangingVerbsFemale.map((word) => {
+  // הקשב/י => הקשב, הקשיבי
+  ...verbsFemaleExtraYod.map((word) => {
     const wordWithoutLastLetter = word.slice(0, word.length - 1);
     const lastLetter = word.slice(word.length - 1);
     let lastLetterMatcher = `(${lastLetter})`;
     if (finnables.includes(lastLetter)) {
       lastLetterMatcher = `(${toFin(lastLetter)}|${toNotFin(lastLetter)})`;
     }
-    return [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${B}`, `${wordWithoutLastLetter}${toFin(lastLetter)}`, `${wordWithoutLastLetter}${lastLetter}י`];
+    return [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${B}`, `${wordWithoutLastLetter}${toFin(lastLetter)}`, `${wordWithoutLastLetter}י${lastLetter}י`];
   }),
 
   // סטודנטים/ות => סטודנטים, סטודנטיות
@@ -88,8 +77,8 @@ export default [
 
   [`(${W})ה${SEP}י${B}`, '$1ה', '$1י'], // ראה/י
 
-  [`(${W})ו(${W})${SEP}י${B}`, '$1ו$2', '$1$2י'], // כתוב/י
-  [`(${W})${SEP}י${B}`, `$1${M_WORDFIN}`, 'י$1י'], // הקשב/י
+  [`(${W}{2,})ו(${W})${SEP}י${B}`, '$1ו$2', '$1$2י'], // כתוב/י
+  [`(${W})${SEP}י${B}`, `$1${M_WORDFIN}`, '$1י'], // לך/י
 
   [`(${W})(ה)?${SEP}ת${B}`, `$1$2${M_WORDFIN}`, '$1ת'], // נהג/ת, רואה/ת חשבון
 

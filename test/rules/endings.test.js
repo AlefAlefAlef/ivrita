@@ -38,6 +38,36 @@ test('Word endings', () => {
   expect(genderize('כתוב/י', FEMALE)).toBe('כתבי');
   expect(genderize('כתוב/י', MALE)).toBe('כתוב');
 
+  expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
+  expect(genderize('רוצ/י', MALE)).toBe('רוץ');
+
+  expect(genderize('צור/י', FEMALE)).toBe('צרי');
+  expect(genderize('צור/י', MALE)).toBe('צור');
+
+  expect(genderize('קומ/י', FEMALE)).toBe('קומי');
+  expect(genderize('קומ/י', MALE)).toBe('קום');
+
+  expect(genderize('עופ/י', FEMALE)).toBe('עופי');
+  expect(genderize('עופ/י', MALE)).toBe('עוף');
+
+  expect(genderize('שים/י', FEMALE)).toBe('שימי');
+  expect(genderize('שים/י', MALE)).toBe('שים');
+
+  expect(genderize('עקוב/י', FEMALE)).toBe('עקבי');
+  expect(genderize('עקוב/י', MALE)).toBe('עקוב');
+
+  expect(genderize('ראה/י', FEMALE)).toBe('ראי');
+  expect(genderize('ראה/י', MALE)).toBe('ראה');
+
+  expect(genderize('ודא/י', FEMALE)).toBe('ודאי');
+  expect(genderize('ודא/י', MALE)).toBe('ודא');
+
+  expect(genderize('בחר/י', FEMALE)).toBe('בחרי');
+  expect(genderize('בחר/י', MALE)).toBe('בחר');
+
+  expect(genderize('תוכל/י', FEMALE)).toBe('תוכלי');
+  expect(genderize('תוכל/י', MALE)).toBe('תוכל');
+
   expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
   expect(genderize('צאו/נה', MALE)).toBe('צאו');
 
@@ -338,22 +368,4 @@ test('Word endings', () => {
   expect(genderize('יהודים/ות', MALE)).toBe('יהודים');
   expect(genderize('יהודיים/ות', FEMALE)).toBe('יהודיות');
   expect(genderize('יהודיים/ות', MALE)).toBe('יהודיים');
-
-  expect(genderize('עקוב/י', FEMALE)).toBe('עקבי');
-  expect(genderize('עקוב/י', MALE)).toBe('עקוב');
-
-  expect(genderize('צור/י', FEMALE)).toBe('צרי');
-  expect(genderize('צור/י', MALE)).toBe('צור');
-
-  expect(genderize('ראה/י', FEMALE)).toBe('ראי');
-  expect(genderize('ראה/י', MALE)).toBe('ראה');
-
-  expect(genderize('ודא/י', FEMALE)).toBe('ודאי');
-  expect(genderize('ודא/י', MALE)).toBe('ודא');
-
-  expect(genderize('בחר/י', FEMALE)).toBe('בחרי');
-  expect(genderize('בחר/י', MALE)).toBe('בחר');
-
-  expect(genderize('תוכל/י', FEMALE)).toBe('תוכלי');
-  expect(genderize('תוכל/י', MALE)).toBe('תוכל');
 });
