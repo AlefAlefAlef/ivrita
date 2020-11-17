@@ -40,19 +40,7 @@ export const verbsFemaleExtraYod = [
 ];
 
 // Most plurals don't need an extra Yod on their female form: מורים->מורות
-// When the word ends with א, נ or ט, it usually needs one, so there's a rule for that.
-// These are the exceptions which *do not* need an extra Yod:
-export const pluralsWithoutExtraYod = [
-  'גננ',
-  'מאמנ',
-  'מרא',
-  'מלא',
-  'מתרא',
-  'מתרא',
-  'רופא',
-];
-
-// And these are the exceptions which *do*:
+// These are the exceptions which need a Yod:
 export const pluralsWithExtraYod = [
   'יזמ',
   'מומח',
@@ -60,6 +48,8 @@ export const pluralsWithExtraYod = [
   'מצר',
   'אוסטרל',
   'אקדמ',
+  'סטודנט',
+  'מאסטר(א?)נט',
   'אדריכל',
   'ירושלמ',
   `תל([${MAKAF}]| )אביב`,
