@@ -80,6 +80,12 @@ test('Word endings', () => {
   expect(genderize('יספרו/תספרנה', FEMALE)).toBe('תספרנה');
   expect(genderize('יספרו/תספרנה', MALE)).toBe('יספרו');
 
+  expect(genderize('תלכו/נה', FEMALE)).toBe('תלכנה');
+  expect(genderize('תלכו/נה', MALE)).toBe('תלכו');
+
+  expect(genderize('תדרכו/נה', FEMALE)).toBe('תדרכנה');
+  expect(genderize('תדרכו/נה', MALE)).toBe('תדרכו');
+
   expect(genderize('הלבישו/נה', FEMALE)).toBe('הלבשנה');
   expect(genderize('הלבישו/נה', MALE)).toBe('הלבישו');
 
