@@ -138,8 +138,11 @@ test('Word endings', () => {
   expect(genderize('יקירי/תי', FEMALE)).toBe('יקירתי');
   expect(genderize('יקירי/תי', MALE)).toBe('יקירי');
 
-  expect(genderize('יקיר/תי', FEMALE)).toBe('יקירתי');
-  expect(genderize('יקיר/תי', MALE)).toBe('יקירי');
+  expect(genderize('אהובי/תי', FEMALE)).toBe('אהובתי');
+  expect(genderize('אהובי/תי', MALE)).toBe('אהובי');
+
+  expect(genderize('דודי/תי', FEMALE)).toBe('דודתי');
+  expect(genderize('דודי/תי', MALE)).toBe('דודי');
 
   expect(genderize('שלו/ה', FEMALE)).toBe('שלה');
   expect(genderize('שלו/ה', MALE)).toBe('שלו');
