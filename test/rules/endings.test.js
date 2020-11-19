@@ -382,4 +382,9 @@ test('Word endings', () => {
   expect(genderize('יהודים/ות', MALE)).toBe('יהודים');
   expect(genderize('יהודיים/ות', FEMALE)).toBe('יהודיות');
   expect(genderize('יהודיים/ות', MALE)).toBe('יהודיים');
+
+  expect(genderize('קלפטומנים/ות', FEMALE)).toBe('קלפטומניות');
+  expect(genderize('קלפטומנים/ות', MALE)).toBe('קלפטומנים');
+  expect(genderize('קלפטומנים/יות', FEMALE)).toBe('קלפטומניות');
+  expect(genderize('קלפטומנים/יות', MALE)).toBe('קלפטומנים');
 });
