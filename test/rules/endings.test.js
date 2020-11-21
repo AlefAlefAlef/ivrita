@@ -387,4 +387,7 @@ test('Word endings', () => {
   expect(genderize('קלפטומנים/ות', MALE)).toBe('קלפטומנים');
   expect(genderize('קלפטומנים/יות', FEMALE)).toBe('קלפטומניות');
   expect(genderize('קלפטומנים/יות', MALE)).toBe('קלפטומנים');
+
+  expect(genderize('רקדו/נה', FEMALE)).toBe('רקדנה');
+  expect(genderize('רקדו/נה', MALE)).toBe('רקדו');
 });
