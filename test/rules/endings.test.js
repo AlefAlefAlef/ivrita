@@ -13,15 +13,14 @@ test('Word endings', () => {
 
   expect(genderize('הרם/י', FEMALE)).toBe('הרימי');
   expect(genderize('הרם/י', MALE)).toBe('הרם');
-
   expect(genderize('הרמ/י', FEMALE)).toBe('הרימי');
   expect(genderize('הרמ/י', MALE)).toBe('הרם');
 
   expect(genderize('הדגם/י', FEMALE)).toBe('הדגימי');
   expect(genderize('הדגם/י', MALE)).toBe('הדגם');
 
-  expect(genderize('הקשב/י', FEMALE)).toBe('הקשיבי');
-  expect(genderize('הקשב/י', MALE)).toBe('הקשב');
+  expect(genderize('הקלד/י', FEMALE)).toBe('הקלידי');
+  expect(genderize('הקלד/י', MALE)).toBe('הקלד');
 
   expect(genderize('הלבש/י', FEMALE)).toBe('הלבישי');
   expect(genderize('הלבש/י', MALE)).toBe('הלבש');

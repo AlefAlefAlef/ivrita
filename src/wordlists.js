@@ -39,6 +39,7 @@ export const verbsFemaleExtraYod = [
   'הדגם',
   'הלבש',
   'הרבץ',
+  'הקלד',
 ];
 
 // Most plurals don't need an extra Yod on their female form: מורים->מורות
