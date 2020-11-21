@@ -273,8 +273,8 @@ test('Word endings', () => {
   expect(genderize('סטודנטים/יות', FEMALE)).toBe('סטודנטיות');
   expect(genderize('סטודנטים/יות', MALE)).toBe('סטודנטים');
 
-  expect(genderize('מאסטרנטים/ות', FEMALE)).toBe('מאסטרנטיות');
-  expect(genderize('מאסטרנטים/ות', MALE)).toBe('מאסטרנטים');
+  expect(genderize('מאסטרים/ות', FEMALE)).toBe('מאסטריות');
+  expect(genderize('מאסטרים/ות', MALE)).toBe('מאסטרים');
 
   expect(genderize('יזמים/ות', FEMALE)).toBe('יזמיות');
   expect(genderize('יזמים/ות', MALE)).toBe('יזמים');
@@ -378,6 +378,8 @@ test('Word endings', () => {
   expect(genderize('צרפתים/ות', FEMALE)).toBe('צרפתיות');
   expect(genderize('צרפתים/ות', MALE)).toBe('צרפתים');
 
+  expect(genderize('הודים/ות', FEMALE)).toBe('הודיות');
+  expect(genderize('הודים/ות', MALE)).toBe('הודים');
   expect(genderize('יהודים/ות', FEMALE)).toBe('יהודיות');
   expect(genderize('יהודים/ות', MALE)).toBe('יהודים');
   expect(genderize('יהודיים/ות', FEMALE)).toBe('יהודיות');
