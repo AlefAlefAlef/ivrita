@@ -389,4 +389,7 @@ test('Word endings', () => {
   expect(genderize('קלפטומנים/ות', MALE)).toBe('קלפטומנים');
   expect(genderize('קלפטומנים/יות', FEMALE)).toBe('קלפטומניות');
   expect(genderize('קלפטומנים/יות', MALE)).toBe('קלפטומנים');
+
+  expect(genderize('שפים/ות', FEMALE)).toBe('שפיות');
+  expect(genderize('שפים/ות', MALE)).toBe('שפים');
 });
