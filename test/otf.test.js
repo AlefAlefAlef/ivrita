@@ -1,6 +1,7 @@
 import Ivrita from '../src/element';
+import { NEUTRAL, ORIGINAL } from '../src/ivrita';
 
-test('OpenType setting on clean element', () => {
+test('setFontFeatureSettings on clean element', () => {
   const el = document.createElement('p');
 
   expect(el.style.fontFeatureSettings).toEqual('');
@@ -12,6 +13,24 @@ test('OpenType setting on clean element', () => {
   expect(el.style.fontFeatureSettings).toEqual('"titl"');
 
   ivrita.setFontFeatureSettings(false);
+
+  expect(el.style.fontFeatureSettings).toEqual('normal');
+});
+
+test('Implicit fontFeatureSettings via setMode on clean element', () => {
+  const el = document.createElement('p');
+
+  expect(el.style.fontFeatureSettings).toEqual('');
+
+  const ivrita = new Ivrita(el);
+
+  expect(el.style.fontFeatureSettings).toEqual('');
+
+  ivrita.setMode(NEUTRAL);
+
+  expect(el.style.fontFeatureSettings).toEqual('"titl"');
+
+  ivrita.setMode(ORIGINAL);
 
   expect(el.style.fontFeatureSettings).toEqual('normal');
 });

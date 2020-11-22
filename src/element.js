@@ -14,6 +14,8 @@ export default class IvritaElement {
 
   mode;
 
+  fontFeatureSettings;
+
   static GENDERS = GENDERS;
 
   static MALE = MALE;
@@ -69,8 +71,8 @@ export default class IvritaElement {
     });
   }
 
-  static setDefaultMode(gender) {
-    this.defaultMode = gender;
+  static setDefaultMode(newMode) {
+    this.defaultMode = newMode;
   }
 
   setMode(newMode = NEUTRAL) {
@@ -116,6 +118,7 @@ export default class IvritaElement {
   }
 
   setFontFeatureSettings(isActive) {
+    this.fontFeatureSettings = isActive;
     this.elements.forEach((el) => {
       const originalFFS = el.style.fontFeatureSettings;
       let result = originalFFS.slice().replace('normal', '');
