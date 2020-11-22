@@ -67,6 +67,20 @@ test('Multiple elements passed to constructor', () => {
   expect(document.body.querySelector('#content p').textContent).toBe('[מעצבים|מתכנתות|הייטקיסטים] רבים/ות מרגישים תסכול, כאשר פונים אליהם/ן שלא בשפתם/ן.');
 });
 
+test('Ovserver catches new elements added', () => {
+  document.body.innerHTML = template;
+  const i = new Ivrita(document.body);
+
+  document.body.innerHTML += '<b>את/ה נהדר/ת</b>';
+  i.setMode(MALE);
+
+  // Using setTimeout to push the test to the message queue,
+  // which will be executed after the MutationObserver finishes.
+  setTimeout(() => {
+    expect(document.body.textContent).toBe('ddd');
+  }, 0);
+});
+
 test('jQuery element passed to constructor', () => {
   document.body.innerHTML = template;
   const ivrita = new Ivrita(jQuery('#content'));

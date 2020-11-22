@@ -47,7 +47,13 @@ export default class IvritaElement {
       return preExistingInstance;
     }
 
+    this.observer = new MutationObserver(this.onElementChange.bind(this));
     this.elements.forEach((el) => {
+      this.observer.observe(el, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
       this.constructor.instances.set(el, this);
       this.registerTextNodes(el);
     });
@@ -115,6 +121,16 @@ export default class IvritaElement {
     while ((currentNode = walk.nextNode())) {
       this.nodes.add(new TextNode(currentNode));
     }
+  }
+
+  onElementChange(mutationsList) {
+    mutationsList.forEach((mutation) => {
+      Array.from(mutation.addedNodes)
+        .filter((n) => n.nodeType === Node.TEXT_NODE)
+        .forEach((node) => {
+          this.nodes.add(new TextNode(node));
+        });
+    });
   }
 
   setFontFeatureSettings(isActive) {
