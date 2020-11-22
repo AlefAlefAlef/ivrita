@@ -31,10 +31,10 @@ Installing the library on your website requires 3 steps:
     ```
 2. Initialize the Ivrita object:
     ```JavaScript
-    var ivrita = new Ivrita(document.querySelector('#content'));
+    var ivrita = new Ivrita(document.querySelector('#content'), Ivrita.FEMALE);
     ```
     (If no argument is passed to the `Ivrita` constructor, `document.body` is used instead)
-3. Pass to the `Ivrita` object the user's gender with `setMode`:
+3. Change the gender later with `setMode` on the object instance:
     ```JavaScript
     ivrita.setMode(Ivrita.MALE); // Possible options: Ivrita.MALE, Ivrita.FEMALE, Ivrita.NEUTRAL
     ```

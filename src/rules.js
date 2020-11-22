@@ -1,12 +1,12 @@
 import {
-  SEP, HEB, EXTSEP, G, W, FIN, B,
+  SEP, HEB, G, W, FIN, B,
 } from './utils/characters';
 
 import {
   finnables, toFin, toNotFin,
 } from './utils/finals';
 import {
-  custom, verbsFemaleExtraYod, pluralsWithoutExtraYod, pluralsWithExtraYod,
+  custom, verbsFemaleExtraYod, pluralsWithExtraYod,
 } from './wordlists';
 
 // Marks are used by early rules to specify a position in a text
