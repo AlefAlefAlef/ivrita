@@ -15,6 +15,7 @@ import {
 // which was created by a rule (i.e. wasn't the end of the word in the original text)
 // and this ending should be checked for final letters errors (מ=>ם).
 const M_WORDFIN = '\u05c8'; // Not a real character
+const M_NOT_WORDFIN = '\u05c9'; // Not a real character
 
 const regexize = (p) => {
   p[0] = new RegExp(p[0], 'g');
@@ -37,7 +38,7 @@ export default [
     if (finnables.includes(lastLetter)) {
       lastLetterMatcher = `(${toFin(lastLetter)}|${toNotFin(lastLetter)})`;
     }
-    return [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${B}`, `${wordWithoutLastLetter}${toFin(lastLetter)}`, `${wordWithoutLastLetter}י${lastLetter}י`];
+    return [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${B}`, `${wordWithoutLastLetter}${toFin(lastLetter)}`, `${wordWithoutLastLetter}י${toNotFin(lastLetter)}י`];
   }),
 
   // סטודנטים/ות => סטודנטים, סטודנטיות
@@ -54,15 +55,16 @@ export default [
   [`(${B})(${W}{0,3})ת${SEP}י(${W}{2,})`, '$1$2י$3', '$1$2ת$3'], // שת/יכתוב
 
   // Endings
+
   [`ו${SEP}ה${B}`, 'ו', 'ה'], // בגללה/ו
   [`ה${SEP}ו${B}`, 'ו', 'ה'], // בגללו/ה
-  [`(${W})${SEP}ה${B}`, `$1${M_WORDFIN}`, '$1ה'], // בגללו/ה
+  [`(${W})${SEP}ה${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}ה`], // חרוץ/ה
   [`(${W})ה?${SEP}תה${B}`, '$1ה', '$1תה'], // בכה/תה, רצ/תה
   [`(${W})יו${SEP}י?ה${B}`, '$1יו', '$1יה'], // מחקריו/יה
   [`(${W})ה${SEP}ית${B}`, '$1ה', '$1ית'], // מומחה/ית
   [`(${W})י${SEP}ות${B}`, '$1י', '$1ות'], // מומחי/ות
   [`(${W})ות${SEP}י${B}`, '$1י', '$1ות'], // מומחות/י
-  [`(${W})${SEP}ית${B}`, `$1${M_WORDFIN}`, '$1ית'], // סטודנט/ית
+  [`(${W})${SEP}ית${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}ית`], // סטודנט/ית
 
   [`(${W})י${SEP}תי${B}`, '$1י', '$1תי'], // יקירי/תי
 
@@ -74,17 +76,17 @@ export default [
 
   [`(${W})ה${SEP}י${B}`, '$1ה', '$1י'], // ראה/י
 
-  [`(${W}{2,})ו(${W})${SEP}י${B}`, '$1ו$2', '$1$2י'], // כתוב/י
-  [`(${W})${SEP}י${B}`, `$1${M_WORDFIN}`, '$1י'], // לך/י
+  [`(${W}{2,})ו(${W})${SEP}י${B}`, '$1ו$2', `$1$2${M_NOT_WORDFIN}י`], // כתוב/י
+  [`(${W})${SEP}י${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}י`], // לך/י
 
-  [`(${W})(ה)?${SEP}ת${B}`, `$1$2${M_WORDFIN}`, '$1ת'], // נהג/ת, רואה/ת חשבון
+  [`(${W})(ה)?${SEP}ת${B}`, `$1$2${M_WORDFIN}`, `$1${M_NOT_WORDFIN}ת`], // נהג/ת, רואה/ת חשבון
 
   [`(${W})ם${SEP}?ן${B}`, '$1ם', '$1ן'], // אתם/ן
   [`(${W})ן${SEP}?ם${B}`, '$1ם', '$1ן'], // אתן/ם
   [`ה(${W}+)י(${W})ו${SEP}נה`, 'ה$1י$2ו', 'ה$1$2נה'], // הלבישו/נה
   [`(${W}+)ו${SEP}ת(${W}+)נה`, '$1ו', 'ת$2נה'], // יצאו/תצאנה
   [`ת(${W}+)ו${SEP}נה`, 'ת$1ו', 'ת$1נה'], // תדרכו/נה
-  [`(${W})${SEP}נה${B}`, `$1${M_WORDFIN}`, '$1נה'], // צאו/נה
+  [`(${W})${SEP}נה${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}נה`], // צאו/נה
 
   // Parentheses
   [`(${W}+)\\(([ותי]{1,3})\\)([יוהםן]{1,3})${B}`, '$1$3', '$1$2$3'], // מתנגד(ות)יו, מתנגד(ות)יהם
@@ -98,11 +100,11 @@ export default [
   ['\\[([^|]*?)\\|([^|]*?)\\]', '$1', '$2', true], // [בן|בת]
 
   // Final Letters fixes
-  [`ץ(?=${HEB})`, 'צ', 'צ'], // חרוץה
-  [`ך(?=${HEB})`, 'כ', 'כ'], // משךי
-  [`ן(?=${HEB})`, 'נ', 'נ'], // השעןי
-  [`ם(?=${HEB})`, 'מ', 'מ'], // יזםית
-  [`ף(?=${HEB})`, 'פ', 'פ'], // פילוסוףית
+  [`ץ${M_NOT_WORDFIN}`, 'צ', 'צ'], // חרוץה
+  [`ך${M_NOT_WORDFIN}`, 'כ', 'כ'], // משךי
+  [`ן${M_NOT_WORDFIN}`, 'נ', 'נ'], // השעןי
+  [`ם${M_NOT_WORDFIN}`, 'מ', 'מ'], // יזםית
+  [`ף${M_NOT_WORDFIN}`, 'פ', 'פ'], // פילוסוףית
 
   [`([^${G}]+)צ${M_WORDFIN}`, '$1ץ', '$1ץ'], // חרוצ
   [`([^${G}]+)כ${M_WORDFIN}`, '$1ך', '$1ך'], // משוכ
@@ -111,5 +113,5 @@ export default [
   [`([^${G}]+)פ${M_WORDFIN}`, '$1ף', '$1ף'], // פילוסופ
 
   // Remove marks
-  [`${M_WORDFIN}`, '', ''],
+  [`[${M_WORDFIN}${M_NOT_WORDFIN}]`, '', ''],
 ].map(regexize);
