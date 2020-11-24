@@ -38,7 +38,7 @@ export default class IvritaElement {
     } else if (typeof jQuery === 'function' && elem instanceof jQuery && typeof elem.toArray === 'function') {
       this.elements = elem.toArray();
     } else {
-      throw new Error(`Passed argument is not an HTMLElement. Did you mean: 'document.querySelector("${elem.toString()}")'?`);
+      throw new Error('Passed argument is not an HTMLElement.');
     }
 
     if (this.elements.length === 1 && this.constructor.instances.has(this.elements[0])) {
@@ -107,13 +107,8 @@ export default class IvritaElement {
       element,
       NodeFilter.SHOW_TEXT,
       {
-        acceptNode: (node) => (
-          TextNode.instances.has(node) || (
-            (node.textContent.trim().length > 0
-            && hebrewRegex.test(node.textContent) // Test for Hebrew Letters
-            && ivritaSyntaxRegex.test(node.textContent)) // Test for Ivrita Syntax
-              ? NodeFilter.FILTER_ACCEPT
-              : NodeFilter.FILTER_SKIP)),
+        acceptNode: (node) => (this.constructor.acceptNodeFilter(node)
+          ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP),
       },
     );
 
@@ -123,13 +118,47 @@ export default class IvritaElement {
     }
   }
 
+  static acceptNodeFilter(node) {
+    if (node.nodeType !== Node.TEXT_NODE) {
+      return false;
+    }
+
+    // If the checks were aleady applied before, skip them
+    if (TextNode.instances.has(node)) {
+      return true;
+    }
+
+    return (node.textContent.trim().length > 0
+      && hebrewRegex.test(node.textContent) // Test for Hebrew Letters
+      && ivritaSyntaxRegex.test(node.textContent)); // Test for Ivrita Syntax;
+  }
+
   onElementChange(mutationsList) {
     mutationsList.forEach((mutation) => {
-      Array.from(mutation.addedNodes)
-        .filter((n) => n.nodeType === Node.TEXT_NODE)
-        .forEach((node) => {
-          this.nodes.add(new TextNode(node));
-        });
+      if (mutation.type === 'childList') {
+        const added = Array.from(mutation.addedNodes);
+        const removed = Array.from(mutation.removedNodes);
+        if (added.length === removed.length) { // Probably just changed, not really removed
+          removed.forEach((node, i) => {
+            if (node.nodeType === Node.TEXT_NODE) {
+              if (TextNode.instances.has(node) && added[i].nodeType === Node.TEXT_NODE) {
+                const nodeObj = TextNode.instances.get(node);
+                nodeObj.node = added[i]; // This is dangerous, make sure it makes sense
+                TextNode.instances.set(added[i], nodeObj);
+                TextNode.instances.delete(node);
+              }
+            } // TODO: what about nodes with nested text nodes?
+          });
+        } else {
+          added.forEach((node) => {
+            if (node.nodeType === Node.TEXT_NODE && this.constructor.acceptNodeFilter(node)) {
+              this.nodes.add(new TextNode(node));
+            } else if (node.childNodes.length > 0) {
+              this.registerTextNodes(node);
+            }
+          });
+        }
+      }
     });
   }
 
