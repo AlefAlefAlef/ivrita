@@ -391,4 +391,6 @@ test('Word endings', () => {
 
   expect(genderize('שפים/ות', FEMALE)).toBe('שפיות');
   expect(genderize('שפים/ות', MALE)).toBe('שפים');
+  expect(genderize('מכשפים/ות', FEMALE)).toBe('מכשפות');
+  expect(genderize('מכשפים/ות', MALE)).toBe('מכשפים');
 });

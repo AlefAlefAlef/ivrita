@@ -1,5 +1,5 @@
 import {
-  SEP, HEB, G, W, FIN, B,
+  SEP, NCB, G, W, FIN, B,
 } from './utils/characters';
 
 import {
@@ -45,9 +45,9 @@ export default [
   ...pluralsWithExtraYod.map((word) => {
     let targetWord = word;
     if (word.includes('(')) { // regex groups
-      targetWord = word.replace(new RegExp('\\(.*?\\)'), '$1');
+      targetWord = word.replace(new RegExp('\\(.*?\\)'), '$2'); // TODO: support multiple groups
     }
-    return [`${word}ים${SEP}י?ות${B}`, `${targetWord}ים`, `${targetWord}יות`];
+    return [`(${NCB})${word}ים${SEP}י?ות${B}`, `$1${targetWord}ים`, `$1${targetWord}יות`];
   }),
 
   // Beginnings
@@ -70,9 +70,9 @@ export default [
 
   [`(${W}{4,})אים${SEP}י?ות${B}`, '$1אים', '$1איות'], // ארגנטינאים/ות
 
-  [`(י)?ים${SEP}?(י)?ות${B}`, '$1ים', '$1$2ות'], // מורים/ות
-  [`(י)?ות${SEP}?י?ים${B}`, '$1ים', '$1ות'], // מורות/ים
-  [`י${SEP}ות${B}`, 'י', 'ות'], // עורכי/ות
+  [`(${W})(י)?ים${SEP}?(י)?ות${B}`, '$1$2ים', '$1$2$3ות'], // מורים/ות
+  [`(${W})(י)?ות${SEP}?י?ים${B}`, '$1$2ים', '$1$2ות'], // מורות/ים
+  [`(${W})י${SEP}ות${B}`, '$1י', '$1ות'], // עורכי/ות
 
   [`(${W})ה${SEP}י${B}`, '$1ה', '$1י'], // ראה/י
 
