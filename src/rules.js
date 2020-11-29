@@ -1,5 +1,5 @@
 import {
-  SEP, NCB, G, W, FIN, B,
+  SEP, NCB, G, W, FIN, B, HEB,
 } from './utils/characters';
 
 import {
@@ -76,7 +76,7 @@ export default [
 
   [`(${W})ה${SEP}י${B}`, '$1ה', '$1י'], // ראה/י
 
-  [`(${W}{2,})ו(${W})${SEP}י${B}`, '$1ו$2', `$1$2${M_NOT_WORDFIN}י`], // כתוב/י
+  [`(${HEB}{2,})ו(${W})${SEP}י${B}`, '$1ו$2', `$1$2${M_NOT_WORDFIN}י`], // כתוב/י
   [`(${W})${SEP}י${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}י`], // לך/י
 
   [`(${W})(ה)?${SEP}ת${B}`, `$1$2${M_WORDFIN}`, `$1${M_NOT_WORDFIN}ת`], // נהג/ת, רואה/ת חשבון
