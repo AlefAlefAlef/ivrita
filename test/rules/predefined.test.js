@@ -31,6 +31,8 @@ test('Whole words', () => {
 
   expect(genderize('אנשי/ות', FEMALE)).toBe('נשות');
   expect(genderize('אנשי/ות', MALE)).toBe('אנשי');
+  expect(genderize('א.נשות', FEMALE)).toBe('נשות');
+  expect(genderize('א.נשות', MALE)).toBe('אנשי');
 
   expect(genderize('מישהו/י', FEMALE)).toBe('מישהי');
   expect(genderize('מישהו/י', MALE)).toBe('מישהו');
