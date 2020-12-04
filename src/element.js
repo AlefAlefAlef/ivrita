@@ -139,13 +139,14 @@ export default class IvritaElement {
         const added = Array.from(mutation.addedNodes);
         const removed = Array.from(mutation.removedNodes);
         if (added.length === removed.length) { // Probably just changed, not really removed
-          removed.forEach((node, i) => {
-            if (node.nodeType === Node.TEXT_NODE) {
-              if (TextNode.instances.has(node) && added[i].nodeType === Node.TEXT_NODE) {
-                const nodeObj = TextNode.instances.get(node);
-                nodeObj.node = added[i]; // This is dangerous, make sure it makes sense
-                TextNode.instances.set(added[i], nodeObj);
-                TextNode.instances.delete(node);
+          removed.forEach((oldNode, i) => {
+            if (oldNode.nodeType === Node.TEXT_NODE) {
+              const newNode = added[i];
+              if (TextNode.instances.has(oldNode) && newNode.nodeType === Node.TEXT_NODE) {
+                const nodeObj = TextNode.instances.get(oldNode);
+                nodeObj.node = newNode; // This is dangerous, make sure it makes sense
+                TextNode.instances.set(newNode, nodeObj);
+                TextNode.instances.delete(oldNode);
               }
             } // TODO: what about nodes with nested text nodes?
           });
