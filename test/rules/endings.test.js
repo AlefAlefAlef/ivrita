@@ -399,4 +399,7 @@ test('Word endings', () => {
   expect(genderize('שפים/ות', MALE)).toBe('שפים');
   expect(genderize('מכשפים/ות', FEMALE)).toBe('מכשפות');
   expect(genderize('מכשפים/ות', MALE)).toBe('מכשפים');
+
+  expect(genderize('שווים/ות, שוויםות, שוות/ים, שווי/ות זכויות', FEMALE)).toBe('שוות, שוות, שוות, שוות זכויות');
+  expect(genderize('שווים/ות, שוויםות, שוות/ים, שווי/ות זכויות', MALE)).toBe('שווים, שווים, שווים, שווי זכויות');
 });
