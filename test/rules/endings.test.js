@@ -19,9 +19,6 @@ test('Word endings', () => {
   expect(genderize('הדגם/י', FEMALE)).toBe('הדגימי');
   expect(genderize('הדגם/י', MALE)).toBe('הדגם');
 
-  expect(genderize('צור/י', FEMALE)).toBe('צרי');
-  expect(genderize('צור/י', MALE)).toBe('צור');
-
   expect(genderize('הקלד/י', FEMALE)).toBe('הקלידי');
   expect(genderize('הקלד/י', MALE)).toBe('הקלד');
 
@@ -40,14 +37,16 @@ test('Word endings', () => {
   expect(genderize('כתוב/י', FEMALE)).toBe('כתבי');
   expect(genderize('כתוב/י', MALE)).toBe('כתוב');
 
-  expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
-  expect(genderize('רוצ/י', MALE)).toBe('רוץ');
-
   expect(genderize('צור/י', FEMALE)).toBe('צרי');
   expect(genderize('צור/י', MALE)).toBe('צור');
 
+  expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
+  expect(genderize('רוצ/י', MALE)).toBe('רוץ');
+
   expect(genderize('קומ/י', FEMALE)).toBe('קומי');
   expect(genderize('קומ/י', MALE)).toBe('קום');
+  expect(genderize('לכשתקומ/י', FEMALE)).toBe('לכשתקומי');
+  expect(genderize('לכשתקומ/י', MALE)).toBe('לכשתקום');
 
   expect(genderize('עופ/י', FEMALE)).toBe('עופי');
   expect(genderize('עופ/י', MALE)).toBe('עוף');

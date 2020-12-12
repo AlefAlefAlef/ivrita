@@ -19,10 +19,9 @@ export const custom = [
   [`אחת${SEP}(אח)?ד${B}`, 'אחד', 'אחת'], // אחת/ד, אחת/אחד
   [`יקיר(י?)${SEP}תי${B}`, 'יקירי', 'יקירתי'], // יקירי/תי
   [`אהוב(י?)${SEP}תי${B}`, 'אהובי', 'אהובתי'], // יקירי/תי
-  [`צור${SEP}י${B}`, 'צור', 'צרי'], // צור/צרי
 ];
 
-// For most verbs, we follow the rules of:
+// For most verbs (Unless found in *verbsFemaleKeepVav*), we follow the rules of:
 // כתוב/י => Vav before last letter => Vav removed => כתבי
 // else:
 // לך/י => Yod added after original word => לכי
@@ -61,6 +60,17 @@ export const verbsFemaleExtraYod = [
   'השתק',
   'התמד',
   'התקן',
+];
+
+export const verbsFemaleKeepVav = [
+  'קום',
+  'רוץ',
+  'עופ',
+  'שוב',
+  'זוז',
+  'טוס',
+  'שוט',
+  'בוא',
 ];
 
 // Most plurals don't need an extra Yod on their female form: מורים->מורות

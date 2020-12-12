@@ -6,7 +6,7 @@ import {
   finnables, toFin, toNotFin,
 } from './utils/finals';
 import {
-  custom, verbsFemaleExtraYod, pluralsWithExtraYod,
+  custom, verbsFemaleExtraYod, verbsFemaleKeepVav, pluralsWithExtraYod,
 } from './wordlists';
 
 // Marks are used by early rules to specify a position in a text
@@ -26,20 +26,25 @@ const regexize = (p) => {
   return p;
 };
 
+const matchAndNormalizeFemale = (word, addYod) => {
+  const wordWithoutLastLetter = word.slice(0, word.length - 1);
+  const lastLetter = word.slice(word.length - 1);
+  let lastLetterMatcher = `(${lastLetter})`;
+  if (finnables.includes(lastLetter)) {
+    lastLetterMatcher = `(${toFin(lastLetter)}|${toNotFin(lastLetter)})`;
+  }
+  return [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${B}`, `${wordWithoutLastLetter}${toFin(lastLetter)}`, `${wordWithoutLastLetter}${addYod ? 'י' : ''}${toNotFin(lastLetter)}י`];
+};
+
 export default [
   // Whole Words
   ...custom,
 
   // הקשב/י => הקשב, הקשיבי
-  ...verbsFemaleExtraYod.map((word) => {
-    const wordWithoutLastLetter = word.slice(0, word.length - 1);
-    const lastLetter = word.slice(word.length - 1);
-    let lastLetterMatcher = `(${lastLetter})`;
-    if (finnables.includes(lastLetter)) {
-      lastLetterMatcher = `(${toFin(lastLetter)}|${toNotFin(lastLetter)})`;
-    }
-    return [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${B}`, `${wordWithoutLastLetter}${toFin(lastLetter)}`, `${wordWithoutLastLetter}י${toNotFin(lastLetter)}י`];
-  }),
+  ...verbsFemaleExtraYod.map((word) => matchAndNormalizeFemale(word, true)),
+
+  // קום/י => קום, קומי
+  ...verbsFemaleKeepVav.map((word) => matchAndNormalizeFemale(word, false)),
 
   // סטודנטים/ות => סטודנטים, סטודנטיות
   ...pluralsWithExtraYod.map((word) => {
@@ -78,7 +83,7 @@ export default [
 
   [`(${W})ה${SEP}י${B}`, '$1ה', '$1י'], // ראה/י
 
-  [`(${HEB}{2,})ו(${W})${SEP}י${B}`, '$1ו$2', `$1$2${M_NOT_WORDFIN}י`], // כתוב/י
+  [`(${HEB})ו(${W})${SEP}י${B}`, '$1ו$2', `$1$2${M_NOT_WORDFIN}י`], // כתוב/י
   [`(${W})${SEP}י${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}י`], // לך/י
 
   [`(${W})(ה)?${SEP}ת${B}`, `$1$2${M_WORDFIN}`, `$1${M_NOT_WORDFIN}ת`], // נהג/ת, רואה/ת חשבון
