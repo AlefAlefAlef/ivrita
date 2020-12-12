@@ -30,7 +30,7 @@ export default class IvritaElement {
 
   static instances = new Map();
 
-  static defaultMode;
+  static defaultMode = NEUTRAL;
 
   constructor(elem = document.body, mode = null) {
     if (elem instanceof NodeList) {
