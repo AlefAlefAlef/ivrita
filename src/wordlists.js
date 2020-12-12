@@ -1,5 +1,5 @@
 import {
-  G, MAKAF, SEP, EXTSEP, B,
+  G, SEP, EXTSEP, B,
 } from './utils/characters';
 
 export const custom = [
