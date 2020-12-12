@@ -16,6 +16,8 @@ export default class IvritaElement {
 
   fontFeatureSettings;
 
+  static EVENT_MODE_CHANGED = 'ivrita-mode-changed';
+
   static GENDERS = GENDERS;
 
   static MALE = MALE;
@@ -94,11 +96,20 @@ export default class IvritaElement {
     this.mode = newMode;
     this.nodes.forEach((node) => node.setMode(newMode));
 
+    this.dispatchModeChangedEvent(newMode);
+
     return this;
   }
 
   static setMode(newMode) {
     this.instances.forEach((instance) => instance.setMode(newMode));
+  }
+
+  dispatchModeChangedEvent(mode = this.mode) {
+    this.elements.forEach(
+      (el) => el.dispatchEvent(new CustomEvent(this.constructor.EVENT_MODE_CHANGED,
+        { bubbles: true, detail: { mode } })),
+    );
   }
 
   registerTextNodes(element) {
