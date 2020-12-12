@@ -69,10 +69,7 @@ test('Word endings', () => {
   expect(genderize('תוכל/י', FEMALE)).toBe('תוכלי');
   expect(genderize('תוכל/י', MALE)).toBe('תוכל');
 
-  expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
-  expect(genderize('צאו/נה', MALE)).toBe('צאו');
-
-  expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
+  expect(genderize('צאו/נה', FEMALE)).toBe('צאנה');
   expect(genderize('צאו/נה', MALE)).toBe('צאו');
 
   expect(genderize('צאו/תצאנה', FEMALE)).toBe('תצאנה');
@@ -110,6 +107,9 @@ test('Word endings', () => {
 
   expect(genderize('הניחו/נה', FEMALE)).toBe('הנחנה');
   expect(genderize('הניחו/נה', MALE)).toBe('הניחו');
+
+  expect(genderize('רקדו/נה', FEMALE)).toBe('רקדנה');
+  expect(genderize('רקדו/נה', MALE)).toBe('רקדו');
 
   // Third person
   expect(genderize('לו/ה', FEMALE)).toBe('לה');
