@@ -69,10 +69,7 @@ test('Word endings', () => {
   expect(genderize('תוכל/י', FEMALE)).toBe('תוכלי');
   expect(genderize('תוכל/י', MALE)).toBe('תוכל');
 
-  expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
-  expect(genderize('צאו/נה', MALE)).toBe('צאו');
-
-  expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
+  expect(genderize('צאו/נה', FEMALE)).toBe('צאנה');
   expect(genderize('צאו/נה', MALE)).toBe('צאו');
 
   expect(genderize('צאו/תצאנה', FEMALE)).toBe('תצאנה');
