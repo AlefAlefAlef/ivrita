@@ -67,6 +67,20 @@ test('Multiple elements passed to constructor', () => {
   expect(document.body.querySelector('#content p').textContent).toBe('[מעצבים|מתכנתות|הייטקיסטים] רבים/ות מרגישים תסכול, כאשר פונים אליהם/ן שלא בשפתם/ן.');
 });
 
+test('Ovserver catches new elements added', () => {
+  document.body.innerHTML = template;
+  const i = new Ivrita(document.body);
+
+  document.body.innerHTML += '<b>את/ה נהדר/ת</b>';
+  i.setMode(MALE);
+
+  // Using setTimeout to push the test to the message queue,
+  // which will be executed after the MutationObserver finishes.
+  setTimeout(() => {
+    expect(document.body.textContent).toBe('ddd');
+  }, 0);
+});
+
 test('jQuery element passed to constructor', () => {
   document.body.innerHTML = template;
   const ivrita = new Ivrita(jQuery('#content'));
@@ -117,4 +131,20 @@ test('Node singletons', () => {
   expect(ivrita.nodes.size).toEqual(4);
   expect(ivrita2.nodes.size).toEqual(1);
   expect(textNodeRegister).toHaveBeenCalledTimes(4);
+});
+
+test('Events', () => {
+  const listener = jest.fn();
+  document.addEventListener(Ivrita.EVENT_MODE_CHANGED, listener);
+
+  document.body.innerHTML = template;
+  const ivrita = new Ivrita(document.querySelector('#content'));
+
+  ivrita.setMode(MALE);
+  expect(listener.mock.calls.length).toBe(1);
+  expect(listener.mock.calls[0][0].detail.mode).toBe(MALE);
+
+  ivrita.setMode(FEMALE);
+  expect(listener.mock.calls.length).toBe(2);
+  expect(listener.mock.calls[1][0].detail.mode).toBe(FEMALE);
 });

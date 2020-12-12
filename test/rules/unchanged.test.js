@@ -49,3 +49,8 @@ test('Final letters and abbreviations', () => {
   expect(genderize('דסקטופ', FEMALE)).toBe('דסקטופ'); // unchanged
   expect(genderize('דסקטופ', MALE)).toBe('דסקטופ'); // unchanged
 });
+
+test('Words which look like genders', () => {
+  expect(genderize('תותים', FEMALE)).toBe('תותים'); // unchanged
+  expect(genderize('תותים', MALE)).toBe('תותים'); // unchanged
+});

@@ -12,6 +12,12 @@ export default class IvritaElement {
 
   elements = [];
 
+  mode;
+
+  fontFeatureSettings;
+
+  static EVENT_MODE_CHANGED = 'ivrita-mode-changed';
+
   static GENDERS = GENDERS;
 
   static MALE = MALE;
@@ -22,9 +28,11 @@ export default class IvritaElement {
 
   static ORIGINAL = ORIGINAL;
 
-  static instances = new WeakMap();
+  static instances = new Map();
 
-  constructor(elem = document.body) {
+  static defaultMode = NEUTRAL;
+
+  constructor(elem = document.body, mode = null) {
     if (elem instanceof NodeList) {
       this.elements = Array.from(elem);
     } else if (elem instanceof HTMLElement) {
@@ -41,12 +49,22 @@ export default class IvritaElement {
       return preExistingInstance;
     }
 
+    this.observer = new MutationObserver(this.onElementChange.bind(this));
     this.elements.forEach((el) => {
+      this.observer.observe(el, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
       this.constructor.instances.set(el, this);
       this.registerTextNodes(el);
     });
 
-    this.setFontFeatureSettings(true);
+    if (typeof mode !== 'undefined') {
+      this.setMode(mode);
+    } else if (this.constructor.defaultMode) {
+      this.setMode(this.constructor.defaultMode);
+    }
   }
 
   destroy() {
@@ -61,10 +79,37 @@ export default class IvritaElement {
     });
   }
 
-  setMode(gender = NEUTRAL) {
-    this.mode = gender;
-    this.nodes.forEach((node) => node.setMode(gender));
+  static setDefaultMode(newMode) {
+    this.defaultMode = newMode;
+  }
+
+  setMode(newMode = NEUTRAL) {
+    if (newMode === NEUTRAL) {
+      this.setFontFeatureSettings(true);
+    } else if (this.mode === NEUTRAL) {
+      this.setFontFeatureSettings(false);
+    }
+
+    if (!this.constructor.GENDERS.includes(newMode)) {
+      return this;
+    }
+    this.mode = newMode;
+    this.nodes.forEach((node) => node.setMode(newMode));
+
+    this.dispatchModeChangedEvent(newMode);
+
     return this;
+  }
+
+  static setMode(newMode) {
+    this.instances.forEach((instance) => instance.setMode(newMode));
+  }
+
+  dispatchModeChangedEvent(mode = this.mode) {
+    this.elements.forEach(
+      (el) => el.dispatchEvent(new CustomEvent(this.constructor.EVENT_MODE_CHANGED,
+        { bubbles: true, detail: { mode } })),
+    );
   }
 
   registerTextNodes(element) {
@@ -89,7 +134,18 @@ export default class IvritaElement {
     }
   }
 
+  onElementChange(mutationsList) {
+    mutationsList.forEach((mutation) => {
+      Array.from(mutation.addedNodes)
+        .filter((n) => n.nodeType === Node.TEXT_NODE)
+        .forEach((node) => {
+          this.nodes.add(new TextNode(node));
+        });
+    });
+  }
+
   setFontFeatureSettings(isActive) {
+    this.fontFeatureSettings = isActive;
     this.elements.forEach((el) => {
       const originalFFS = el.style.fontFeatureSettings;
       let result = originalFFS.slice().replace('normal', '');
@@ -112,18 +168,10 @@ export default class IvritaElement {
 
     return this;
   }
-
-  getFontFeatureSettings() {
-    return this.elements.filter((el) => el.style.fontFeatureSettings.includes('titl')).length;
-  }
 }
 
 if (typeof jQuery === 'function') {
   jQuery.fn.ivrita = function ivritajQueryFn(gender) {
-    const i = new IvritaElement(this);
-    if (typeof gender !== 'undefined') {
-      i.setMode(gender);
-    }
-    return i;
+    return new IvritaElement(this, gender);
   };
 }

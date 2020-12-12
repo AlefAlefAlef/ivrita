@@ -24,15 +24,16 @@ export default class TextNode {
     this.originalText = node.textContent;
   }
 
-  setMode(gender) {
+  setMode(newMode) {
     let newVal;
+    this.currentMode = newMode;
 
-    if (gender === ORIGINAL) {
+    if (newMode === ORIGINAL) {
       newVal = this.originalText;
-    } else if (gender === NEUTRAL && !this.originalText.includes('{') && !this.originalText.includes('[')) {
+    } else if (newMode === NEUTRAL && !this.originalText.includes('{') && !this.originalText.includes('[')) {
       newVal = this.originalText;
     } else {
-      newVal = genderize(this.originalText, gender);
+      newVal = genderize(this.originalText, newMode);
     }
 
     if (newVal !== this.node.data) {
