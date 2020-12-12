@@ -1,6 +1,7 @@
 module.exports = {
   // entry is the "main" source file we want to include/import
   entry: './src/element.js',
+  devtool: 'source-map',
   // output tells webpack where to put the bundle it creates
   output: {
     // in the case of a "plain global browser library", this
