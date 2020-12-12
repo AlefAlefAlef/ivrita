@@ -5,6 +5,11 @@ test('Singular possessive', () => {
   expect(genderize('חבר(ת)ו', MALE)).toBe('חברו');
 });
 
+test('Grandma/pa', () => {
+  expect(genderize('סב(ת)א', FEMALE)).toBe('סבתא');
+  expect(genderize('סב(ת)א', MALE)).toBe('סבא');
+});
+
 test('Men/Women', () => {
   expect(genderize('(א)נשים', FEMALE)).toBe('נשים');
   expect(genderize('(א)נשים', MALE)).toBe('אנשים');
@@ -32,4 +37,7 @@ test('Yod in the middle', () => {
 
   expect(genderize('פנ(י)יך', FEMALE)).toBe('פנייך');
   expect(genderize('פנ(י)יך', MALE)).toBe('פניך');
+
+  expect(genderize('הפע(י)ל/י', FEMALE)).toBe('הפעילי');
+  expect(genderize('הפע(י)ל/י', MALE)).toBe('הפעל');
 });

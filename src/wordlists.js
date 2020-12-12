@@ -1,10 +1,10 @@
 import {
-  G, MAKAF, SEP, EXTSEP, B,
+  G, SEP, EXTSEP, B,
 } from './utils/characters';
 
 export const custom = [
   [`א${EXTSEP}נשים`, 'אנשים', 'נשים'], // א.נשים
-  [`א${EXTSEP}נשי(?!ם)`, 'אנשי', 'נשות'], // א.נשי
+  [`א${EXTSEP}נשות`, 'אנשי', 'נשות'], // א.נשי
   [`את${SEP}ה`, 'אתה', 'את'], // את/ה
   [`איש${SEP}(?:אש)?ת`, 'איש', 'אשת'], // איש/אשת, איש/ת
   [`אשת${SEP}איש`, 'איש', 'אשת'], // אשת/איש
@@ -18,11 +18,11 @@ export const custom = [
   [`אחד${SEP}(אח)?ת${B}`, 'אחד', 'אחת'], // אחד/ת, אחד/אחת
   [`אחת${SEP}(אח)?ד${B}`, 'אחד', 'אחת'], // אחת/ד, אחת/אחד
   [`יקיר(י?)${SEP}תי${B}`, 'יקירי', 'יקירתי'], // יקירי/תי
-  [`אהוב(י?)${SEP}תי${B}`, 'אהובי', 'אהובתי'], // יקירי/תי
-  [`צור${SEP}י${B}`, 'צור', 'צרי'], // צור/צרי
+  [`אהוב(י?)${SEP}תי${B}`, 'אהובי', 'אהובתי'], // אהובי/תי
+  ['סב\\(ת\\)א', 'סבא', 'סבתא'], // סבא/סבתא
 ];
 
-// For most verbs, we follow the rules of:
+// For most verbs (Unless found in *verbsFemaleKeepVav*), we follow the rules of:
 // כתוב/י => Vav before last letter => Vav removed => כתבי
 // else:
 // לך/י => Yod added after original word => לכי
@@ -30,17 +30,48 @@ export const custom = [
 // הקשב => Add Yod before and after Bet => הקשיבי
 // This is the list of words which need that extra Yod:
 export const verbsFemaleExtraYod = [
-  'השב',
-  'הקשב',
-  'הפעל',
-  'הרגש',
-  'התמד',
-  'הרם',
+  'האר',
+  'הבא',
+  'הגב',
   'הדגם',
+  'הדלק',
+  'הוסף',
+  'הועל',
+  'הורד',
+  'הזמן',
+  'הזן',
+  'הכנס',
   'הלבש',
-  'הרבץ',
+  'המלץ',
+  'המשך',
+  'הסר',
+  'הסתר',
+  'הפעל',
+  'הפקד',
+  'הצג',
   'הקלד',
+  'הקלק',
+  'הקש',
+  'הקשב',
+  'הרגש',
+  'הרם',
+  'הרעף',
+  'השב',
+  'השלם',
+  'השתק',
+  'התמד',
   'התקן',
+];
+
+export const verbsFemaleKeepVav = [
+  'קום',
+  'רוץ',
+  'עופ',
+  'שוב',
+  'זוז',
+  'טוס',
+  'שוט',
+  'בוא',
 ];
 
 // Most plurals don't need an extra Yod on their female form: מורים->מורות
@@ -65,6 +96,7 @@ export const pluralsWithExtraYod = [
   'אוסטר(ל?)',
   'אופטימ',
   'אחרא',
+  'אחיינ',
   'איטלק',
   'אינדיבידואליסט',
   'אירונ',

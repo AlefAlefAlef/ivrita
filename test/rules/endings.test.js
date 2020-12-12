@@ -25,8 +25,8 @@ test('Word endings', () => {
   expect(genderize('הלבש/י', FEMALE)).toBe('הלבישי');
   expect(genderize('הלבש/י', MALE)).toBe('הלבש');
 
-  expect(genderize('הרבצ/י', FEMALE)).toBe('הרביצי');
-  expect(genderize('הרבצ/י', MALE)).toBe('הרבץ');
+  expect(genderize('הקש/י', FEMALE)).toBe('הקישי');
+  expect(genderize('הקש/י', MALE)).toBe('הקש');
 
   expect(genderize('צפה/י', FEMALE)).toBe('צפי');
   expect(genderize('צפה/י', MALE)).toBe('צפה');
@@ -37,14 +37,16 @@ test('Word endings', () => {
   expect(genderize('כתוב/י', FEMALE)).toBe('כתבי');
   expect(genderize('כתוב/י', MALE)).toBe('כתוב');
 
-  expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
-  expect(genderize('רוצ/י', MALE)).toBe('רוץ');
-
   expect(genderize('צור/י', FEMALE)).toBe('צרי');
   expect(genderize('צור/י', MALE)).toBe('צור');
 
+  expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
+  expect(genderize('רוצ/י', MALE)).toBe('רוץ');
+
   expect(genderize('קומ/י', FEMALE)).toBe('קומי');
   expect(genderize('קומ/י', MALE)).toBe('קום');
+  expect(genderize('לכשתקומ/י', FEMALE)).toBe('לכשתקומי');
+  expect(genderize('לכשתקומ/י', MALE)).toBe('לכשתקום');
 
   expect(genderize('עופ/י', FEMALE)).toBe('עופי');
   expect(genderize('עופ/י', MALE)).toBe('עוף');
@@ -67,10 +69,7 @@ test('Word endings', () => {
   expect(genderize('תוכל/י', FEMALE)).toBe('תוכלי');
   expect(genderize('תוכל/י', MALE)).toBe('תוכל');
 
-  expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
-  expect(genderize('צאו/נה', MALE)).toBe('צאו');
-
-  expect(genderize('צאו/נה', FEMALE)).toBe('צאונה');
+  expect(genderize('צאו/נה', FEMALE)).toBe('צאנה');
   expect(genderize('צאו/נה', MALE)).toBe('צאו');
 
   expect(genderize('צאו/תצאנה', FEMALE)).toBe('תצאנה');
@@ -108,6 +107,9 @@ test('Word endings', () => {
 
   expect(genderize('הניחו/נה', FEMALE)).toBe('הנחנה');
   expect(genderize('הניחו/נה', MALE)).toBe('הניחו');
+
+  expect(genderize('רקדו/נה', FEMALE)).toBe('רקדנה');
+  expect(genderize('רקדו/נה', MALE)).toBe('רקדו');
 
   // Third person
   expect(genderize('לו/ה', FEMALE)).toBe('לה');
@@ -377,6 +379,9 @@ test('Word endings', () => {
   expect(genderize('צרפתים/ות', FEMALE)).toBe('צרפתיות');
   expect(genderize('צרפתים/ות', MALE)).toBe('צרפתים');
 
+  expect(genderize('אחיינים/ות', FEMALE)).toBe('אחייניות');
+  expect(genderize('אחיינים/ות', MALE)).toBe('אחיינים');
+
   expect(genderize('הודים/ות', FEMALE)).toBe('הודיות');
   expect(genderize('הודים/ות', MALE)).toBe('הודים');
   expect(genderize('יהודים/ות', FEMALE)).toBe('יהודיות');
@@ -393,4 +398,7 @@ test('Word endings', () => {
   expect(genderize('שפים/ות', MALE)).toBe('שפים');
   expect(genderize('מכשפים/ות', FEMALE)).toBe('מכשפות');
   expect(genderize('מכשפים/ות', MALE)).toBe('מכשפים');
+
+  expect(genderize('שווים/ות, שוויםות, שוות/ים, שווי/ות זכויות', FEMALE)).toBe('שוות, שוות, שוות, שוות זכויות');
+  expect(genderize('שווים/ות, שוויםות, שוות/ים, שווי/ות זכויות', MALE)).toBe('שווים, שווים, שווים, שווי זכויות');
 });

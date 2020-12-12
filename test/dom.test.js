@@ -132,3 +132,19 @@ test('Node singletons', () => {
   expect(ivrita2.nodes.size).toEqual(1);
   expect(textNodeRegister).toHaveBeenCalledTimes(4);
 });
+
+test('Events', () => {
+  const listener = jest.fn();
+  document.addEventListener(Ivrita.EVENT_MODE_CHANGED, listener);
+
+  document.body.innerHTML = template;
+  const ivrita = new Ivrita(document.querySelector('#content'));
+
+  ivrita.setMode(MALE);
+  expect(listener.mock.calls.length).toBe(1);
+  expect(listener.mock.calls[0][0].detail.mode).toBe(MALE);
+
+  ivrita.setMode(FEMALE);
+  expect(listener.mock.calls.length).toBe(2);
+  expect(listener.mock.calls[1][0].detail.mode).toBe(FEMALE);
+});
