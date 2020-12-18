@@ -1,5 +1,6 @@
 import Ivrita from '../src/element';
-import TextNode from '../src/node';
+import TextNode from '../src/textNode';
+import TextObject from '../src/textObject';
 
 import {
   FEMALE, MALE, NEUTRAL, ORIGINAL,
@@ -118,7 +119,7 @@ test('Bad element passed to constructor', () => {
 });
 
 test('Node singletons', () => {
-  const textNodeRegister = jest.spyOn(TextNode.instances, 'set');
+  const textNodeRegister = jest.spyOn(TextObject.instances, 'set');
 
   document.body.innerHTML = template;
   const ivrita = new Ivrita(document.querySelector('#content'));

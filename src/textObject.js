@@ -1,8 +1,8 @@
 import { genderize, ORIGINAL, NEUTRAL } from './ivrita';
 
-export default class TextNode {
-  node = {};
+export const IncompatibleTypeError = new Error('Incompatible node passed to the node constructor');
 
+export default class TextObject {
   originalText = '';
 
   currentMode = false;
@@ -10,18 +10,15 @@ export default class TextNode {
   static instances = new WeakMap();
 
   constructor(node) {
-    if (!(node instanceof Node) || node.nodeType !== Node.TEXT_NODE) {
-      return false;
+    if (TextObject.instances.has(node)) {
+      return TextObject.instances.get(node);
     }
 
-    if (this.constructor.instances.has(node)) {
-      return this.constructor.instances.get(node);
-    }
+    TextObject.instances.set(node, this);
+  }
 
-    this.constructor.instances.set(node, this);
-
-    this.node = node;
-    this.originalText = node.textContent;
+  init() {
+    this.originalText = this.getValue();
   }
 
   setMode(newMode) {
@@ -36,8 +33,16 @@ export default class TextNode {
       newVal = genderize(this.originalText, newMode);
     }
 
-    if (newVal !== this.node.data) {
-      this.node.data = newVal;
+    if (newVal !== this.getValue()) {
+      this.setValue(newVal);
     }
+  }
+
+  getValue() {
+    return this.value;
+  }
+
+  setValue(newVal) {
+    this.value = newVal;
   }
 }

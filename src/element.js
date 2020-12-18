@@ -1,7 +1,9 @@
 import {
   MALE, FEMALE, NEUTRAL, ORIGINAL, GENDERS,
 } from './ivrita';
-import TextNode from './node';
+import TextAttribute from './textAttribute';
+import TextNode from './textNode';
+import TextObject from './textObject';
 import { HEB, SYNTAX } from './utils/characters';
 
 const hebrewRegex = new RegExp(HEB);
@@ -15,6 +17,12 @@ export default class IvritaElement {
   mode;
 
   fontFeatureSettings;
+
+  relavantAttributes = {
+    'a, img, button, input': ['title'],
+    [`input:not([type=${['submit', 'button', 'checkbox', 'radio', 'hidden', 'image', 'range', 'reset', 'file'].join(']):not([type=')}])`]: ['placeholder'],
+    'input[type=submit], input[type=button], input[type=reset]': ['value'],
+  };
 
   static EVENT_MODE_CHANGED = 'ivrita-mode-changed';
 
@@ -119,7 +127,7 @@ export default class IvritaElement {
       NodeFilter.SHOW_TEXT,
       {
         acceptNode: (node) => (
-          TextNode.instances.has(node) || (
+          TextObject.instances.has(node) || (
             (node.textContent.trim().length > 0
             && hebrewRegex.test(node.textContent) // Test for Hebrew Letters
             && ivritaSyntaxRegex.test(node.textContent)) // Test for Ivrita Syntax
@@ -132,6 +140,16 @@ export default class IvritaElement {
     while ((currentNode = walk.nextNode())) {
       this.nodes.add(new TextNode(currentNode));
     }
+
+    Object.entries(this.relavantAttributes).forEach(([selector, attributes]) => {
+      Array.from(element.querySelectorAll(selector)).forEach((input) => {
+        attributes.forEach((attrName) => {
+          if (input.hasAttribute(attrName)) {
+            this.nodes.add(new TextAttribute(input.getAttributeNode(attrName)));
+          }
+        });
+      });
+    });
   }
 
   onElementChange(mutationsList) {
