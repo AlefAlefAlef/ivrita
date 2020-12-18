@@ -48,7 +48,7 @@ export default class IvritaElement {
     } else if (typeof jQuery === 'function' && elem instanceof jQuery && typeof elem.toArray === 'function') {
       this.elements = elem.toArray();
     } else {
-      throw new Error(`Passed argument is not an HTMLElement. Did you mean: 'document.querySelector("${elem.toString()}")'?`);
+      throw new Error('Passed argument is not an HTMLElement.');
     }
 
     if (this.elements.length === 1 && this.constructor.instances.has(this.elements[0])) {
@@ -131,28 +131,7 @@ export default class IvritaElement {
       element,
       NodeFilter.SHOW_ELEMENT + NodeFilter.SHOW_TEXT,
       {
-        acceptNode: (node) => {
-          if (TextObject.instances.has(node)) { // Already indexed, will be pointer to existing node
-            return NodeFilter.FILTER_ACCEPT;
-          }
-
-          if (node.textContent.trim().length <= 0) {
-            return NodeFilter.FILTER_REJECT; // If there's no content, reject all child nodes
-          }
-
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            if (node.dataset.ivritaDisable) {
-              return Node.FILTER_REJECT;
-            }
-          } else if (node.nodeType === Node.TEXT_NODE) {
-            if (hebrewRegex.test(node.textContent) // Test for Hebrew Letters
-            && ivritaSyntaxRegex.test(node.textContent)) {
-              return NodeFilter.FILTER_ACCEPT;
-            }
-          }
-          return NodeFilter.FILTER_SKIP;
-        },
-
+        acceptNode: (node) => (this.constructor.acceptNodeFilter(node)),
       },
     );
 
@@ -174,6 +153,28 @@ export default class IvritaElement {
     });
   }
 
+  static acceptNodeFilter(node) {
+    if (TextObject.instances.has(node)) { // Already indexed, will be pointer to existing node
+      return NodeFilter.FILTER_ACCEPT;
+    }
+
+    if (node.textContent.trim().length <= 0) {
+      return NodeFilter.FILTER_REJECT; // If there's no content, reject all child nodes
+    }
+
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      if (node.dataset.ivritaDisable) {
+        return Node.FILTER_REJECT;
+      }
+    } else if (node.nodeType === Node.TEXT_NODE) {
+      if (hebrewRegex.test(node.textContent) // Test for Hebrew Letters
+      && ivritaSyntaxRegex.test(node.textContent)) {
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    }
+    return NodeFilter.FILTER_SKIP;
+  }
+
   onElementChange(mutationsList) {
     const closest = (el, s) => {
       do {
@@ -185,13 +186,35 @@ export default class IvritaElement {
     };
 
     mutationsList.forEach((mutation) => {
-      Array.from(mutation.addedNodes)
-        .forEach((node) => {
-          if (closest(node, '[data-ivrita-disable]')) {
-            return;
-          }
-          this.registerTextNodes(node);
-        });
+      if (mutation.type === 'childList') {
+        const added = Array.from(mutation.addedNodes);
+        const removed = Array.from(mutation.removedNodes);
+        if (added.length === removed.length) { // Probably just changed, not really removed
+          removed.forEach((oldNode, i) => {
+            if (oldNode.nodeType === Node.TEXT_NODE) {
+              const newNode = added[i];
+              if (TextNode.instances.has(oldNode) && newNode.nodeType === Node.TEXT_NODE) {
+                const nodeObj = TextNode.instances.get(oldNode);
+                nodeObj.node = newNode; // This is dangerous, make sure it makes sense
+                TextNode.instances.set(newNode, nodeObj);
+                TextNode.instances.delete(oldNode);
+              }
+            } // TODO: what about nodes with nested text nodes?
+          });
+        } else {
+          added.forEach((node) => {
+            if (closest(node, '[data-ivrita-disable]')) {
+              return;
+            }
+            if (node.nodeType === Node.TEXT_NODE
+              && this.constructor.acceptNodeFilter(node) === NodeFilter.FILTER_ACCEPT) {
+              this.nodes.add(new TextNode(node));
+            } else if (node.childNodes.length > 0) {
+              this.registerTextNodes(node);
+            }
+          });
+        }
+      }
     });
   }
 
