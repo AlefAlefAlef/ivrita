@@ -53,7 +53,7 @@ export default class IvritaElement {
 
     if (this.elements.length === 1 && this.constructor.instances.has(this.elements[0])) {
       const preExistingInstance = this.constructor.instances.get(this.elements[0]);
-      preExistingInstance.registerTextNodes(this.elements[0]); // Make sure all nodes are registered
+      preExistingInstance.registerTextObjects(this.elements[0]); // Make sure nodes are registered
       return preExistingInstance;
     }
 
@@ -62,10 +62,10 @@ export default class IvritaElement {
       this.observer.observe(el, {
         childList: true,
         subtree: true,
-        characterData: true,
+        characterData: false,
       });
       this.constructor.instances.set(el, this);
-      this.registerTextNodes(el);
+      this.registerTextObjects(el);
     });
 
     if (typeof mode !== 'undefined') {
@@ -120,19 +120,39 @@ export default class IvritaElement {
     );
   }
 
+  registerTextObjects(element) {
+    this.registerTextNodes(element);
+    this.registerTextAttributes(element);
+  }
+
   registerTextNodes(element) {
     let currentNode;
     const walk = document.createTreeWalker(
       element,
-      NodeFilter.SHOW_TEXT,
+      NodeFilter.SHOW_ELEMENT + NodeFilter.SHOW_TEXT,
       {
-        acceptNode: (node) => (
-          TextObject.instances.has(node) || (
-            (node.textContent.trim().length > 0
-            && hebrewRegex.test(node.textContent) // Test for Hebrew Letters
-            && ivritaSyntaxRegex.test(node.textContent)) // Test for Ivrita Syntax
-              ? NodeFilter.FILTER_ACCEPT
-              : NodeFilter.FILTER_SKIP)),
+        acceptNode: (node) => {
+          if (TextObject.instances.has(node)) { // Already indexed, will be pointer to existing node
+            return NodeFilter.FILTER_ACCEPT;
+          }
+
+          if (node.textContent.trim().length <= 0) {
+            return NodeFilter.FILTER_REJECT; // If there's no content, reject all child nodes
+          }
+
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            if (node.dataset.ivritaDisable) {
+              return Node.FILTER_REJECT;
+            }
+          } else if (node.nodeType === Node.TEXT_NODE) {
+            if (hebrewRegex.test(node.textContent) // Test for Hebrew Letters
+            && ivritaSyntaxRegex.test(node.textContent)) {
+              return NodeFilter.FILTER_ACCEPT;
+            }
+          }
+          return NodeFilter.FILTER_SKIP;
+        },
+
       },
     );
 
@@ -140,7 +160,9 @@ export default class IvritaElement {
     while ((currentNode = walk.nextNode())) {
       this.nodes.add(new TextNode(currentNode));
     }
+  }
 
+  registerTextAttributes(element) {
     Object.entries(this.relavantAttributes).forEach(([selector, attributes]) => {
       Array.from(element.querySelectorAll(selector)).forEach((input) => {
         attributes.forEach((attrName) => {
@@ -153,11 +175,22 @@ export default class IvritaElement {
   }
 
   onElementChange(mutationsList) {
+    const closest = (el, s) => {
+      do {
+        if (el instanceof Element && Element.prototype.matches.call(el, s)) return el;
+        // eslint-disable-next-line no-param-reassign
+        el = el.parentElement || el.parentNode;
+      } while (el !== null && el.nodeType === 1);
+      return null;
+    };
+
     mutationsList.forEach((mutation) => {
       Array.from(mutation.addedNodes)
-        .filter((n) => n.nodeType === Node.TEXT_NODE)
         .forEach((node) => {
-          this.nodes.add(new TextNode(node));
+          if (closest(node, '[data-ivrita-disable]')) {
+            return;
+          }
+          this.registerTextNodes(node);
         });
     });
   }

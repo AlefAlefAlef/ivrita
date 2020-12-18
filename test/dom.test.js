@@ -149,3 +149,13 @@ test('Events', () => {
   expect(listener.mock.calls.length).toBe(2);
   expect(listener.mock.calls[1][0].detail.mode).toBe(FEMALE);
 });
+
+test('data-ivrita-disable', () => {
+  document.body.innerHTML = '<p>[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u data-ivrita-disable="true">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.</p>';
+  const paragraph = document.querySelector('p');
+
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-disable="true">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
+});
