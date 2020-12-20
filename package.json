@@ -1,6 +1,6 @@
 {
   "name": "ivrita",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Ivrita is an open-source set of typographic tools for gender equality in Hebrew",
   "main": "src/ivrita.js",
   "browser": "src/element.js",
