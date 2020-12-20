@@ -154,7 +154,7 @@ export default class IvritaElement {
   }
 
   static acceptNodeFilter(node) {
-    if (TextObject.instances.has(node)) { // Already indexed, will be pointer to existing node
+    if (TextObject.instances.has(node)) { // Already indexed, will be a pointer to existing node
       return NodeFilter.FILTER_ACCEPT;
     }
 
@@ -164,7 +164,7 @@ export default class IvritaElement {
 
     if (node.nodeType === Node.ELEMENT_NODE) {
       if (node.dataset.ivritaDisable) {
-        return Node.FILTER_REJECT;
+        return NodeFilter.FILTER_REJECT;
       }
     } else if (node.nodeType === Node.TEXT_NODE) {
       if (hebrewRegex.test(node.textContent) // Test for Hebrew Letters
