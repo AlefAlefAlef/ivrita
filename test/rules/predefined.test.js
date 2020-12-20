@@ -20,6 +20,9 @@ test('Whole words', () => {
   expect(genderize('אח/ות', FEMALE)).toBe('אחות');
   expect(genderize('אח/ות', MALE)).toBe('אח');
 
+  expect(genderize('אחי/ותי', FEMALE)).toBe('אחותי');
+  expect(genderize('אחי/ותי', MALE)).toBe('אחי');
+
   expect(genderize('לו/לה, לה/לו', FEMALE)).toBe('לה, לה');
   expect(genderize('לו/לה, לה/לו', MALE)).toBe('לו, לו');
 
