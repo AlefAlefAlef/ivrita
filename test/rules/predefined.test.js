@@ -7,6 +7,9 @@ test('Whole words', () => {
   expect(genderize('א.נשים', FEMALE)).toBe('נשים');
   expect(genderize('א.נשים', MALE)).toBe('אנשים');
 
+  expect(genderize('א.נשי', FEMALE)).toBe('נשות');
+  expect(genderize('א.נשי', MALE)).toBe('אנשי');
+
   expect(genderize('איש/ת', FEMALE)).toBe('אשת');
   expect(genderize('איש/ת', MALE)).toBe('איש');
   expect(genderize('איש/אשת', FEMALE)).toBe('אשת');
