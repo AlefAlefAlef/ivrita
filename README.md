@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://alefalefalef.co.il/ivrita">
-    <img src="https://github.com/AlefAlefAlef/ivrita-chrome/raw/main/src/icon.png" alt="Ivrita Logo" width="80" height="80">
+    <img src="https://alefalefalef.co.il/wp-content/files/ivrita-files/ivrita-logo-1080-white.png" alt="Ivrita Logo" width="80" height="80">
   </a>
 
   <h2 align="center"><a href="https://alefalefalef.co.il/ivrita">Ivrita</a> JavaScript Library</h2>
