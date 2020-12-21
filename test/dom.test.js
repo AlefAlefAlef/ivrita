@@ -158,3 +158,12 @@ test('data-ivrita-disable', () => {
   ivrita.setMode(FEMALE);
   expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-disable="true">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
 });
+
+test('No breaking space is preserved', () => {
+  document.body.innerHTML = '<p>מתכנתים/ות&nbsp;רבים/ות</p>';
+
+  const ivrita = new Ivrita(document.body.childNodes[0]);
+  ivrita.setMode(FEMALE);
+
+  expect(document.body.innerHTML).toBe('<p>מתכנתות&nbsp;רבות</p>');
+});

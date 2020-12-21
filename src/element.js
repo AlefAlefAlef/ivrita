@@ -1,5 +1,5 @@
 import {
-  MALE, FEMALE, NEUTRAL, ORIGINAL, GENDERS,
+  MALE, FEMALE, NEUTRAL, ORIGINAL, GENDERS, genderize,
 } from './ivrita';
 import TextAttribute from './textAttribute';
 import TextNode from './textNode';
@@ -39,6 +39,11 @@ export default class IvritaElement {
   static instances = new Map();
 
   static defaultMode = NEUTRAL;
+
+  // Exported for comfort
+  static genderizeString = genderize;
+
+  static textObjects = TextObject.instances;
 
   constructor(elem = document.body, mode = null) {
     if (elem instanceof NodeList) {
