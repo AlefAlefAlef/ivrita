@@ -53,4 +53,7 @@ test('Final letters and abbreviations', () => {
 test('Words which look like genders', () => {
   expect(genderize('תותים', FEMALE)).toBe('תותים'); // unchanged
   expect(genderize('תותים', MALE)).toBe('תותים'); // unchanged
+
+  expect(genderize('צוותים', FEMALE)).toBe('צוותים'); // unchanged
+  expect(genderize('צוותים', MALE)).toBe('צוותים'); // unchanged
 });
