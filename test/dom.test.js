@@ -44,6 +44,14 @@ test('DOM plug-in', () => {
   expect(ivrita.nodes.size).toEqual(0);
 });
 
+test('Default mode is working', () => {
+  document.body.innerHTML = template;
+  const paragraph = document.querySelector('#content p');
+
+  new Ivrita();
+  expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u>מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+});
+
 test('Single element passed to constructor', () => {
   document.body.innerHTML = template;
   const ivrita = new Ivrita(document.querySelector('#content'));
@@ -112,7 +120,6 @@ test('jQuery function with gender', () => {
 test('Bad element passed to constructor', () => {
   document.body.innerHTML = template;
   expect(() => {
-    // eslint-disable-next-line no-new
     new Ivrita('#content'); // Should be DOMElement, not string
   }).toThrow(Error);
 });
@@ -135,10 +142,11 @@ test('Node singletons', () => {
 
 test('Events', () => {
   const listener = jest.fn();
-  document.addEventListener(Ivrita.EVENT_MODE_CHANGED, listener);
 
   document.body.innerHTML = template;
   const ivrita = new Ivrita(document.querySelector('#content'));
+
+  document.addEventListener(Ivrita.EVENT_MODE_CHANGED, listener);
 
   ivrita.setMode(MALE);
   expect(listener.mock.calls.length).toBe(1);
@@ -162,8 +170,7 @@ test('data-ivrita-disable', () => {
 test('No breaking space is preserved', () => {
   document.body.innerHTML = '<p>מתכנתים/ות&nbsp;רבים/ות</p>';
 
-  const ivrita = new Ivrita(document.body.childNodes[0]);
-  ivrita.setMode(FEMALE);
+  new Ivrita(document.body.childNodes[0], FEMALE);
 
   expect(document.body.innerHTML).toBe('<p>מתכנתות&nbsp;רבות</p>');
 });

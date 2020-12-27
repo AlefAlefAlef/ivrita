@@ -45,7 +45,7 @@ export default class IvritaElement {
 
   static textObjects = TextObject.instances;
 
-  constructor(elem = document.body, mode = null) {
+  constructor(elem = document.body, mode = undefined) {
     if (elem instanceof NodeList) {
       this.elements = Array.from(elem);
     } else if (elem instanceof HTMLElement) {
