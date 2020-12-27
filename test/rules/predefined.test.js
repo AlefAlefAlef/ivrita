@@ -48,4 +48,7 @@ test('Whole words', () => {
 
   expect(genderize('יקירי/תי', FEMALE)).toBe('יקירתי');
   expect(genderize('יקירי/תי', MALE)).toBe('יקירי');
+
+  expect(genderize('זה/זאת', FEMALE)).toBe('זאת');
+  expect(genderize('זה/זאת', MALE)).toBe('זה');
 });

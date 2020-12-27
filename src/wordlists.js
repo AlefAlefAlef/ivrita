@@ -21,6 +21,7 @@ export const custom = [
   [`יקיר(י?)${SEP}תי${B}`, 'יקירי', 'יקירתי'], // יקירי/תי
   [`אהוב(י?)${SEP}תי${B}`, 'אהובי', 'אהובתי'], // אהובי/תי
   ['סב\\(ת\\)א', 'סבא', 'סבתא'], // סבא/סבתא
+  [`זה${SEP}זאת${B}`, 'זה', 'זאת'], // זה/זאת
 ];
 
 // For most verbs (Unless found in *verbsFemaleKeepVav*), we follow the rules of:
