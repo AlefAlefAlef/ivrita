@@ -22,6 +22,7 @@ export const custom = [
   [`אהוב(י?)${SEP}תי${B}`, 'אהובי', 'אהובתי'], // אהובי/תי
   ['סב\\(ת\\)א', 'סבא', 'סבתא'], // סבא/סבתא
   [`זה${SEP}זאת${B}`, 'זה', 'זאת'], // זה/זאת
+  [`נשוי${SEP}א?ה${B}`, 'נשוי', 'נשואה'], // נשוי/אה
 ];
 
 // For most verbs (Unless found in *verbsFemaleKeepVav*), we follow the rules of:

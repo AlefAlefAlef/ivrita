@@ -51,4 +51,9 @@ test('Whole words', () => {
 
   expect(genderize('זה/זאת', FEMALE)).toBe('זאת');
   expect(genderize('זה/זאת', MALE)).toBe('זה');
+
+  expect(genderize('נשוי/אה', FEMALE)).toBe('נשואה');
+  expect(genderize('נשוי/אה', MALE)).toBe('נשוי');
+  expect(genderize('נשוי/ה', FEMALE)).toBe('נשואה');
+  expect(genderize('נשוי/ה', MALE)).toBe('נשוי');
 });
