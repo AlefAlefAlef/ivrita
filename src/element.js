@@ -45,8 +45,14 @@ export default class IvritaElement {
 
   static textObjects = TextObject.instances;
 
-  constructor(elem = document.body, mode = undefined) {
-    if (elem instanceof Array && elem.filter((el) => el instanceof HTMLElement)) {
+  constructor(elem, mode) {
+    if (typeof elem === 'undefined') {
+      this.elements = [document.body];
+      const titleTag = document.documentElement.querySelector('title');
+      if (titleTag) {
+        this.elements.push(titleTag);
+      }
+    } else if (elem instanceof Array && elem.filter((el) => el instanceof HTMLElement)) {
       this.elements = elem;
     } else if (elem instanceof NodeList) {
       this.elements = Array.from(elem);

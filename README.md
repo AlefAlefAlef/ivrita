@@ -30,7 +30,7 @@ Installing the library on your website requires 3 steps:
     <script src="https://ivrita.alefalefalef.co.il/ivrita.min.js"></script>
     ```
 2. Initialize the Ivrita object:
-    * First argument is the DOM element(s) for which texts should be changed (default: `document.body`)
+    * First argument is the DOM element(s) for which texts should be changed (default: `<body>` and `<title>`)
     * Second argument is the initial gender to be set (default: `Ivrita.NEUTRAL`)
     ```JavaScript
     var ivrita = new Ivrita(document.querySelector('#content'), Ivrita.FEMALE);

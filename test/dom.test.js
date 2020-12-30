@@ -88,6 +88,24 @@ test('Array of elements passed to constructor', () => {
   expect(italic.innerHTML).toBe('תסכול');
 });
 
+test('<title> tag is changed', () => {
+  document.documentElement.innerHTML = `
+  <html>
+    <head>
+      <title>צור/י קשר</title>
+    </head>
+    <body>
+      ${template}
+    </body>
+  </html>`;
+
+  const title = document.documentElement.querySelector('title');
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(title.innerHTML).toBe('צרי קשר');
+});
+
 test('Ovserver catches new elements added', () => {
   document.body.innerHTML = template;
   const i = new Ivrita(document.body);
