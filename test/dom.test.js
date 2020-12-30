@@ -75,6 +75,19 @@ test('Multiple elements passed to constructor', () => {
   expect(document.body.querySelector('#content p').textContent).toBe('[מעצבים|מתכנתות|הייטקיסטים] רבים/ות מרגישים תסכול, כאשר פונים אליהם/ן שלא בשפתם/ן.');
 });
 
+test('Array of elements passed to constructor', () => {
+  document.body.innerHTML = template;
+  const bold = document.querySelector('#content p b');
+  const underlined = document.querySelector('#content p u');
+  const italic = document.querySelector('#content p i');
+  const ivrita = new Ivrita([bold, underlined, italic]);
+
+  ivrita.setMode(MALE);
+  expect(bold.innerHTML).toBe('פונים');
+  expect(underlined.innerHTML).toBe('מרגישים');
+  expect(italic.innerHTML).toBe('תסכול');
+});
+
 test('Ovserver catches new elements added', () => {
   document.body.innerHTML = template;
   const i = new Ivrita(document.body);
