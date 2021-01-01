@@ -27,8 +27,6 @@ export default class TextObject {
 
     if (newMode === ORIGINAL) {
       newVal = this.originalText;
-    } else if (newMode === NEUTRAL && !this.originalText.includes('{') && !this.originalText.includes('[')) {
-      newVal = this.originalText;
     } else {
       newVal = genderize(this.originalText, newMode);
     }

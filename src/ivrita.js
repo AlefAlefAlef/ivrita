@@ -40,7 +40,7 @@ export const genderize = (originalText, gender, doneFunc) => {
 
       case NEUTRAL:
       default:
-        if (neutral) replacement = neutral;
+        if (typeof neutral !== 'undefined') replacement = neutral;
         break;
     }
     if (replacement !== undefined) {
