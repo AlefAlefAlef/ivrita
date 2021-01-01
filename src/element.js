@@ -2,6 +2,7 @@ import {
   MALE, FEMALE, NEUTRAL, ORIGINAL, GENDERS, genderize,
 } from './ivrita';
 import TextAttribute from './textAttribute';
+import TextElement, { MALE_DATA_ATTR, FEMALE_DATA_ATTR, NEUTRAL_DATA_ATTR } from './textElement';
 import TextNode from './textNode';
 import TextObject from './textObject';
 import { HEB, SYNTAX } from './utils/characters';
@@ -150,7 +151,13 @@ export default class IvritaElement {
 
     // eslint-disable-next-line no-cond-assign
     while ((currentNode = walk.nextNode())) {
-      this.nodes.add(new TextNode(currentNode));
+      let newNode;
+      if (currentNode instanceof Text) {
+        newNode = new TextNode(currentNode);
+      } else if (currentNode instanceof Element) {
+        newNode = new TextElement(currentNode);
+      }
+      this.nodes.add(newNode);
     }
   }
 
@@ -178,6 +185,10 @@ export default class IvritaElement {
     if (node.nodeType === Node.ELEMENT_NODE) {
       if (node.dataset.ivritaDisable) {
         return NodeFilter.FILTER_REJECT;
+      }
+      if ([MALE_DATA_ATTR, FEMALE_DATA_ATTR, NEUTRAL_DATA_ATTR]
+        .filter((attr) => node.dataset[attr]).length) {
+        return NodeFilter.FILTER_ACCEPT;
       }
     } else if (node.nodeType === Node.TEXT_NODE) {
       if (hebrewRegex.test(node.textContent) // Test for Hebrew Letters

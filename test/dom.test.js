@@ -198,6 +198,54 @@ test('data-ivrita-disable', () => {
   expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-disable="true">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
 });
 
+test('data-ivrita-male', () => {
+  document.body.innerHTML = '<p>[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u data-ivrita-male="חשים">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.</p>';
+  const paragraph = document.querySelector('p');
+
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-male="חשים">מרגישות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
+
+  ivrita.setMode(MALE);
+  expect(paragraph.innerHTML).toBe('מעצבים רבים <u data-ivrita-male="חשים">חשים</u> <i>תסכול</i>, כאשר <b>פונים</b> אליהם שלא בשפתם.');
+
+  ivrita.setMode(NEUTRAL);
+  expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u data-ivrita-male="חשים">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+});
+
+test('data-ivrita-female', () => {
+  document.body.innerHTML = '<p>[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u data-ivrita-female="חשות">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.</p>';
+  const paragraph = document.querySelector('p');
+
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-female="חשות">חשות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
+
+  ivrita.setMode(MALE);
+  expect(paragraph.innerHTML).toBe('מעצבים רבים <u data-ivrita-female="חשות">מרגישים</u> <i>תסכול</i>, כאשר <b>פונים</b> אליהם שלא בשפתם.');
+
+  ivrita.setMode(NEUTRAL);
+  expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u data-ivrita-female="חשות">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+});
+
+test('data-ivrita-neutral', () => {
+  document.body.innerHTML = '<p>[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u data-ivrita-neutral="חשותים">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.</p>';
+  const paragraph = document.querySelector('p');
+
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-neutral="חשותים">מרגישות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
+
+  ivrita.setMode(MALE);
+  expect(paragraph.innerHTML).toBe('מעצבים רבים <u data-ivrita-neutral="חשותים">מרגישים</u> <i>תסכול</i>, כאשר <b>פונים</b> אליהם שלא בשפתם.');
+
+  ivrita.setMode(NEUTRAL);
+  expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u data-ivrita-neutral="חשותים">חשותים</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+});
+
 test('No breaking space is preserved', () => {
   document.body.innerHTML = '<p>מתכנתים/ות&nbsp;רבים/ות</p>';
 

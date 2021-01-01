@@ -1,4 +1,4 @@
-import { genderize, ORIGINAL, NEUTRAL } from './ivrita';
+import { genderize, ORIGINAL } from './ivrita';
 
 export const IncompatibleTypeError = new Error('Incompatible node passed to the node constructor');
 
@@ -6,6 +6,8 @@ export default class TextObject {
   originalText = '';
 
   currentMode = false;
+
+  storedValues = {}
 
   static instances = new WeakMap();
 
@@ -25,7 +27,9 @@ export default class TextObject {
     let newVal;
     this.currentMode = newMode;
 
-    if (newMode === ORIGINAL) {
+    if (this.storedValues[newMode] !== undefined) {
+      newVal = this.storedValues[newMode];
+    } else if (newMode === ORIGINAL) {
       newVal = this.originalText;
     } else {
       newVal = genderize(this.originalText, newMode);
