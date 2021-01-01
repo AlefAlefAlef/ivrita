@@ -47,7 +47,7 @@ export const genderize = (originalText, gender, doneFunc) => {
       genderized = genderized.replace(pattern, replacement);
     }
 
-    if (typeof doneFunc !== 'undefined' && prev !== genderized) {
+    if (typeof doneFunc === 'function' && prev !== genderized) {
       used.push(pattern);
       prev = genderized;
     }
@@ -64,7 +64,7 @@ export const genderize = (originalText, gender, doneFunc) => {
     });
   }
 
-  if (typeof doneFunc !== 'undefined') {
+  if (typeof doneFunc === 'function') {
     doneFunc(used);
   }
   return genderized;
