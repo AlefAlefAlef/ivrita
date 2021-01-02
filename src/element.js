@@ -11,20 +11,6 @@ const hebrewRegex = new RegExp(HEB);
 const ivritaSyntaxRegex = new RegExp(SYNTAX);
 
 export default class IvritaElement {
-  nodes = new Set();
-
-  elements = [];
-
-  mode;
-
-  fontFeatureSettings;
-
-  relavantAttributes = {
-    'a, img, button, input': ['title'],
-    [`input:not([type=${['submit', 'button', 'checkbox', 'radio', 'hidden', 'image', 'range', 'reset', 'file'].join(']):not([type=')}])`]: ['placeholder'],
-    'input[type=submit], input[type=button], input[type=reset]': ['value'],
-  };
-
   static EVENT_MODE_CHANGED = 'ivrita-mode-changed';
 
   static GENDERS = GENDERS;
@@ -41,10 +27,23 @@ export default class IvritaElement {
 
   static defaultMode = NEUTRAL;
 
-  // Exported for comfort
   static genderize = genderize;
 
   static textObjects = TextObject.instances;
+
+  nodes = new Set();
+
+  elements = [];
+
+  mode;
+
+  fontFeatureSettings;
+
+  relavantAttributes = {
+    'a, img, button, input': ['title'],
+    [`input:not([type=${['submit', 'button', 'checkbox', 'radio', 'hidden', 'image', 'range', 'reset', 'file'].join(']):not([type=')}])`]: ['placeholder'],
+    'input[type=submit], input[type=button], input[type=reset]': ['value'],
+  };
 
   constructor(elem, mode) {
     if (typeof elem === 'undefined') {
