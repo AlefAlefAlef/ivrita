@@ -105,12 +105,6 @@ export default class IvritaElement {
   }
 
   setMode(newMode = NEUTRAL) {
-    if (newMode === NEUTRAL) {
-      this.setFontFeatureSettings(true);
-    } else if (this.mode === NEUTRAL) {
-      this.setFontFeatureSettings(false);
-    }
-
     if (!this.constructor.GENDERS.includes(newMode)) {
       return this;
     }
