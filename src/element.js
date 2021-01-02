@@ -42,7 +42,7 @@ export default class IvritaElement {
   static defaultMode = NEUTRAL;
 
   // Exported for comfort
-  static genderizeString = genderize;
+  static genderize = genderize;
 
   static textObjects = TextObject.instances;
 
