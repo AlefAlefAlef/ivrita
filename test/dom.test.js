@@ -253,3 +253,13 @@ test('No breaking space is preserved', () => {
 
   expect(document.body.innerHTML).toBe('<p>מתכנתות&nbsp;רבות</p>');
 });
+
+test('On-Instance genderize string', () => {
+  const iv = new Ivrita(document.body);
+
+  iv.setMode(FEMALE);
+  expect(iv.genderize('איש/ה')).toBe('אישה');
+
+  iv.setMode(MALE);
+  expect(iv.genderize('איש/ה')).toBe('איש');
+});

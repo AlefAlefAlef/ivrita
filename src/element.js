@@ -126,6 +126,10 @@ export default class IvritaElement {
     this.instances.forEach((instance) => instance.setMode(newMode));
   }
 
+  genderize(text) {
+    return this.constructor.genderize(text, this.mode);
+  }
+
   dispatchModeChangedEvent(mode = this.mode) {
     this.elements.forEach(
       (el) => el.dispatchEvent(new CustomEvent(this.constructor.EVENT_MODE_CHANGED,
