@@ -1,4 +1,6 @@
-import { genderize, FEMALE, MALE } from '../../src/ivrita';
+import {
+  genderize, FEMALE, MALE, NEUTRAL,
+} from '../../src/ivrita';
 
 test('Singular possessive', () => {
   expect(genderize('חבר(ת)ו', FEMALE)).toBe('חברתו');
@@ -40,4 +42,25 @@ test('Yod in the middle', () => {
 
   expect(genderize('הפע(י)ל/י', FEMALE)).toBe('הפעילי');
   expect(genderize('הפע(י)ל/י', MALE)).toBe('הפעל');
+});
+
+test('Neutral plural', () => {
+  expect(genderize('הודעתך(ם)', FEMALE)).toBe('הודעתך');
+  expect(genderize('הודעתך(ם)', MALE)).toBe('הודעתך');
+  expect(genderize('הודעתך(ם)', NEUTRAL)).toBe('הודעתכם');
+  expect(genderize('הודעתך(ן)', NEUTRAL)).toBe('הודעתכן');
+  expect(genderize('הודעתך(םן)', NEUTRAL)).toBe('הודעתכםן');
+  expect(genderize('הודעתך(ןם)', NEUTRAL)).toBe('הודעתכןם');
+  expect(genderize('הודעתך(ם.ן)', NEUTRAL)).toBe('הודעתכם.ן');
+  expect(genderize('הודעתך(ם/ן)', NEUTRAL)).toBe('הודעתכם/ן');
+
+  expect(genderize('שלך(ם)', FEMALE)).toBe('שלך');
+  expect(genderize('שלך(ם)', MALE)).toBe('שלך');
+  expect(genderize('שלך(ם)', NEUTRAL)).toBe('שלכם');
+  expect(genderize('שלך(ן)', NEUTRAL)).toBe('שלכן');
+
+  expect(genderize('שלכ(ם)', FEMALE)).toBe('שלך');
+  expect(genderize('שלכ(ם)', MALE)).toBe('שלך');
+  expect(genderize('שלכ(ם)', NEUTRAL)).toBe('שלכם');
+  expect(genderize('שלכ(ן)', NEUTRAL)).toBe('שלכן');
 });
