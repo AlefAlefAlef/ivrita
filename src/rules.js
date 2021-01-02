@@ -26,14 +26,23 @@ const regexize = (p) => {
   return p;
 };
 
-const matchAndNormalizeFemale = (word, addYod) => {
+// Unisex rules match always replace the same string, mode-ignorantly.
+const unisex = (pattern, replacement) => [pattern, replacement, replacement, replacement];
+
+const matchAndNormalizeVerb = (word, addYod) => {
   const wordWithoutLastLetter = word.slice(0, word.length - 1);
   const lastLetter = word.slice(word.length - 1);
   let lastLetterMatcher = `(${lastLetter})`;
   if (finnables.includes(lastLetter)) {
     lastLetterMatcher = `(${toFin(lastLetter)}|${toNotFin(lastLetter)})`;
   }
-  return [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${B}`, `${wordWithoutLastLetter}${toFin(lastLetter)}`, `${wordWithoutLastLetter}${addYod ? 'י' : ''}${toNotFin(lastLetter)}י`];
+
+  const femaleBase = `${wordWithoutLastLetter}${addYod ? 'י' : ''}${toNotFin(lastLetter)}`;
+  const male = `${wordWithoutLastLetter}${toFin(lastLetter)}`;
+  return [
+    [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${SEP}ו${B}`, male, `${femaleBase}י`, `${femaleBase}ו`],
+    [`${wordWithoutLastLetter}${lastLetterMatcher}${SEP}י${B}`, male, `${femaleBase}י`],
+  ];
 };
 
 export default [
@@ -41,10 +50,10 @@ export default [
   ...custom,
 
   // הקשב/י => הקשב, הקשיבי
-  ...verbsFemaleExtraYod.map((word) => matchAndNormalizeFemale(word, true)),
+  ...verbsFemaleExtraYod.reduce((r, word) => r.concat(matchAndNormalizeVerb(word, true)), []),
 
   // קום/י => קום, קומי
-  ...verbsFemaleKeepVav.map((word) => matchAndNormalizeFemale(word, false)),
+  ...verbsFemaleKeepVav.reduce((r, word) => r.concat(matchAndNormalizeVerb(word, false)), []),
 
   // סטודנטים/ות => סטודנטים, סטודנטיות
   ...pluralsWithExtraYod.map((word) => {
@@ -81,9 +90,15 @@ export default [
   [`(${W})(י)?ות${SEP}י?ים${B}`, '$1$2ים', '$1$2ות'], // מורות/ים
   [`(${W})י${SEP}ות${B}`, '$1י', '$1ות'], // עורכי/ות
 
+  [`(${W})ה${SEP}י${SEP}ו${B}`, '$1ה', '$1י', '$1ו'], // ראה/י/ו
   [`(${W})ה${SEP}י${B}`, '$1ה', '$1י'], // ראה/י
+  [`(${W})י${SEP}ה${SEP}ו${B}`, '$1ה', '$1י', '$1ו'], // ראי/ה/ו
+  [`(${W})י${SEP}ה${B}`, '$1ה', '$1י'], // ראי/ה
+  [`(${W}+)\\(י\\)(${W})${SEP}י${SEP}ו${B}`, '$1$2', '$1י$2י', '$1י$2ו'], // הפע(י)ל/י/ו
   [`(${W}+)\\(י\\)(${W})${SEP}י${B}`, '$1$2', '$1י$2י'], // הפע(י)ל/י
+  [`(${HEB})ו(${W})${SEP}י${SEP}ו${B}`, '$1ו$2', `$1$2${M_NOT_WORDFIN}י`, `$1$2${M_NOT_WORDFIN}ו`], // כתוב/י/ו
   [`(${HEB})ו(${W})${SEP}י${B}`, '$1ו$2', `$1$2${M_NOT_WORDFIN}י`], // כתוב/י
+  [`(${W})${SEP}י${SEP}ו${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}י`, `$1${M_NOT_WORDFIN}ו`], // לך/י/ו
   [`(${W})${SEP}י${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}י`], // לך/י
 
   [`(${W})(ה)?${SEP}ת${B}`, `$1$2${M_WORDFIN}`, `$1${M_NOT_WORDFIN}ת`], // נהג/ת, רואה/ת חשבון
@@ -107,18 +122,18 @@ export default [
   ['\\[([^|]*?)\\|([^|]*?)\\]', '$1', '$2', true], // [בן|בת]
 
   // Final Letters fixes
-  [`ץ${M_NOT_WORDFIN}`, 'צ', 'צ'], // חרוץה
-  [`ך${M_NOT_WORDFIN}`, 'כ', 'כ'], // משךי
-  [`ן${M_NOT_WORDFIN}`, 'נ', 'נ'], // השעןי
-  [`ם${M_NOT_WORDFIN}`, 'מ', 'מ'], // יזםית
-  [`ף${M_NOT_WORDFIN}`, 'פ', 'פ'], // פילוסוףית
+  unisex(`ץ${M_NOT_WORDFIN}`, 'צ'), // חרוץה
+  unisex(`ך${M_NOT_WORDFIN}`, 'כ'), // משךי
+  unisex(`ן${M_NOT_WORDFIN}`, 'נ'), // השעןי
+  unisex(`ם${M_NOT_WORDFIN}`, 'מ'), // יזםית
+  unisex(`ף${M_NOT_WORDFIN}`, 'פ'), // פילוסוףית
 
-  [`([^${G}]+)צ${M_WORDFIN}`, '$1ץ', '$1ץ'], // חרוצ
-  [`([^${G}]+)כ${M_WORDFIN}`, '$1ך', '$1ך'], // משוכ
-  [`([^${G}]+)נ${M_WORDFIN}`, '$1ן', '$1ן'], // השענ
-  [`([^${G}]+)מ${M_WORDFIN}`, '$1ם', '$1ם'], // יזמ
-  [`([^${G}]+)פ${M_WORDFIN}`, '$1ף', '$1ף'], // פילוסופ
+  unisex(`([^${G}]+)צ${M_WORDFIN}`, '$1ץ'), // חרוצ
+  unisex(`([^${G}]+)כ${M_WORDFIN}`, '$1ך'), // משוכ
+  unisex(`([^${G}]+)נ${M_WORDFIN}`, '$1ן'), // השענ
+  unisex(`([^${G}]+)מ${M_WORDFIN}`, '$1ם'), // יזמ
+  unisex(`([^${G}]+)פ${M_WORDFIN}`, '$1ף'), // פילוסופ
 
   // Remove marks
-  [`[${M_WORDFIN}${M_NOT_WORDFIN}]`, '', ''],
+  unisex(`[${M_WORDFIN}${M_NOT_WORDFIN}]`, ''),
 ].map(regexize);

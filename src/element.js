@@ -2,6 +2,7 @@ import {
   MALE, FEMALE, NEUTRAL, ORIGINAL, GENDERS, genderize,
 } from './ivrita';
 import TextAttribute from './textAttribute';
+import TextElement, { MALE_DATA_ATTR, FEMALE_DATA_ATTR, NEUTRAL_DATA_ATTR } from './textElement';
 import TextNode from './textNode';
 import TextObject from './textObject';
 import { HEB, SYNTAX } from './utils/characters';
@@ -45,8 +46,16 @@ export default class IvritaElement {
 
   static textObjects = TextObject.instances;
 
-  constructor(elem = document.body, mode = null) {
-    if (elem instanceof NodeList) {
+  constructor(elem, mode) {
+    if (typeof elem === 'undefined') {
+      this.elements = [document.body];
+      const titleTag = document.documentElement.querySelector('title');
+      if (titleTag) {
+        this.elements.push(titleTag);
+      }
+    } else if (elem instanceof Array && elem.filter((el) => el instanceof HTMLElement)) {
+      this.elements = elem;
+    } else if (elem instanceof NodeList) {
       this.elements = Array.from(elem);
     } else if (elem instanceof HTMLElement) {
       this.elements = [elem];
@@ -142,7 +151,13 @@ export default class IvritaElement {
 
     // eslint-disable-next-line no-cond-assign
     while ((currentNode = walk.nextNode())) {
-      this.nodes.add(new TextNode(currentNode));
+      let newNode;
+      if (currentNode instanceof Text) {
+        newNode = new TextNode(currentNode);
+      } else if (currentNode instanceof Element) {
+        newNode = new TextElement(currentNode);
+      }
+      this.nodes.add(newNode);
     }
   }
 
@@ -170,6 +185,10 @@ export default class IvritaElement {
     if (node.nodeType === Node.ELEMENT_NODE) {
       if (node.dataset.ivritaDisable) {
         return NodeFilter.FILTER_REJECT;
+      }
+      if ([MALE_DATA_ATTR, FEMALE_DATA_ATTR, NEUTRAL_DATA_ATTR]
+        .filter((attr) => node.dataset[attr]).length) {
+        return NodeFilter.FILTER_ACCEPT;
       }
     } else if (node.nodeType === Node.TEXT_NODE) {
       if (hebrewRegex.test(node.textContent) // Test for Hebrew Letters

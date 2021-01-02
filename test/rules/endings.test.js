@@ -1,73 +1,105 @@
-import { genderize, FEMALE, MALE } from '../../src/ivrita';
+import {
+  genderize, FEMALE, MALE, NEUTRAL,
+} from '../../src/ivrita';
 
 test('Word endings', () => {
   // Commandings
   expect(genderize('הקשב/י', FEMALE)).toBe('הקשיבי');
   expect(genderize('הקשב/י', MALE)).toBe('הקשב');
+  expect(genderize('הקשב/י/ו', NEUTRAL)).toBe('הקשיבו');
 
   expect(genderize('הפעל/י', FEMALE)).toBe('הפעילי');
   expect(genderize('הפעל/י', MALE)).toBe('הפעל');
+  expect(genderize('הפעל/י/ו', NEUTRAL)).toBe('הפעילו');
 
   expect(genderize('השב/י', FEMALE)).toBe('השיבי');
   expect(genderize('השב/י', MALE)).toBe('השב');
+  expect(genderize('השב/י/ו', NEUTRAL)).toBe('השיבו');
 
   expect(genderize('הרם/י', FEMALE)).toBe('הרימי');
   expect(genderize('הרם/י', MALE)).toBe('הרם');
+  expect(genderize('הרם/י/ו', NEUTRAL)).toBe('הרימו');
+  expect(genderize('הרם/י/ו', FEMALE)).toBe('הרימי');
+  expect(genderize('הרם/י/ו', MALE)).toBe('הרם');
+
   expect(genderize('הרמ/י', FEMALE)).toBe('הרימי');
   expect(genderize('הרמ/י', MALE)).toBe('הרם');
+  expect(genderize('הרמ/י/ו', NEUTRAL)).toBe('הרימו');
+  expect(genderize('הרמ/י/ו', FEMALE)).toBe('הרימי');
+  expect(genderize('הרמ/י/ו', MALE)).toBe('הרם');
 
   expect(genderize('הדגם/י', FEMALE)).toBe('הדגימי');
   expect(genderize('הדגם/י', MALE)).toBe('הדגם');
+  expect(genderize('הדגם/י/ו', NEUTRAL)).toBe('הדגימו');
 
   expect(genderize('הקלד/י', FEMALE)).toBe('הקלידי');
   expect(genderize('הקלד/י', MALE)).toBe('הקלד');
+  expect(genderize('הקלד/י/ו', NEUTRAL)).toBe('הקלידו');
 
   expect(genderize('הלבש/י', FEMALE)).toBe('הלבישי');
   expect(genderize('הלבש/י', MALE)).toBe('הלבש');
+  expect(genderize('הלבש/י/ו', NEUTRAL)).toBe('הלבישו');
 
   expect(genderize('הקש/י', FEMALE)).toBe('הקישי');
   expect(genderize('הקש/י', MALE)).toBe('הקש');
+  expect(genderize('הקש/י/ו', NEUTRAL)).toBe('הקישו');
 
   expect(genderize('צפה/י', FEMALE)).toBe('צפי');
   expect(genderize('צפה/י', MALE)).toBe('צפה');
+  expect(genderize('צפה/י/ו', NEUTRAL)).toBe('צפו');
 
   expect(genderize('שלח/י', FEMALE)).toBe('שלחי');
   expect(genderize('שלח/י', MALE)).toBe('שלח');
+  expect(genderize('שלח/י/ו', FEMALE)).toBe('שלחי');
+  expect(genderize('שלח/י/ו', MALE)).toBe('שלח');
+  expect(genderize('שלח/י/ו', NEUTRAL)).toBe('שלחו');
 
   expect(genderize('כתוב/י', FEMALE)).toBe('כתבי');
   expect(genderize('כתוב/י', MALE)).toBe('כתוב');
+  expect(genderize('כתוב/י/ו', NEUTRAL)).toBe('כתבו');
 
   expect(genderize('צור/י', FEMALE)).toBe('צרי');
   expect(genderize('צור/י', MALE)).toBe('צור');
+  expect(genderize('צור/י/ו', NEUTRAL)).toBe('צרו');
 
   expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
   expect(genderize('רוצ/י', MALE)).toBe('רוץ');
+  expect(genderize('רוצ/י/ו', NEUTRAL)).toBe('רוצו');
 
   expect(genderize('קומ/י', FEMALE)).toBe('קומי');
   expect(genderize('קומ/י', MALE)).toBe('קום');
+  expect(genderize('קומ/י/ו', NEUTRAL)).toBe('קומו');
   expect(genderize('לכשתקומ/י', FEMALE)).toBe('לכשתקומי');
   expect(genderize('לכשתקומ/י', MALE)).toBe('לכשתקום');
+  expect(genderize('לכשתקומ/י/ו', NEUTRAL)).toBe('לכשתקומו');
 
   expect(genderize('עופ/י', FEMALE)).toBe('עופי');
   expect(genderize('עופ/י', MALE)).toBe('עוף');
+  expect(genderize('עופ/י/ו', NEUTRAL)).toBe('עופו');
 
   expect(genderize('שים/י', FEMALE)).toBe('שימי');
   expect(genderize('שים/י', MALE)).toBe('שים');
+  expect(genderize('שים/י/ו', NEUTRAL)).toBe('שימו');
 
   expect(genderize('עקוב/י', FEMALE)).toBe('עקבי');
   expect(genderize('עקוב/י', MALE)).toBe('עקוב');
+  expect(genderize('עקוב/י/ו', NEUTRAL)).toBe('עקבו');
 
   expect(genderize('ראה/י', FEMALE)).toBe('ראי');
   expect(genderize('ראה/י', MALE)).toBe('ראה');
+  expect(genderize('ראה/י/ו', NEUTRAL)).toBe('ראו');
 
   expect(genderize('ודא/י', FEMALE)).toBe('ודאי');
   expect(genderize('ודא/י', MALE)).toBe('ודא');
+  expect(genderize('ודא/י/ו', NEUTRAL)).toBe('ודאו');
 
   expect(genderize('בחר/י', FEMALE)).toBe('בחרי');
   expect(genderize('בחר/י', MALE)).toBe('בחר');
+  expect(genderize('בחר/י/ו', NEUTRAL)).toBe('בחרו');
 
   expect(genderize('תוכל/י', FEMALE)).toBe('תוכלי');
   expect(genderize('תוכל/י', MALE)).toBe('תוכל');
+  expect(genderize('תוכל/י/ו', NEUTRAL)).toBe('תוכלו');
 
   expect(genderize('דווח/י', FEMALE)).toBe('דווחי');
   expect(genderize('דווח/י', MALE)).toBe('דווח');

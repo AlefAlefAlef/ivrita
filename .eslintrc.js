@@ -16,6 +16,7 @@ module.exports = {
   },
   rules: {
     'no-param-reassign': [2, { props: false }],
+    'no-new': [0],
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/setup-jest.js'] }], // Allow importing jQuery in Jest setup file
   },
 };

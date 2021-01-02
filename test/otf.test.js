@@ -23,9 +23,6 @@ test('Implicit fontFeatureSettings via setMode on clean element', () => {
   expect(el.style.fontFeatureSettings).toEqual('');
 
   const ivrita = new Ivrita(el);
-
-  expect(el.style.fontFeatureSettings).toEqual('');
-
   ivrita.setMode(NEUTRAL);
 
   expect(el.style.fontFeatureSettings).toEqual('"titl"');
@@ -41,8 +38,6 @@ test('OpenType setting on element with pre-existing settings', () => {
   el.style.fontFeatureSettings = '"ss01" 1, "tnum"';
 
   const ivrita = new Ivrita(el);
-
-  expect(el.style.fontFeatureSettings).toEqual('"ss01" 1, "tnum"');
 
   ivrita.setFontFeatureSettings(true);
 

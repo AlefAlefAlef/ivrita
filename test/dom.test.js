@@ -44,6 +44,14 @@ test('DOM plug-in', () => {
   expect(ivrita.nodes.size).toEqual(0);
 });
 
+test('Default mode is working', () => {
+  document.body.innerHTML = template;
+  const paragraph = document.querySelector('#content p');
+
+  new Ivrita();
+  expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u>מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+});
+
 test('Single element passed to constructor', () => {
   document.body.innerHTML = template;
   const ivrita = new Ivrita(document.querySelector('#content'));
@@ -65,6 +73,37 @@ test('Multiple elements passed to constructor', () => {
   expect(underlined.innerHTML).toBe('מרגישים');
   expect(italic.innerHTML).toBe('תסכול');
   expect(document.body.querySelector('#content p').textContent).toBe('[מעצבים|מתכנתות|הייטקיסטים] רבים/ות מרגישים תסכול, כאשר פונים אליהם/ן שלא בשפתם/ן.');
+});
+
+test('Array of elements passed to constructor', () => {
+  document.body.innerHTML = template;
+  const bold = document.querySelector('#content p b');
+  const underlined = document.querySelector('#content p u');
+  const italic = document.querySelector('#content p i');
+  const ivrita = new Ivrita([bold, underlined, italic]);
+
+  ivrita.setMode(MALE);
+  expect(bold.innerHTML).toBe('פונים');
+  expect(underlined.innerHTML).toBe('מרגישים');
+  expect(italic.innerHTML).toBe('תסכול');
+});
+
+test('<title> tag is changed', () => {
+  document.documentElement.innerHTML = `
+  <html>
+    <head>
+      <title>צור/י קשר</title>
+    </head>
+    <body>
+      ${template}
+    </body>
+  </html>`;
+
+  const title = document.documentElement.querySelector('title');
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(title.innerHTML).toBe('צרי קשר');
 });
 
 test('Ovserver catches new elements added', () => {
@@ -112,7 +151,6 @@ test('jQuery function with gender', () => {
 test('Bad element passed to constructor', () => {
   document.body.innerHTML = template;
   expect(() => {
-    // eslint-disable-next-line no-new
     new Ivrita('#content'); // Should be DOMElement, not string
   }).toThrow(Error);
 });
@@ -135,10 +173,11 @@ test('Node singletons', () => {
 
 test('Events', () => {
   const listener = jest.fn();
-  document.addEventListener(Ivrita.EVENT_MODE_CHANGED, listener);
 
   document.body.innerHTML = template;
   const ivrita = new Ivrita(document.querySelector('#content'));
+
+  document.addEventListener(Ivrita.EVENT_MODE_CHANGED, listener);
 
   ivrita.setMode(MALE);
   expect(listener.mock.calls.length).toBe(1);
@@ -159,11 +198,58 @@ test('data-ivrita-disable', () => {
   expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-disable="true">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
 });
 
+test('data-ivrita-male', () => {
+  document.body.innerHTML = '<p>[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u data-ivrita-male="חשים">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.</p>';
+  const paragraph = document.querySelector('p');
+
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-male="חשים">מרגישות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
+
+  ivrita.setMode(MALE);
+  expect(paragraph.innerHTML).toBe('מעצבים רבים <u data-ivrita-male="חשים">חשים</u> <i>תסכול</i>, כאשר <b>פונים</b> אליהם שלא בשפתם.');
+
+  ivrita.setMode(NEUTRAL);
+  expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u data-ivrita-male="חשים">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+});
+
+test('data-ivrita-female', () => {
+  document.body.innerHTML = '<p>[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u data-ivrita-female="חשות">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.</p>';
+  const paragraph = document.querySelector('p');
+
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-female="חשות">חשות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
+
+  ivrita.setMode(MALE);
+  expect(paragraph.innerHTML).toBe('מעצבים רבים <u data-ivrita-female="חשות">מרגישים</u> <i>תסכול</i>, כאשר <b>פונים</b> אליהם שלא בשפתם.');
+
+  ivrita.setMode(NEUTRAL);
+  expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u data-ivrita-female="חשות">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+});
+
+test('data-ivrita-neutral', () => {
+  document.body.innerHTML = '<p>[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u data-ivrita-neutral="חשותים">מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.</p>';
+  const paragraph = document.querySelector('p');
+
+  const ivrita = new Ivrita();
+
+  ivrita.setMode(FEMALE);
+  expect(paragraph.innerHTML).toBe('מתכנתות רבות <u data-ivrita-neutral="חשותים">מרגישות</u> <i>תסכול</i>, כאשר <b>פונות</b> אליהן שלא בשפתן.');
+
+  ivrita.setMode(MALE);
+  expect(paragraph.innerHTML).toBe('מעצבים רבים <u data-ivrita-neutral="חשותים">מרגישים</u> <i>תסכול</i>, כאשר <b>פונים</b> אליהם שלא בשפתם.');
+
+  ivrita.setMode(NEUTRAL);
+  expect(paragraph.innerHTML).toBe('הייטקיסטים רבים/ות <u data-ivrita-neutral="חשותים">חשותים</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.');
+});
+
 test('No breaking space is preserved', () => {
   document.body.innerHTML = '<p>מתכנתים/ות&nbsp;רבים/ות</p>';
 
-  const ivrita = new Ivrita(document.body.childNodes[0]);
-  ivrita.setMode(FEMALE);
+  new Ivrita(document.body.childNodes[0], FEMALE);
 
   expect(document.body.innerHTML).toBe('<p>מתכנתות&nbsp;רבות</p>');
 });

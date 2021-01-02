@@ -40,14 +40,14 @@ export const genderize = (originalText, gender, doneFunc) => {
 
       case NEUTRAL:
       default:
-        if (neutral) replacement = neutral;
+        if (typeof neutral !== 'undefined') replacement = neutral;
         break;
     }
     if (replacement !== undefined) {
       genderized = genderized.replace(pattern, replacement);
     }
 
-    if (typeof doneFunc !== 'undefined' && prev !== genderized) {
+    if (typeof doneFunc === 'function' && prev !== genderized) {
       used.push(pattern);
       prev = genderized;
     }
@@ -64,7 +64,7 @@ export const genderize = (originalText, gender, doneFunc) => {
     });
   }
 
-  if (typeof doneFunc !== 'undefined') {
+  if (typeof doneFunc === 'function') {
     doneFunc(used);
   }
   return genderized;
