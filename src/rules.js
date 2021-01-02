@@ -1,5 +1,5 @@
 import {
-  SEP, NCB, G, W, FIN, B, HEB,
+  SEP, G, W, FIN, B, HEB, LBPB,
 } from './utils/characters';
 
 import {
@@ -59,14 +59,14 @@ export default [
   ...pluralsWithExtraYod.map((word) => {
     let targetWord = word;
     if (word.includes('(')) { // regex groups
-      targetWord = word.replace(new RegExp('\\(.*?\\)'), '$2'); // TODO: support multiple groups
+      targetWord = word.replace(new RegExp('\\(.*?\\)'), '$1'); // TODO: support multiple groups
     }
-    return [`(${NCB})${word}ים${SEP}י?ות${B}`, `$1${targetWord}ים`, `$1${targetWord}יות`];
+    return [`${LBPB}${word}ים${SEP}י?ות${B}`, `${targetWord}ים`, `${targetWord}יות`];
   }),
 
   // Beginnings
-  [`(${B})(${W}{0,3})י${SEP}ת(${W}{2,})`, '$1$2י$3', '$1$2ת$3'], // שי/תכתוב
-  [`(${B})(${W}{0,3})ת${SEP}י(${W}{2,})`, '$1$2י$3', '$1$2ת$3'], // שת/יכתוב
+  [`${LBPB}(${W}{0,3})י${SEP}ת(${W}{2,})`, '$1י$2', '$1ת$2'], // שי/תכתוב
+  [`${LBPB}(${W}{0,3})ת${SEP}י(${W}{2,})`, '$1י$2', '$1ת$2'], // שת/יכתוב
 
   // Endings
 

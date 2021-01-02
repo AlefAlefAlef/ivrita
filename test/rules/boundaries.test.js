@@ -12,3 +12,7 @@ test('Word beginning with special chars', () => {
   expect(genderize('"בוא/י', FEMALE)).toBe('"בואי');
   expect(genderize('"בוא/י', MALE)).toBe('"בוא');
 });
+
+test('Rules beginning with boundary', () => {
+  expect(genderize('י/תכתוב י/תרצה', MALE)).toBe('יכתוב ירצה');
+});
