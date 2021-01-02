@@ -101,6 +101,15 @@ test('Word endings', () => {
   expect(genderize('תוכל/י', MALE)).toBe('תוכל');
   expect(genderize('תוכל/י/ו', NEUTRAL)).toBe('תוכלו');
 
+  expect(genderize('דווח/י', FEMALE)).toBe('דווחי');
+  expect(genderize('דווח/י', MALE)).toBe('דווח');
+
+  expect(genderize('כוון/י', FEMALE)).toBe('כווני');
+  expect(genderize('כוון/י', MALE)).toBe('כוון');
+
+  expect(genderize('תכוונ/י', FEMALE)).toBe('תכווני');
+  expect(genderize('תכוונ/י', MALE)).toBe('תכוון');
+
   expect(genderize('צאו/נה', FEMALE)).toBe('צאנה');
   expect(genderize('צאו/נה', MALE)).toBe('צאו');
 
