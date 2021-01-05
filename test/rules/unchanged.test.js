@@ -57,3 +57,8 @@ test('Words which look like genders', () => {
   expect(genderize('צוותים', FEMALE)).toBe('צוותים'); // unchanged
   expect(genderize('צוותים', MALE)).toBe('צוותים'); // unchanged
 });
+
+test('Words that look like beginnings', () => {
+  expect(genderize('מישהי/תבוא', FEMALE)).toBe('מישהי/תבוא'); // unchanged
+  expect(genderize('מישהי/תבוא', MALE)).toBe('מישהי/תבוא'); // unchanged
+});
