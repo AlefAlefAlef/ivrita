@@ -15,4 +15,6 @@ test('Word beginning with special chars', () => {
 
 test('Rules beginning with boundary', () => {
   expect(genderize('י/תכתוב י/תרצה', MALE)).toBe('יכתוב ירצה');
+
+  expect(genderize('ישראלים/ות סטודנטים/ות', FEMALE)).toBe('ישראליות סטודנטיות');
 });
