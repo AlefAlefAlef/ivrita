@@ -3,6 +3,7 @@ import {
 } from './utils/characters';
 
 import {
+  finals,
   finnables, toFin, toNotFin,
 } from './utils/finals';
 import {
@@ -73,6 +74,10 @@ export default [
   [`ו${SEP}ה${B}`, 'ו', 'ה'], // בגללה/ו
   [`ה${SEP}ו${B}`, 'ו', 'ה'], // בגללו/ה
   [`(${W})${SEP}ה${B}`, `$1${M_WORDFIN}`, `$1${M_NOT_WORDFIN}ה`], // חרוץ/ה
+  ...finals.map(
+    (f) => [`(${W})${f}${SEP}${toNotFin(f)}ה${B}`, `$1${f}${M_WORDFIN}`, `$1${toNotFin(f)}${M_NOT_WORDFIN}ה`],
+  ), // מוכן/נה, חרוץ/צה
+
   [`(${W})ה?${SEP}תה${B}`, '$1ה', '$1תה'], // בכה/תה, רצ/תה
   [`(${W})יו${SEP}י?ה${B}`, '$1יו', '$1יה'], // מחקריו/יה
   [`(${W})ה${SEP}ית${B}`, '$1ה', '$1ית'], // מומחה/ית

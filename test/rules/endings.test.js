@@ -228,6 +228,11 @@ test('Word endings', () => {
   expect(genderize('חרוץ/ה', FEMALE)).toBe('חרוצה');
   expect(genderize('חרוץ/ה', MALE)).toBe('חרוץ');
 
+  expect(genderize('חרוץ/צה', FEMALE)).toBe('חרוצה');
+  expect(genderize('חרוץ/צה', MALE)).toBe('חרוץ');
+  expect(genderize('מוכן/נה', FEMALE)).toBe('מוכנה');
+  expect(genderize('מוכן/נה', MALE)).toBe('מוכן');
+
   expect(genderize('גבוה/ה', FEMALE)).toBe('גבוהה');
   expect(genderize('גבוה/ה', MALE)).toBe('גבוה');
 
