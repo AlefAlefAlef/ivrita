@@ -31,3 +31,19 @@ test('OpenType setting on element with pre-existing settings', () => {
 
   expect(el.style.fontFeatureSettings).toEqual('"ss01" 1, "tnum"');
 });
+
+test('setFontFeatureSettings on clean element', () => {
+  const el = document.createElement('p');
+
+  expect(el.style.fontFeatureSettings).toEqual('');
+
+  const ivrita = new Ivrita(el);
+
+  ivrita.setMode(Ivrita.MULTI);
+
+  expect(el.style.fontFeatureSettings).toEqual('"titl"');
+
+  ivrita.setMode(Ivrita.NEUTRAL);
+
+  expect(el.style.fontFeatureSettings).toEqual('normal');
+});

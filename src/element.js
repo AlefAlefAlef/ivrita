@@ -10,10 +10,12 @@ import { HEB, SYNTAX } from './utils/characters';
 const hebrewRegex = new RegExp(HEB);
 const ivritaSyntaxRegex = new RegExp(SYNTAX);
 
+const MULTI = GENDERS.length; // ENUM-like
+
 export default class IvritaElement {
   static EVENT_MODE_CHANGED = 'ivrita-mode-changed';
 
-  static GENDERS = GENDERS;
+  static ORIGINAL = ORIGINAL;
 
   static MALE = MALE;
 
@@ -21,7 +23,10 @@ export default class IvritaElement {
 
   static NEUTRAL = NEUTRAL;
 
-  static ORIGINAL = ORIGINAL;
+  // MULTI is a special with FFS enabled, but is essentialy the NEUTRAL mode.
+  static MULTI = MULTI;
+
+  static GENDERS = [...GENDERS, MULTI];
 
   static instances = new Map();
 
@@ -108,8 +113,14 @@ export default class IvritaElement {
     if (!this.constructor.GENDERS.includes(newMode)) {
       return this;
     }
+
+    if ((this.mode === MULTI && newMode !== MULTI) || (this.mode !== MULTI && newMode === MULTI)) {
+      this.setFontFeatureSettings(newMode === MULTI);
+    }
+
     this.mode = newMode;
-    this.nodes.forEach((node) => node.setMode(newMode));
+    // If the new mode is MULTI, mask it from the child nodes - for them it's a NEUTRAL mode.
+    this.nodes.forEach((node) => node.setMode(newMode === MULTI ? NEUTRAL : newMode));
 
     this.dispatchModeChangedEvent(newMode);
 
