@@ -1,0 +1,312 @@
+/**
+* Switch
+*/
+
+@font-face {
+  font-family: 'Ivritacons';
+  font-weight: '400';
+  src: url('fonts/ivritacons-alefalefalef.woff2') format("woff2"), url('fonts/ivritacons-alefalefalef.woff') format("woff");
+}
+
+.ivrita-switch *, .ivrita-mode-changer * {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  font-size: 1em;
+  font-weight: normal;
+  font-style: normal;
+  border: 0;
+  text-decoration: none;
+  list-style-type: none;
+  min-width: auto;
+  min-height: auto;
+  max-width: none;
+  max-height: none;
+  -webkit-text-stroke: none;
+  -moz-text-stroke: initial;
+  -ms-text-stroke: initial;
+  word-spacing: normal;
+  text-align: left;
+  width: auto;
+  height: auto;
+  position: static;
+  display: inline-block;
+  border: 0;
+  float: none;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  direction: ltr;
+  visibility: visible;
+  opacity: 1;
+  text-shadow: none;
+  outline: 0;
+  vertical-align: unset;
+  white-space: normal;
+  letter-spacing: 0;
+}
+
+.ivrita-switch {
+  *, &:before, &:after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+
+  z-index: 999999;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  top: calc(50% - 1em);
+  left: -1px;
+  border-radius: 0 7px 7px 0;
+  transition: .2s all ease-out .1s;
+  border: 1px solid #222;
+  font-size: 32px;
+  min-width: 1.2em;
+  padding: 0.1em 0em 0;
+  overflow: hidden;
+
+  &:hover {
+    top: calc(50% - 2.2em);
+  }
+
+  &.ivrita-switch--right {
+    left: auto;
+    right: -1px;
+    border-radius: 7px 0 0 7px;
+  }
+
+  a {
+    font-family: 'Ivritacons' !important;
+    font-weight: normal !important;
+    font-style: normal !important;
+    transition: .1s all ease-out;
+    display: block;
+    color: #2d2828;
+    line-height: 1em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    width: 1.1em;
+    height: 1.1em;
+    line-height: 1.1em;
+    margin: 0 0.12em;
+    overflow: hidden;
+
+    &.ivrita-logo {
+      transition: .1s all ease-out;
+    }
+  }
+
+  &:hover a.ivrita-logo {
+    height: 0;
+    visibility: hidden;
+  }
+
+  a.ivrita-button {
+    visibility: hidden;
+    border-radius: 5px;
+    height: 0;
+    transition: .2s all ease-out;
+    overflow: hidden;
+  }
+
+  &:hover a.ivrita-button {
+    visibility: visible;
+    font-size: 1em;
+    height: 1.1em;
+  }
+
+  a {
+    &.ivrita-button {
+      &.ivrita-active:not(.ivrita-button-style-1) {
+        background: #555;
+        color: #fff;
+      }
+
+      &.ivrita-button-style-1.ivrita-active { // TODO: make this into a loop, and move ss01 to a weight...
+        /* Ivrita default */
+        -webkit-font-feature-settings: "ss01";
+        font-feature-settings: "ss01";
+      }
+
+      &.ivrita-button-style-2 {
+        /* Venus & Mars*/
+        -webkit-font-feature-settings: "ss02";
+        font-feature-settings: "ss02";
+      }
+
+      &.ivrita-button-style-3 {
+        /* Hebrew M.F.X */
+        -webkit-font-feature-settings: "ss03";
+        font-feature-settings: "ss03";
+      }
+
+      &.ivrita-button-style-4 {
+        /* M.F.X */
+        -webkit-font-feature-settings: "ss04";
+        font-feature-settings: "ss04";
+      }
+
+      &.ivrita-button-style-5 {
+        /* Lips & Mustache */
+        -webkit-font-feature-settings: "ss05";
+        font-feature-settings: "ss05";
+      }
+
+      &.ivrita-button-style-6 {
+        /* Stick figures */
+        -webkit-font-feature-settings: "ss06";
+        font-feature-settings: "ss06";
+      }
+
+      &.ivrita-button-style-7 {
+        /* Plural Hebrew */
+        -webkit-font-feature-settings: "ss07";
+        font-feature-settings: "ss07";
+      }
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        color: #6306ec;
+      }
+    }
+
+    &.ivrita-info-link {
+      transition: .2s all ease-out;
+      visibility: hidden;
+      font-size: 0.7em;
+      height: 0;
+      width: 100%;
+
+      &:hover {
+        color: #6306ec;
+        -webkit-font-feature-settings: "ss01";
+        font-feature-settings: "ss01";
+      }
+    }
+  }
+
+  &:hover a.ivrita-info-link {
+    border-top: 1px solid #555;
+    margin: 0.2em 0 0;
+    height: auto;
+    visibility: visible;
+  }
+}
+
+/**
+* Toolbar
+*/
+
+.ivrita-toolbar {
+  * {
+    display: inline-block !important;
+  }
+
+  font-size: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 1.6em !important;
+  padding: 0.5em 0.7em;
+  overflow: auto;
+  position: relative;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.03);
+  color: #333333;
+  font-size: 18px;
+  z-index: 1;
+
+  .ivrita-toolbar-label {
+    padding-left: 0.2em;
+    opacity: 0.7;
+    line-height: 1em;
+  }
+
+  a {
+    color: #333333 !important;
+    text-decoration: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    transition: color .3s !important;
+    display: inline-block !important;
+    padding: 0 0.3em !important;
+    margin: 1px !important;
+    white-space: nowrap;
+    cursor: pointer !important;
+
+    &:before {
+      content: attr(data-ivrita-icon) !important;
+      font-size: 1.2em !important;
+      vertical-align: middle !important;
+      font-family: 'Ivritacons' !important;
+    }
+
+    &:focus, &:hover {
+      border: 1px solid rgba(0, 0, 0, 0.2) !important;
+      margin: 0 !important;
+    }
+
+    &.ivrita-mode-changer {
+      border-radius: 2px !important;
+    }
+
+    &.ivrita-active {
+      border: 1px solid rgba(0, 0, 0, 0.8) !important;
+      margin: 0 !important;
+    }
+
+    &.ivrita-toolbar-info {
+      padding: 0 !important;
+      margin: 0 !important;
+      line-height: 1em;
+
+      &:hover {
+        border: none !important;
+
+        &:before {
+          -webkit-font-feature-settings: "ss01";
+          font-feature-settings: "ss01";
+        }
+      }
+    }
+  }
+}
+
+/* Mobile CSS */
+@media screen and (max-width: 480px) {
+  .ivrita-switch {
+    font-size: 26px;
+
+    a {
+      margin: 0;
+    }
+  }
+
+  .ivrita-toolbar {
+    font-size: 14px;
+
+    .ivrita-toolbar-menu {
+      display: block !important;
+      width: 100%;
+    }
+
+    .ivrita-toolbar-label {
+      display: block !important;
+      clear: both;
+      margin-bottom: 0.3em;
+    }
+
+    a.ivrita-toolbar-info {
+      position: absolute !important;
+      left: 0.8em;
+      top: 0.4em;
+    }
+  }
+}

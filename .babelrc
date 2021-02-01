@@ -8,6 +8,7 @@
     }],
     ["@babel/plugin-transform-template-literals", {
       "loose": true
-    }]
+    }],
+    ["@babel/plugin-transform-react-jsx", { "pragma": "dom" }]
   ]
 }
