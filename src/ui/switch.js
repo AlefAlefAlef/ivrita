@@ -13,7 +13,7 @@ export default class IvritaSwitch extends JSXComponent {
     iconTitle: 'Ivrita',
     aboutLinkText: 'About the Ivrita project',
     aboutLinkURL: 'https://alefalefalef.co.il/ivrita/',
-    style: 1,
+    style: 0,
     logoIcon: '&#x26A5;&#xFE0E;',
     modes: {
       [Ivrita.MALE]: {

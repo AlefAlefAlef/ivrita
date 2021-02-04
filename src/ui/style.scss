@@ -12,7 +12,7 @@
   margin: 0;
   padding: 0;
   outline: 0;
-  font-size: 1em;
+  font-size: 30px;
   font-weight: normal;
   font-style: normal;
   border: 0;
@@ -47,12 +47,6 @@
 }
 
 .ivrita-switch {
-  *, &:before, &:after {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-  }
-
   z-index: 999999;
   background-color: rgba(255, 255, 255, 0.8);
   position: fixed;
@@ -61,15 +55,21 @@
   border-radius: 0 7px 7px 0;
   transition: .2s all ease-out .1s;
   border: 1px solid #222;
-  font-size: 32px;
-  min-width: 1.2em;
-  padding: 0.1em 0em 0;
+  font-size: 30px;
+  min-width: 40px;
+  padding: 3px 0 0;
   overflow: hidden;
-
+  
   &:hover {
-    top: calc(50% - 2.2em);
+    top: calc(50% - 66px);
   }
 
+  *, &:before, &:after {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+  }
+  
   &.ivrita-switch--right {
     left: auto;
     right: -1px;
@@ -87,10 +87,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    width: 1.1em;
-    height: 1.1em;
-    line-height: 1.1em;
-    margin: 0 0.12em;
+    width: 33px;
+    height: 33px;
+    line-height: 33px;
+    margin: 0 3px;
     overflow: hidden;
 
     &.ivrita-logo {
@@ -113,57 +113,27 @@
 
   &:hover a.ivrita-button {
     visibility: visible;
-    font-size: 1em;
-    height: 1.1em;
+    font-size: 30px;
+    height: 33px;
   }
 
   a {
     &.ivrita-button {
-      &.ivrita-active:not(.ivrita-button-style-1) {
+      &.ivrita-active:not(.ivrita-button-style-0) {
         background: #555;
         color: #fff;
       }
 
-      &.ivrita-button-style-1.ivrita-active { // TODO: make this into a loop, and move ss01 to a weight...
-        /* Ivrita default */
-        -webkit-font-feature-settings: "ss01";
-        font-feature-settings: "ss01";
+      &.ivrita-button-style-0.ivrita-active {
+        -webkit-font-feature-settings: "swsh";
+        font-feature-settings: "swsh";
       }
 
-      &.ivrita-button-style-2 {
-        /* Venus & Mars*/
-        -webkit-font-feature-settings: "ss02";
-        font-feature-settings: "ss02";
-      }
-
-      &.ivrita-button-style-3 {
-        /* Hebrew M.F.X */
-        -webkit-font-feature-settings: "ss03";
-        font-feature-settings: "ss03";
-      }
-
-      &.ivrita-button-style-4 {
-        /* M.F.X */
-        -webkit-font-feature-settings: "ss04";
-        font-feature-settings: "ss04";
-      }
-
-      &.ivrita-button-style-5 {
-        /* Lips & Mustache */
-        -webkit-font-feature-settings: "ss05";
-        font-feature-settings: "ss05";
-      }
-
-      &.ivrita-button-style-6 {
-        /* Stick figures */
-        -webkit-font-feature-settings: "ss06";
-        font-feature-settings: "ss06";
-      }
-
-      &.ivrita-button-style-7 {
-        /* Plural Hebrew */
-        -webkit-font-feature-settings: "ss07";
-        font-feature-settings: "ss07";
+      @for $i from 1 through 7 {
+        &.ivrita-button-style-#{$i} {
+          -webkit-font-feature-settings: "ss0#{$i}";
+          font-feature-settings: "ss0#{$i}";
+        }
       }
 
       &:hover {
@@ -175,7 +145,8 @@
     &.ivrita-info-link {
       transition: .2s all ease-out;
       visibility: hidden;
-      font-size: 0.7em;
+      font-size: 20px;
+      line-height: 21px;
       height: 0;
       width: 100%;
 
@@ -189,11 +160,12 @@
 
   &:hover a.ivrita-info-link {
     border-top: 1px solid #555;
-    margin: 0.2em 0 0;
+    margin: 4px 0 0;
     height: auto;
     visibility: visible;
   }
 }
+
 
 /**
 * Toolbar
@@ -282,10 +254,13 @@
 /* Mobile CSS */
 @media screen and (max-width: 480px) {
   .ivrita-switch {
-    font-size: 26px;
+    top: auto;
+    bottom: 0;
+    border-radius: 0 7px 0 0;
 
-    a {
-      margin: 0;
+    &:hover {
+      top: auto; 
+      
     }
   }
 
