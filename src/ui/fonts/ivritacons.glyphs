@@ -3,7 +3,6 @@
 DisplayStrings = (
 "/venus.ss01",
 "/space/alephsymbol/northWestArrowToCorner/blackstar/ballotBox/ballotBoxWithCheck/ballotBoxWithX/peace/yinyang/whiteSmilingFace/venus/mars/heartWhiteSuit/heartBlackSuit/maleAndFemaleSign/heavyAsterisk/nullControl/venus.ss01/mars.ss01/maleAndFemaleSign.ss01/venus.ss02/mars.ss02/maleAndFemaleSign.ss02",
-"",
 "/space/space/space",
 "/space/space/space",
 "/space/i.circled/i.circled.ss01/space/space/heartBlackSuit/maleAndFemaleSign/heavyAsterisk/nullControl/venus.ss01/i.circled",
@@ -90,6 +89,10 @@ name = ss06;
 automatic = 1;
 code = "sub venus by venus.ss07;\012sub mars by mars.ss07;\012sub maleAndFemaleSign by maleAndFemaleSign.ss07;\012";
 name = ss07;
+},
+{
+code = "sub venus by venus.ss01;\012sub mars by mars.ss01;\012sub maleAndFemaleSign by maleAndFemaleSign.ss01;";
+name = swsh;
 }
 );
 fontMaster = (
