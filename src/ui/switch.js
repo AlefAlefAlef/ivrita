@@ -1,31 +1,37 @@
 import JSXComponent from 'jsx-render/lib/JSXComponent';
 // eslint-disable-next-line no-unused-vars
 import dom from 'jsx-render';
+import {
+  iconTitle,
+  aboutLinkText,
+  defaultMaleLabel,
+  defaultFemaleLabel,
+  defaultNeutralLabel,
+} from './hebrew';
 
 import './style.scss';
-// import template from './template.jsx';
 
 import Ivrita from '../element';
 
 export default class IvritaSwitch extends JSXComponent {
   config = {
     position: 'left',
-    iconTitle: 'Ivrita',
-    aboutLinkText: 'About the Ivrita project',
+    iconTitle,
+    aboutLinkText,
     aboutLinkURL: 'https://alefalefalef.co.il/ivrita/',
     style: 0,
     logoIcon: '&#x26A5;&#xFE0E;',
     modes: {
       [Ivrita.MALE]: {
-        label: 'Male',
+        label: defaultMaleLabel,
         icon: '&#x2642;&#xFE0E;',
       },
       [Ivrita.FEMALE]: {
-        label: 'Female',
+        label: defaultFemaleLabel,
         icon: '&#x2640;&#xFE0E;',
       },
       [Ivrita.NEUTRAL]: {
-        label: 'Neutral',
+        label: defaultNeutralLabel,
         icon: '&#x26A5;&#xFE0E;',
       },
     },
