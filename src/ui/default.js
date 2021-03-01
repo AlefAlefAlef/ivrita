@@ -37,14 +37,17 @@ export default class DefaultSwitch extends IvritaSwitch {
       [Ivrita.MALE]: {
         label: defaultMaleLabel,
         icon: '&#x2642;&#xFE0E;',
+        order: 1,
       },
       [Ivrita.FEMALE]: {
         label: defaultFemaleLabel,
         icon: '&#x2640;&#xFE0E;',
+        order: 2,
       },
       [Ivrita.NEUTRAL]: {
         label: defaultNeutralLabel,
         icon: '&#x26A5;&#xFE0E;',
+        order: 3,
       },
     },
     default: Ivrita.NEUTRAL,
@@ -69,7 +72,9 @@ export default class DefaultSwitch extends IvritaSwitch {
       <div class={`ivrita-switch ivrita-switch--${this.config.position}`}>
         <a href="#" class="ivrita-logo" title={ this.config.iconTitle } dangerouslySetInnerHTML={{ __html: this.config.logoIcon }}></a>
         {
-          Object.keys(this.config.modes).map((mode) => (
+          Object.keys(this.config.modes)
+            .sort((mode1, mode2) => this.config.modes[mode1].order - this.config.modes[mode2].order)
+            .map((mode) => (
             <a href="#"
               class={`ivrita-mode-changer ivrita-button ivrita-button-style-${this.config.style}`}
               data-ivrita-mode={ mode }
@@ -78,7 +83,7 @@ export default class DefaultSwitch extends IvritaSwitch {
               onClick={ (e) => { e.preventDefault(); this.setMode(mode); } }
               dangerouslySetInnerHTML={{ __html: this.config.modes[mode].icon }}
               ></a>
-          ))
+            ))
         }
         <a href={ this.config.aboutLinkURL } class="ivrita-info-link" title={ this.config.aboutLinkText } target="_blank">ⓘ</a>
       </div>
