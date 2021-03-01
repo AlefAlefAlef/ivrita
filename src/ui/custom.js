@@ -73,13 +73,4 @@ export default class CustomSwitch extends IvritaSwitch {
       }
     });
   }
-
-  // eslint-disable-next-line class-methods-use-this
-  build() {}
-
-  // eslint-disable-next-line class-methods-use-this
-  rebuild() {}
-
-  // eslint-disable-next-line class-methods-use-this
-  render() {}
 }

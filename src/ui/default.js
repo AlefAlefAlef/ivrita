@@ -84,4 +84,28 @@ export default class DefaultSwitch extends IvritaSwitch {
       </div>
     );
   }
+
+  build() {
+    this.element = this.render();
+  }
+
+  init() {
+    // Dispatch the event, in order to allow external reconfiguration
+    document.dispatchEvent(new CustomEvent(this.constructor.EVENT_INIT, { bubbles: true }));
+
+    this.build();
+    document.body.appendChild(this.element);
+
+    const storedMode = window.localStorage.getItem('ivrita-mode');
+    if (storedMode) {
+      this.setMode(storedMode);
+    } else if (this.config.default) {
+      this.setMode(this.config.default);
+    }
+  }
+
+  rebuild() {
+    this.element.remove();
+    this.init();
+  }
 }
