@@ -57,8 +57,10 @@ export default class CustomSwitch extends IvritaSwitch {
     this.ivritaInstances.forEach((ivritaInstance) => {
       if (ivritaInstance.elements.length) {
         ivritaInstance.elements[0].addEventListener(IvritaElement.EVENT_MODE_CHANGED,
-          ({ detail: { mode } }) => {
-            this.setActiveButton(mode);
+          ({ detail: { mode, firingInstance } }) => {
+            if (firingInstance === ivritaInstance) { // Skip events bubbled by other instances
+              this.setActiveButton(mode);
+            }
           });
       }
     });
