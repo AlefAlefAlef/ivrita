@@ -75,7 +75,7 @@ export default class DefaultSwitch extends IvritaSwitch {
               data-ivrita-mode={ mode }
               title={ this.config.modes[mode].label }
               ref={ super.ref }
-              onClick={ () => { this.setMode(mode); } }
+              onClick={ (e) => { e.preventDefault(); this.setMode(mode); } }
               dangerouslySetInnerHTML={{ __html: this.config.modes[mode].icon }}
               ></a>
           ))

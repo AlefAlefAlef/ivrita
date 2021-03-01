@@ -43,7 +43,9 @@ export default class CustomSwitch extends IvritaSwitch {
       }
 
       if (btnMode !== null) {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (e) => {
+          e.preventDefault();
+
           this.setMode(btnMode);
           this.setActiveButton(btnMode);
         });
