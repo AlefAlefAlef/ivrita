@@ -138,7 +138,7 @@ export default class IvritaElement {
   dispatchModeChangedEvent(mode = this.mode) {
     this.elements.forEach(
       (el) => el.dispatchEvent(new CustomEvent(this.constructor.EVENT_MODE_CHANGED,
-        { bubbles: true, detail: { mode } })),
+        { bubbles: true, detail: { mode, firingInstance: this } })),
     );
   }
 

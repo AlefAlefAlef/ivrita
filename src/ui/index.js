@@ -1,14 +1,16 @@
 import Ivrita from '../element';
-import IvritaSwitch from './switch';
+import CustomSwitch from './custom';
+import DefaultSwitch from './default';
 
 import DocReady from './docReady';
 
-const switchInstance = new IvritaSwitch();
+const defaultSwitch = new DefaultSwitch();
 
 DocReady(() => {
   window._ivrita = new Ivrita();
-  switchInstance.setIvritaInstances(window._ivrita);
-  switchInstance.init();
+  defaultSwitch.setIvritaInstances(window._ivrita);
+  defaultSwitch.init();
 });
 
-export default switchInstance;
+defaultSwitch.custom = CustomSwitch;
+export default defaultSwitch;
