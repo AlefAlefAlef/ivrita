@@ -5,6 +5,10 @@ import {
   FEMALE, MALE, NEUTRAL, ORIGINAL,
 } from '../src/ivrita';
 
+function waitEventLoop() {
+  return new Promise((resolve) => setImmediate(resolve));
+}
+
 const template = `
   <div id="content">
     <p>[מעצבים|מתכנתות|הייטקיסטים] רבים/ות <u>מרגישים/ות</u> <i>תסכול</i>, כאשר <b>פונים/ות</b> אליהם/ן שלא בשפתם/ן.</p>
@@ -106,18 +110,23 @@ test('<title> tag is changed', () => {
   expect(title.innerHTML).toBe('צרי קשר');
 });
 
-test('Ovserver catches new elements added', () => {
+test('Ovserver catches new elements added and sets their mode properly', async () => {
   document.body.innerHTML = template;
   const i = new Ivrita(document.body);
 
-  document.body.innerHTML += '<b>את/ה נהדר/ת</b>';
+  i.setMode(FEMALE);
+
+  document.body.insertAdjacentHTML('beforeend', '<span>את/ה נהדר/ת</span>');
+
+  await waitEventLoop(); // Required to activate MutationObserver
+
+  expect(document.querySelector('#content u').innerHTML).toBe('מרגישות');
+  expect(document.querySelector('span').innerHTML).toBe('את נהדרת');
+
   i.setMode(MALE);
 
-  // Using setTimeout to push the test to the message queue,
-  // which will be executed after the MutationObserver finishes.
-  setTimeout(() => {
-    expect(document.body.textContent).toBe('ddd');
-  }, 0);
+  expect(document.querySelector('#content u').innerHTML).toBe('מרגישים');
+  expect(document.querySelector('span').innerHTML).toBe('אתה נהדר');
 });
 
 test('jQuery element passed to constructor', () => {

@@ -29,7 +29,8 @@
   },
   "homepage": "https://github.com/AlefAlefAlef/ivrita#readme",
   "dependencies": {
-    "jsx-render": "^1.1.1"
+    "jsx-render": "^1.1.1",
+    "regenerator-runtime": "^0.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

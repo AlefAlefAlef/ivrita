@@ -166,6 +166,10 @@ export default class IvritaElement {
         newNode = new TextElement(currentNode);
       }
       this.nodes.add(newNode);
+      // Set the new node's mode to the current mode, to get in line with everything else
+      if (this.mode) {
+        newNode.setMode(this.mode);
+      }
     }
   }
 
@@ -240,7 +244,12 @@ export default class IvritaElement {
             }
             if (node.nodeType === Node.TEXT_NODE
               && this.constructor.acceptNodeFilter(node) === NodeFilter.FILTER_ACCEPT) {
-              this.nodes.add(new TextNode(node));
+              const ivritaTextNode = new TextNode(node);
+              this.nodes.add(ivritaTextNode);
+              // Set the new node's mode to the current mode, to get in line with everything else
+              if (this.mode) {
+                ivritaTextNode.setMode(this.mode);
+              }
             } else if (node.childNodes.length > 0) {
               this.registerTextNodes(node);
             }
