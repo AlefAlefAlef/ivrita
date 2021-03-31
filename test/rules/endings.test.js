@@ -62,6 +62,10 @@ test('Word endings', () => {
   expect(genderize('צור/י', MALE)).toBe('צור');
   expect(genderize('צור/י/ו', NEUTRAL)).toBe('צרו');
 
+  expect(genderize('חשוב/י', FEMALE)).toBe('חשבי');
+  expect(genderize('חשוב/י', MALE)).toBe('חשוב');
+  expect(genderize('חשוב/י/ו', NEUTRAL)).toBe('חשבו');
+
   expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
   expect(genderize('רוצ/י', MALE)).toBe('רוץ');
   expect(genderize('רוצ/י/ו', NEUTRAL)).toBe('רוצו');

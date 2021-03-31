@@ -26,6 +26,8 @@ export const custom = [
   [`זה${SEP}ז?ו${B}`, 'זה', 'זו'], // זה/זו
   [`זו${SEP}ז?ה${B}`, 'זה', 'זו'], // זו/זה
   [`נשוי${SEP}א?ה${B}`, 'נשוי', 'נשואה'], // נשוי/אה
+  [`חשוב${SEP}י${B}`, 'חשוב', 'חשבי'], // חשוב/י (exception because of שוב/י which is in verbsFemaleKeepVav)
+  [`חשוב${SEP}י${SEP}ו${B}`, 'חשוב', 'חשבי', 'חשבו'], // חשוב/י/ו (exception because of שוב/י which is in verbsFemaleKeepVav)
 ];
 
 // For most verbs (Unless found in *verbsFemaleKeepVav*), we follow the rules of:
