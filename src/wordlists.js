@@ -42,7 +42,7 @@ export const verbsFemaleExtraYod = [
   'הדגם',
   'הדלק',
   'הוסף',
-  'הועל',
+  'הואל',
   'הורד',
   'הזמן',
   'הזן',
@@ -67,6 +67,8 @@ export const verbsFemaleExtraYod = [
   'השתק',
   'התמד',
   'התקן',
+  'העתק',
+  'הדבק',
 ];
 
 export const verbsFemaleKeepVav = [
