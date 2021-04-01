@@ -53,8 +53,7 @@ export default class DefaultSwitch extends IvritaSwitch {
     default: Ivrita.NEUTRAL,
   }
 
-  setMode(modeStr) {
-    const mode = parseInt(modeStr, 10);
+  setMode(mode) {
     this.element.querySelectorAll('a.ivrita-mode-changer').forEach((e) => {
       if (parseInt(e.dataset.ivritaMode, 10) === mode) {
         e.classList.add('ivrita-active');
@@ -74,6 +73,7 @@ export default class DefaultSwitch extends IvritaSwitch {
         {
           Object.keys(this.config.modes)
             .sort((mode1, mode2) => this.config.modes[mode1].order - this.config.modes[mode2].order)
+            .map((mode) => parseInt(mode, 10))
             .map((mode) => (
             <a href="#"
               class={`ivrita-mode-changer ivrita-button ivrita-button-style-${this.config.style}`}
@@ -101,7 +101,17 @@ export default class DefaultSwitch extends IvritaSwitch {
     this.build();
     document.body.appendChild(this.element);
 
-    const storedMode = window.localStorage.getItem('ivrita-mode');
+    let storedMode = window.localStorage.getItem('ivrita-mode');
+    if (!Number.isNaN(parseInt(storedMode, 10))) {
+      storedMode = parseInt(storedMode, 10);
+    }
+    if (!Ivrita.GENDERS.includes(storedMode)) {
+      if (Ivrita.GENDERS.includes(Ivrita[storedMode])) {
+        storedMode = Ivrita[storedMode];
+      } else {
+        storedMode = Ivrita.defaultMode;
+      }
+    }
     if (storedMode) {
       this.setMode(storedMode);
     } else if (this.config.default) {
