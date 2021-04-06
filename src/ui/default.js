@@ -68,8 +68,8 @@ export default class DefaultSwitch extends IvritaSwitch {
 
   render() {
     return (
-      <div class={`ivrita-switch ivrita-switch--${this.config.position}`}>
-        <a href="#" class="ivrita-logo" title={ this.config.iconTitle } dangerouslySetInnerHTML={{ __html: this.config.logoIcon }}></a>
+      <div class={`ivrita-switch ivrita-switch--${this.config.position}`} tabindex="0" title={ this.config.iconTitle }>
+        <a href="#" class="ivrita-logo" tabindex="-1" title={ this.config.iconTitle } dangerouslySetInnerHTML={{ __html: this.config.logoIcon }}></a>
         {
           Object.keys(this.config.modes)
             .sort((mode1, mode2) => this.config.modes[mode1].order - this.config.modes[mode2].order)

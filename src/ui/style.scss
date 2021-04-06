@@ -8,6 +8,8 @@
   src: url('fonts/ivritacons-alefalefalef.woff2') format("woff2"), url('fonts/ivritacons-alefalefalef.woff') format("woff");
 }
 
+$ivrita-accent: #6306ec;
+
 .ivrita-switch *, .ivrita-mode-changer * {
   margin: 0;
   padding: 0;
@@ -60,10 +62,6 @@
   padding: 3px 0 0;
   overflow: hidden;
   
-  &:hover {
-    top: calc(50% - 66px);
-  }
-
   *, &:before, &:after {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -96,28 +94,15 @@
     &.ivrita-logo {
       transition: .1s all ease-out;
     }
-  }
 
-  &:hover a.ivrita-logo {
-    height: 0;
-    visibility: hidden;
-  }
+    &.ivrita-button {
+      visibility: hidden;
+      border-radius: 5px;
+      height: 0;
+      transition: .2s all ease-out;
+      overflow: hidden;
+    }
 
-  a.ivrita-button {
-    visibility: hidden;
-    border-radius: 5px;
-    height: 0;
-    transition: .2s all ease-out;
-    overflow: hidden;
-  }
-
-  &:hover a.ivrita-button {
-    visibility: visible;
-    font-size: 30px;
-    height: 33px;
-  }
-
-  a {
     &.ivrita-button {
       &.ivrita-active:not(.ivrita-button-style-0) {
         background: #555;
@@ -136,9 +121,13 @@
         }
       }
 
-      &:hover {
+      &:hover, &:focus {
         background-color: rgba(0, 0, 0, 0.1);
-        color: #6306ec;
+        color: $ivrita-accent;
+      }
+
+      &.ivrita-active:focus {
+        border: 1px solid $ivrita-accent;
       }
     }
 
@@ -150,19 +139,35 @@
       height: 0;
       width: 100%;
 
-      &:hover {
-        color: #6306ec;
+      &:hover, &:focus {
+        color: $ivrita-accent;
         -webkit-font-feature-settings: "ss01";
         font-feature-settings: "ss01";
       }
     }
   }
 
-  &:hover a.ivrita-info-link {
-    border-top: 1px solid #555;
-    margin: 4px 0 0;
-    height: auto;
-    visibility: visible;
+
+  &:hover, &:focus, &:focus-within {
+    top: calc(50% - 66px);
+
+    a.ivrita-logo {
+      height: 0;
+      visibility: hidden;
+    }
+
+    a.ivrita-button {
+      visibility: visible;
+      font-size: 30px;
+      height: 33px;
+    }
+
+    a.ivrita-info-link {
+      border-top: 1px solid #555;
+      margin: 4px 0 0;
+      height: auto;
+      visibility: visible;
+    }
   }
 }
 
