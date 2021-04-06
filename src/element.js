@@ -2,7 +2,7 @@ import {
   Mode, genderize,
 } from './ivrita';
 import TextAttribute from './textAttribute';
-import TextElement, { MALE_DATA_ATTR, FEMALE_DATA_ATTR, NEUTRAL_DATA_ATTR } from './textElement';
+import TextElement, { DataAttr } from './textElement';
 import TextNode from './textNode';
 import TextObject from './textObject';
 import { HEB, SYNTAX } from './utils/characters';
@@ -25,6 +25,8 @@ export default class IvritaElement {
   static MULTI = Object.keys(Mode).length;
 
   static GENDERS = [...Object.values(Mode), this.MULTI];
+
+  static DataAttrs = DataAttr;
 
   static instances = new Map();
 
@@ -199,7 +201,7 @@ export default class IvritaElement {
       if (node.dataset.ivritaDisable) {
         return NodeFilter.FILTER_REJECT;
       }
-      if ([MALE_DATA_ATTR, FEMALE_DATA_ATTR, NEUTRAL_DATA_ATTR]
+      if (Object.values(DataAttr)
         .filter((attr) => node.dataset[attr]).length) {
         return NodeFilter.FILTER_ACCEPT;
       }

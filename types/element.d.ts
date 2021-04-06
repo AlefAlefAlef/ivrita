@@ -6,6 +6,9 @@ export default class IvritaElement {
     static NEUTRAL: number;
     static MULTI: number;
     static GENDERS: number[];
+    static DataAttrs: {
+        [x: number]: string;
+    };
     static instances: Map<any, any>;
     static defaultMode: number;
     static genderize: (originalText: string, newMode: number, doneFunc: any) => string;

@@ -1,6 +1,8 @@
-export const MALE_DATA_ATTR: "ivritaMale";
-export const FEMALE_DATA_ATTR: "ivritaFemale";
-export const NEUTRAL_DATA_ATTR: "ivritaNeutral";
+export type DataAttr = string;
+/** @enum {string} */
+export const DataAttr: {
+    [x: number]: string;
+};
 export default class TextElement extends TextObject {
     element: {};
 }

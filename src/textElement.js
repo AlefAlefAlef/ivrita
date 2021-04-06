@@ -1,9 +1,12 @@
 import TextObject, { IncompatibleTypeError } from './textObject';
 import { Mode } from './ivrita';
 
-export const MALE_DATA_ATTR = 'ivritaMale';
-export const FEMALE_DATA_ATTR = 'ivritaFemale';
-export const NEUTRAL_DATA_ATTR = 'ivritaNeutral';
+/** @enum {string} */
+export const DataAttr = {
+  [Mode.MALE]: 'ivritaMale',
+  [Mode.FEMALE]: 'ivritaFemale',
+  [Mode.NEUTRAL]: 'ivritaNeutral',
+};
 
 export default class TextElement extends TextObject {
   element = {};
@@ -25,14 +28,14 @@ export default class TextElement extends TextObject {
 
   init() {
     super.init();
-    if (this.element.dataset[MALE_DATA_ATTR]) {
-      this.storedValues[Mode.MALE] = this.element.dataset[MALE_DATA_ATTR];
+    if (this.element.dataset[DataAttr[Mode.MALE]]) {
+      this.storedValues[Mode.MALE] = this.element.dataset[DataAttr[Mode.MALE]];
     }
-    if (this.element.dataset[FEMALE_DATA_ATTR]) {
-      this.storedValues[Mode.FEMALE] = this.element.dataset[FEMALE_DATA_ATTR];
+    if (this.element.dataset[DataAttr[Mode.FEMALE]]) {
+      this.storedValues[Mode.FEMALE] = this.element.dataset[DataAttr[Mode.FEMALE]];
     }
-    if (this.element.dataset[NEUTRAL_DATA_ATTR]) {
-      this.storedValues[Mode.NEUTRAL] = this.element.dataset[NEUTRAL_DATA_ATTR];
+    if (this.element.dataset[DataAttr[Mode.NEUTRAL]]) {
+      this.storedValues[Mode.NEUTRAL] = this.element.dataset[DataAttr[Mode.NEUTRAL]];
     }
   }
 
