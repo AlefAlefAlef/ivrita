@@ -3,17 +3,22 @@ import rules from './rules';
 const PROTECTED = '__IVRITA_PROTECTED__';
 const protectedRegexp = new RegExp(`\\{${PROTECTED}:(\\d+):${PROTECTED}\\}`, 'g');
 
-export const ORIGINAL = 0;
+/** @enum {number} */
+export const Mode = {
+  ORIGINAL: 0,
+  MALE: 1,
+  FEMALE: 2,
+  NEUTRAL: 3,
+};
 
-export const MALE = 1;
-
-export const FEMALE = 2;
-
-export const NEUTRAL = 3;
-
-export const GENDERS = [ORIGINAL, MALE, FEMALE, NEUTRAL];
-
-export const genderize = (originalText, gender, doneFunc) => {
+/**
+ *
+ * @param {string} originalText The original text, un-genderized
+ * @param {Mode} newMode The new mode to genderize the string into
+ * @param {*} doneFunc An optional callback to be executed after the genderization,
+ * which will receive an array of matched rules
+ */
+export const genderize = (originalText, newMode, doneFunc) => {
   let genderized = originalText;
   const bracedStrings = [];
 
@@ -29,16 +34,16 @@ export const genderize = (originalText, gender, doneFunc) => {
   const used = [];
   rules.forEach(([pattern, male, female, neutral]) => {
     let replacement;
-    switch (gender) {
-      case FEMALE:
+    switch (newMode) {
+      case Mode.FEMALE:
         replacement = female;
         break;
 
-      case MALE:
+      case Mode.MALE:
         replacement = male;
         break;
 
-      case NEUTRAL:
+      case Mode.NEUTRAL:
       default:
         if (typeof neutral !== 'undefined') replacement = neutral;
         break;

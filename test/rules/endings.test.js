@@ -1,454 +1,452 @@
-import {
-  genderize, FEMALE, MALE, NEUTRAL,
-} from '../../src/ivrita';
+import { genderize, Mode } from '../../src/ivrita';
 
 test('Word endings', () => {
   // Commandings
-  expect(genderize('הקשב/י', FEMALE)).toBe('הקשיבי');
-  expect(genderize('הקשב/י', MALE)).toBe('הקשב');
-  expect(genderize('הקשב/י/ו', NEUTRAL)).toBe('הקשיבו');
+  expect(genderize('הקשב/י', Mode.FEMALE)).toBe('הקשיבי');
+  expect(genderize('הקשב/י', Mode.MALE)).toBe('הקשב');
+  expect(genderize('הקשב/י/ו', Mode.NEUTRAL)).toBe('הקשיבו');
 
-  expect(genderize('הפעל/י', FEMALE)).toBe('הפעילי');
-  expect(genderize('הפעל/י', MALE)).toBe('הפעל');
-  expect(genderize('הפעל/י/ו', NEUTRAL)).toBe('הפעילו');
+  expect(genderize('הפעל/י', Mode.FEMALE)).toBe('הפעילי');
+  expect(genderize('הפעל/י', Mode.MALE)).toBe('הפעל');
+  expect(genderize('הפעל/י/ו', Mode.NEUTRAL)).toBe('הפעילו');
 
-  expect(genderize('השב/י', FEMALE)).toBe('השיבי');
-  expect(genderize('השב/י', MALE)).toBe('השב');
-  expect(genderize('השב/י/ו', NEUTRAL)).toBe('השיבו');
+  expect(genderize('השב/י', Mode.FEMALE)).toBe('השיבי');
+  expect(genderize('השב/י', Mode.MALE)).toBe('השב');
+  expect(genderize('השב/י/ו', Mode.NEUTRAL)).toBe('השיבו');
 
-  expect(genderize('הרם/י', FEMALE)).toBe('הרימי');
-  expect(genderize('הרם/י', MALE)).toBe('הרם');
-  expect(genderize('הרם/י/ו', NEUTRAL)).toBe('הרימו');
-  expect(genderize('הרם/י/ו', FEMALE)).toBe('הרימי');
-  expect(genderize('הרם/י/ו', MALE)).toBe('הרם');
+  expect(genderize('הרם/י', Mode.FEMALE)).toBe('הרימי');
+  expect(genderize('הרם/י', Mode.MALE)).toBe('הרם');
+  expect(genderize('הרם/י/ו', Mode.NEUTRAL)).toBe('הרימו');
+  expect(genderize('הרם/י/ו', Mode.FEMALE)).toBe('הרימי');
+  expect(genderize('הרם/י/ו', Mode.MALE)).toBe('הרם');
 
-  expect(genderize('הרמ/י', FEMALE)).toBe('הרימי');
-  expect(genderize('הרמ/י', MALE)).toBe('הרם');
-  expect(genderize('הרמ/י/ו', NEUTRAL)).toBe('הרימו');
-  expect(genderize('הרמ/י/ו', FEMALE)).toBe('הרימי');
-  expect(genderize('הרמ/י/ו', MALE)).toBe('הרם');
+  expect(genderize('הרמ/י', Mode.FEMALE)).toBe('הרימי');
+  expect(genderize('הרמ/י', Mode.MALE)).toBe('הרם');
+  expect(genderize('הרמ/י/ו', Mode.NEUTRAL)).toBe('הרימו');
+  expect(genderize('הרמ/י/ו', Mode.FEMALE)).toBe('הרימי');
+  expect(genderize('הרמ/י/ו', Mode.MALE)).toBe('הרם');
 
-  expect(genderize('הדגם/י', FEMALE)).toBe('הדגימי');
-  expect(genderize('הדגם/י', MALE)).toBe('הדגם');
-  expect(genderize('הדגם/י/ו', NEUTRAL)).toBe('הדגימו');
+  expect(genderize('הדגם/י', Mode.FEMALE)).toBe('הדגימי');
+  expect(genderize('הדגם/י', Mode.MALE)).toBe('הדגם');
+  expect(genderize('הדגם/י/ו', Mode.NEUTRAL)).toBe('הדגימו');
 
-  expect(genderize('הקלד/י', FEMALE)).toBe('הקלידי');
-  expect(genderize('הקלד/י', MALE)).toBe('הקלד');
-  expect(genderize('הקלד/י/ו', NEUTRAL)).toBe('הקלידו');
+  expect(genderize('הקלד/י', Mode.FEMALE)).toBe('הקלידי');
+  expect(genderize('הקלד/י', Mode.MALE)).toBe('הקלד');
+  expect(genderize('הקלד/י/ו', Mode.NEUTRAL)).toBe('הקלידו');
 
-  expect(genderize('הלבש/י', FEMALE)).toBe('הלבישי');
-  expect(genderize('הלבש/י', MALE)).toBe('הלבש');
-  expect(genderize('הלבש/י/ו', NEUTRAL)).toBe('הלבישו');
+  expect(genderize('הלבש/י', Mode.FEMALE)).toBe('הלבישי');
+  expect(genderize('הלבש/י', Mode.MALE)).toBe('הלבש');
+  expect(genderize('הלבש/י/ו', Mode.NEUTRAL)).toBe('הלבישו');
 
-  expect(genderize('הקש/י', FEMALE)).toBe('הקישי');
-  expect(genderize('הקש/י', MALE)).toBe('הקש');
-  expect(genderize('הקש/י/ו', NEUTRAL)).toBe('הקישו');
+  expect(genderize('הקש/י', Mode.FEMALE)).toBe('הקישי');
+  expect(genderize('הקש/י', Mode.MALE)).toBe('הקש');
+  expect(genderize('הקש/י/ו', Mode.NEUTRAL)).toBe('הקישו');
 
-  expect(genderize('צפה/י', FEMALE)).toBe('צפי');
-  expect(genderize('צפה/י', MALE)).toBe('צפה');
-  expect(genderize('צפה/י/ו', NEUTRAL)).toBe('צפו');
+  expect(genderize('צפה/י', Mode.FEMALE)).toBe('צפי');
+  expect(genderize('צפה/י', Mode.MALE)).toBe('צפה');
+  expect(genderize('צפה/י/ו', Mode.NEUTRAL)).toBe('צפו');
 
-  expect(genderize('שלח/י', FEMALE)).toBe('שלחי');
-  expect(genderize('שלח/י', MALE)).toBe('שלח');
-  expect(genderize('שלח/י/ו', FEMALE)).toBe('שלחי');
-  expect(genderize('שלח/י/ו', MALE)).toBe('שלח');
-  expect(genderize('שלח/י/ו', NEUTRAL)).toBe('שלחו');
+  expect(genderize('שלח/י', Mode.FEMALE)).toBe('שלחי');
+  expect(genderize('שלח/י', Mode.MALE)).toBe('שלח');
+  expect(genderize('שלח/י/ו', Mode.FEMALE)).toBe('שלחי');
+  expect(genderize('שלח/י/ו', Mode.MALE)).toBe('שלח');
+  expect(genderize('שלח/י/ו', Mode.NEUTRAL)).toBe('שלחו');
 
-  expect(genderize('כתוב/י', FEMALE)).toBe('כתבי');
-  expect(genderize('כתוב/י', MALE)).toBe('כתוב');
-  expect(genderize('כתוב/י/ו', NEUTRAL)).toBe('כתבו');
+  expect(genderize('כתוב/י', Mode.FEMALE)).toBe('כתבי');
+  expect(genderize('כתוב/י', Mode.MALE)).toBe('כתוב');
+  expect(genderize('כתוב/י/ו', Mode.NEUTRAL)).toBe('כתבו');
 
-  expect(genderize('צור/י', FEMALE)).toBe('צרי');
-  expect(genderize('צור/י', MALE)).toBe('צור');
-  expect(genderize('צור/י/ו', NEUTRAL)).toBe('צרו');
+  expect(genderize('צור/י', Mode.FEMALE)).toBe('צרי');
+  expect(genderize('צור/י', Mode.MALE)).toBe('צור');
+  expect(genderize('צור/י/ו', Mode.NEUTRAL)).toBe('צרו');
 
-  expect(genderize('חשוב/י', FEMALE)).toBe('חשבי');
-  expect(genderize('חשוב/י', MALE)).toBe('חשוב');
-  expect(genderize('חשוב/י/ו', NEUTRAL)).toBe('חשבו');
+  expect(genderize('חשוב/י', Mode.FEMALE)).toBe('חשבי');
+  expect(genderize('חשוב/י', Mode.MALE)).toBe('חשוב');
+  expect(genderize('חשוב/י/ו', Mode.NEUTRAL)).toBe('חשבו');
 
-  expect(genderize('רוצ/י', FEMALE)).toBe('רוצי');
-  expect(genderize('רוצ/י', MALE)).toBe('רוץ');
-  expect(genderize('רוצ/י/ו', NEUTRAL)).toBe('רוצו');
+  expect(genderize('רוצ/י', Mode.FEMALE)).toBe('רוצי');
+  expect(genderize('רוצ/י', Mode.MALE)).toBe('רוץ');
+  expect(genderize('רוצ/י/ו', Mode.NEUTRAL)).toBe('רוצו');
 
-  expect(genderize('קומ/י', FEMALE)).toBe('קומי');
-  expect(genderize('קומ/י', MALE)).toBe('קום');
-  expect(genderize('קומ/י/ו', NEUTRAL)).toBe('קומו');
-  expect(genderize('לכשתקומ/י', FEMALE)).toBe('לכשתקומי');
-  expect(genderize('לכשתקומ/י', MALE)).toBe('לכשתקום');
-  expect(genderize('לכשתקומ/י/ו', NEUTRAL)).toBe('לכשתקומו');
+  expect(genderize('קומ/י', Mode.FEMALE)).toBe('קומי');
+  expect(genderize('קומ/י', Mode.MALE)).toBe('קום');
+  expect(genderize('קומ/י/ו', Mode.NEUTRAL)).toBe('קומו');
+  expect(genderize('לכשתקומ/י', Mode.FEMALE)).toBe('לכשתקומי');
+  expect(genderize('לכשתקומ/י', Mode.MALE)).toBe('לכשתקום');
+  expect(genderize('לכשתקומ/י/ו', Mode.NEUTRAL)).toBe('לכשתקומו');
 
-  expect(genderize('עופ/י', FEMALE)).toBe('עופי');
-  expect(genderize('עופ/י', MALE)).toBe('עוף');
-  expect(genderize('עופ/י/ו', NEUTRAL)).toBe('עופו');
+  expect(genderize('עופ/י', Mode.FEMALE)).toBe('עופי');
+  expect(genderize('עופ/י', Mode.MALE)).toBe('עוף');
+  expect(genderize('עופ/י/ו', Mode.NEUTRAL)).toBe('עופו');
 
-  expect(genderize('שים/י', FEMALE)).toBe('שימי');
-  expect(genderize('שים/י', MALE)).toBe('שים');
-  expect(genderize('שים/י/ו', NEUTRAL)).toBe('שימו');
+  expect(genderize('שים/י', Mode.FEMALE)).toBe('שימי');
+  expect(genderize('שים/י', Mode.MALE)).toBe('שים');
+  expect(genderize('שים/י/ו', Mode.NEUTRAL)).toBe('שימו');
 
-  expect(genderize('עקוב/י', FEMALE)).toBe('עקבי');
-  expect(genderize('עקוב/י', MALE)).toBe('עקוב');
-  expect(genderize('עקוב/י/ו', NEUTRAL)).toBe('עקבו');
+  expect(genderize('עקוב/י', Mode.FEMALE)).toBe('עקבי');
+  expect(genderize('עקוב/י', Mode.MALE)).toBe('עקוב');
+  expect(genderize('עקוב/י/ו', Mode.NEUTRAL)).toBe('עקבו');
 
-  expect(genderize('ראה/י', FEMALE)).toBe('ראי');
-  expect(genderize('ראה/י', MALE)).toBe('ראה');
-  expect(genderize('ראה/י/ו', NEUTRAL)).toBe('ראו');
+  expect(genderize('ראה/י', Mode.FEMALE)).toBe('ראי');
+  expect(genderize('ראה/י', Mode.MALE)).toBe('ראה');
+  expect(genderize('ראה/י/ו', Mode.NEUTRAL)).toBe('ראו');
 
-  expect(genderize('ודא/י', FEMALE)).toBe('ודאי');
-  expect(genderize('ודא/י', MALE)).toBe('ודא');
-  expect(genderize('ודא/י/ו', NEUTRAL)).toBe('ודאו');
+  expect(genderize('ודא/י', Mode.FEMALE)).toBe('ודאי');
+  expect(genderize('ודא/י', Mode.MALE)).toBe('ודא');
+  expect(genderize('ודא/י/ו', Mode.NEUTRAL)).toBe('ודאו');
 
-  expect(genderize('בחר/י', FEMALE)).toBe('בחרי');
-  expect(genderize('בחר/י', MALE)).toBe('בחר');
-  expect(genderize('בחר/י/ו', NEUTRAL)).toBe('בחרו');
+  expect(genderize('בחר/י', Mode.FEMALE)).toBe('בחרי');
+  expect(genderize('בחר/י', Mode.MALE)).toBe('בחר');
+  expect(genderize('בחר/י/ו', Mode.NEUTRAL)).toBe('בחרו');
 
-  expect(genderize('תוכל/י', FEMALE)).toBe('תוכלי');
-  expect(genderize('תוכל/י', MALE)).toBe('תוכל');
-  expect(genderize('תוכל/י/ו', NEUTRAL)).toBe('תוכלו');
+  expect(genderize('תוכל/י', Mode.FEMALE)).toBe('תוכלי');
+  expect(genderize('תוכל/י', Mode.MALE)).toBe('תוכל');
+  expect(genderize('תוכל/י/ו', Mode.NEUTRAL)).toBe('תוכלו');
 
-  expect(genderize('דווח/י', FEMALE)).toBe('דווחי');
-  expect(genderize('דווח/י', MALE)).toBe('דווח');
+  expect(genderize('דווח/י', Mode.FEMALE)).toBe('דווחי');
+  expect(genderize('דווח/י', Mode.MALE)).toBe('דווח');
 
-  expect(genderize('כוון/י', FEMALE)).toBe('כווני');
-  expect(genderize('כוון/י', MALE)).toBe('כוון');
+  expect(genderize('כוון/י', Mode.FEMALE)).toBe('כווני');
+  expect(genderize('כוון/י', Mode.MALE)).toBe('כוון');
 
-  expect(genderize('תכוונ/י', FEMALE)).toBe('תכווני');
-  expect(genderize('תכוונ/י', MALE)).toBe('תכוון');
+  expect(genderize('תכוונ/י', Mode.FEMALE)).toBe('תכווני');
+  expect(genderize('תכוונ/י', Mode.MALE)).toBe('תכוון');
 
-  expect(genderize('צאו/נה', FEMALE)).toBe('צאנה');
-  expect(genderize('צאו/נה', MALE)).toBe('צאו');
+  expect(genderize('צאו/נה', Mode.FEMALE)).toBe('צאנה');
+  expect(genderize('צאו/נה', Mode.MALE)).toBe('צאו');
 
-  expect(genderize('צאו/תצאנה', FEMALE)).toBe('תצאנה');
-  expect(genderize('צאו/תצאנה', MALE)).toBe('צאו');
+  expect(genderize('צאו/תצאנה', Mode.FEMALE)).toBe('תצאנה');
+  expect(genderize('צאו/תצאנה', Mode.MALE)).toBe('צאו');
 
-  expect(genderize('יספרו/תספרנה', FEMALE)).toBe('תספרנה');
-  expect(genderize('יספרו/תספרנה', MALE)).toBe('יספרו');
+  expect(genderize('יספרו/תספרנה', Mode.FEMALE)).toBe('תספרנה');
+  expect(genderize('יספרו/תספרנה', Mode.MALE)).toBe('יספרו');
 
-  expect(genderize('תלכו/נה', FEMALE)).toBe('תלכנה');
-  expect(genderize('תלכו/נה', MALE)).toBe('תלכו');
+  expect(genderize('תלכו/נה', Mode.FEMALE)).toBe('תלכנה');
+  expect(genderize('תלכו/נה', Mode.MALE)).toBe('תלכו');
 
-  expect(genderize('תדרכו/נה', FEMALE)).toBe('תדרכנה');
-  expect(genderize('תדרכו/נה', MALE)).toBe('תדרכו');
+  expect(genderize('תדרכו/נה', Mode.FEMALE)).toBe('תדרכנה');
+  expect(genderize('תדרכו/נה', Mode.MALE)).toBe('תדרכו');
 
-  expect(genderize('הלבישו/נה', FEMALE)).toBe('הלבשנה');
-  expect(genderize('הלבישו/נה', MALE)).toBe('הלבישו');
+  expect(genderize('הלבישו/נה', Mode.FEMALE)).toBe('הלבשנה');
+  expect(genderize('הלבישו/נה', Mode.MALE)).toBe('הלבישו');
 
-  expect(genderize('החזיקו/נה', FEMALE)).toBe('החזקנה');
-  expect(genderize('החזיקו/נה', MALE)).toBe('החזיקו');
+  expect(genderize('החזיקו/נה', Mode.FEMALE)).toBe('החזקנה');
+  expect(genderize('החזיקו/נה', Mode.MALE)).toBe('החזיקו');
 
-  expect(genderize('הביאו/נה', FEMALE)).toBe('הבאנה');
-  expect(genderize('הביאו/נה', MALE)).toBe('הביאו');
+  expect(genderize('הביאו/נה', Mode.FEMALE)).toBe('הבאנה');
+  expect(genderize('הביאו/נה', Mode.MALE)).toBe('הביאו');
 
-  expect(genderize('החטיפו/נה', FEMALE)).toBe('החטפנה');
-  expect(genderize('החטיפו/נה', MALE)).toBe('החטיפו');
+  expect(genderize('החטיפו/נה', Mode.FEMALE)).toBe('החטפנה');
+  expect(genderize('החטיפו/נה', Mode.MALE)).toBe('החטיפו');
 
-  expect(genderize('הניחו/נה', FEMALE)).toBe('הנחנה');
-  expect(genderize('הניחו/נה', MALE)).toBe('הניחו');
+  expect(genderize('הניחו/נה', Mode.FEMALE)).toBe('הנחנה');
+  expect(genderize('הניחו/נה', Mode.MALE)).toBe('הניחו');
 
-  expect(genderize('השתיקו/נה', FEMALE)).toBe('השתקנה');
-  expect(genderize('השתיקו/נה', MALE)).toBe('השתיקו');
+  expect(genderize('השתיקו/נה', Mode.FEMALE)).toBe('השתקנה');
+  expect(genderize('השתיקו/נה', Mode.MALE)).toBe('השתיקו');
 
-  expect(genderize('העיפו/נה', FEMALE)).toBe('העפנה');
-  expect(genderize('העיפו/נה', MALE)).toBe('העיפו');
+  expect(genderize('העיפו/נה', Mode.FEMALE)).toBe('העפנה');
+  expect(genderize('העיפו/נה', Mode.MALE)).toBe('העיפו');
 
-  expect(genderize('הניחו/נה', FEMALE)).toBe('הנחנה');
-  expect(genderize('הניחו/נה', MALE)).toBe('הניחו');
+  expect(genderize('הניחו/נה', Mode.FEMALE)).toBe('הנחנה');
+  expect(genderize('הניחו/נה', Mode.MALE)).toBe('הניחו');
 
-  expect(genderize('רקדו/נה', FEMALE)).toBe('רקדנה');
-  expect(genderize('רקדו/נה', MALE)).toBe('רקדו');
+  expect(genderize('רקדו/נה', Mode.FEMALE)).toBe('רקדנה');
+  expect(genderize('רקדו/נה', Mode.MALE)).toBe('רקדו');
 
   // Third person
-  expect(genderize('לו/ה', FEMALE)).toBe('לה');
-  expect(genderize('לו/ה', MALE)).toBe('לו');
-  expect(genderize('לה/ו', FEMALE)).toBe('לה');
-  expect(genderize('לה/ו', MALE)).toBe('לו');
-  expect(genderize('לו/לה', FEMALE)).toBe('לה');
-  expect(genderize('לו/לה', MALE)).toBe('לו');
-  expect(genderize('לה/לו', FEMALE)).toBe('לה');
-  expect(genderize('לה/לו', MALE)).toBe('לו');
+  expect(genderize('לו/ה', Mode.FEMALE)).toBe('לה');
+  expect(genderize('לו/ה', Mode.MALE)).toBe('לו');
+  expect(genderize('לה/ו', Mode.FEMALE)).toBe('לה');
+  expect(genderize('לה/ו', Mode.MALE)).toBe('לו');
+  expect(genderize('לו/לה', Mode.FEMALE)).toBe('לה');
+  expect(genderize('לו/לה', Mode.MALE)).toBe('לו');
+  expect(genderize('לה/לו', Mode.FEMALE)).toBe('לה');
+  expect(genderize('לה/לו', Mode.MALE)).toBe('לו');
 
-  expect(genderize('עשה/תה', FEMALE)).toBe('עשתה');
-  expect(genderize('עשה/תה', MALE)).toBe('עשה');
+  expect(genderize('עשה/תה', Mode.FEMALE)).toBe('עשתה');
+  expect(genderize('עשה/תה', Mode.MALE)).toBe('עשה');
 
-  expect(genderize('בכה/תה', FEMALE)).toBe('בכתה');
-  expect(genderize('בכה/תה', MALE)).toBe('בכה');
+  expect(genderize('בכה/תה', Mode.FEMALE)).toBe('בכתה');
+  expect(genderize('בכה/תה', Mode.MALE)).toBe('בכה');
 
-  expect(genderize('רצ/תה', FEMALE)).toBe('רצתה');
-  expect(genderize('רצ/תה', MALE)).toBe('רצה');
+  expect(genderize('רצ/תה', Mode.FEMALE)).toBe('רצתה');
+  expect(genderize('רצ/תה', Mode.MALE)).toBe('רצה');
 
-  expect(genderize('כפ/תה', FEMALE)).toBe('כפתה');
-  expect(genderize('כפ/תה', MALE)).toBe('כפה');
+  expect(genderize('כפ/תה', Mode.FEMALE)).toBe('כפתה');
+  expect(genderize('כפ/תה', Mode.MALE)).toBe('כפה');
 
-  expect(genderize('הלווה/תה', FEMALE)).toBe('הלוותה');
-  expect(genderize('הלווה/תה', MALE)).toBe('הלווה');
+  expect(genderize('הלווה/תה', Mode.FEMALE)).toBe('הלוותה');
+  expect(genderize('הלווה/תה', Mode.MALE)).toBe('הלווה');
 
-  expect(genderize('יקירי/תי', FEMALE)).toBe('יקירתי');
-  expect(genderize('יקירי/תי', MALE)).toBe('יקירי');
+  expect(genderize('יקירי/תי', Mode.FEMALE)).toBe('יקירתי');
+  expect(genderize('יקירי/תי', Mode.MALE)).toBe('יקירי');
 
-  expect(genderize('אהובי/תי', FEMALE)).toBe('אהובתי');
-  expect(genderize('אהובי/תי', MALE)).toBe('אהובי');
+  expect(genderize('אהובי/תי', Mode.FEMALE)).toBe('אהובתי');
+  expect(genderize('אהובי/תי', Mode.MALE)).toBe('אהובי');
 
-  expect(genderize('דודי/תי', FEMALE)).toBe('דודתי');
-  expect(genderize('דודי/תי', MALE)).toBe('דודי');
+  expect(genderize('דודי/תי', Mode.FEMALE)).toBe('דודתי');
+  expect(genderize('דודי/תי', Mode.MALE)).toBe('דודי');
 
-  expect(genderize('שלו/ה', FEMALE)).toBe('שלה');
-  expect(genderize('שלו/ה', MALE)).toBe('שלו');
+  expect(genderize('שלו/ה', Mode.FEMALE)).toBe('שלה');
+  expect(genderize('שלו/ה', Mode.MALE)).toBe('שלו');
 
-  expect(genderize('מחקריו/ה', FEMALE)).toBe('מחקריה');
-  expect(genderize('מחקריו/ה', MALE)).toBe('מחקריו');
-  expect(genderize('מחקריו/יה', FEMALE)).toBe('מחקריה');
-  expect(genderize('מחקריו/יה', MALE)).toBe('מחקריו');
+  expect(genderize('מחקריו/ה', Mode.FEMALE)).toBe('מחקריה');
+  expect(genderize('מחקריו/ה', Mode.MALE)).toBe('מחקריו');
+  expect(genderize('מחקריו/יה', Mode.FEMALE)).toBe('מחקריה');
+  expect(genderize('מחקריו/יה', Mode.MALE)).toBe('מחקריו');
 
-  expect(genderize('מועמדותו/ה', FEMALE)).toBe('מועמדותה');
-  expect(genderize('מועמדותו/ה', MALE)).toBe('מועמדותו');
+  expect(genderize('מועמדותו/ה', Mode.FEMALE)).toBe('מועמדותה');
+  expect(genderize('מועמדותו/ה', Mode.MALE)).toBe('מועמדותו');
 
-  expect(genderize('מועמדותן/ם', FEMALE)).toBe('מועמדותן');
-  expect(genderize('מועמדותן/ם', MALE)).toBe('מועמדותם');
+  expect(genderize('מועמדותן/ם', Mode.FEMALE)).toBe('מועמדותן');
+  expect(genderize('מועמדותן/ם', Mode.MALE)).toBe('מועמדותם');
 
-  expect(genderize('שלכם/ן', FEMALE)).toBe('שלכן');
-  expect(genderize('שלכם/ן', MALE)).toBe('שלכם');
-  expect(genderize('שלכן/ם', FEMALE)).toBe('שלכן');
-  expect(genderize('שלכן/ם', MALE)).toBe('שלכם');
+  expect(genderize('שלכם/ן', Mode.FEMALE)).toBe('שלכן');
+  expect(genderize('שלכם/ן', Mode.MALE)).toBe('שלכם');
+  expect(genderize('שלכן/ם', Mode.FEMALE)).toBe('שלכן');
+  expect(genderize('שלכן/ם', Mode.MALE)).toBe('שלכם');
 
-  expect(genderize('מחקריהם/ן', FEMALE)).toBe('מחקריהן');
-  expect(genderize('מחקריהם/ן', MALE)).toBe('מחקריהם');
-  expect(genderize('מחקריהן/ם', FEMALE)).toBe('מחקריהן');
-  expect(genderize('מחקריהן/ם', MALE)).toBe('מחקריהם');
+  expect(genderize('מחקריהם/ן', Mode.FEMALE)).toBe('מחקריהן');
+  expect(genderize('מחקריהם/ן', Mode.MALE)).toBe('מחקריהם');
+  expect(genderize('מחקריהן/ם', Mode.FEMALE)).toBe('מחקריהן');
+  expect(genderize('מחקריהן/ם', Mode.MALE)).toBe('מחקריהם');
 
-  expect(genderize('בגללו/ה', FEMALE)).toBe('בגללה');
-  expect(genderize('בגללו/ה', MALE)).toBe('בגללו');
+  expect(genderize('בגללו/ה', Mode.FEMALE)).toBe('בגללה');
+  expect(genderize('בגללו/ה', Mode.MALE)).toBe('בגללו');
 
-  expect(genderize('מינו/ה', FEMALE)).toBe('מינה');
-  expect(genderize('מינו/ה', MALE)).toBe('מינו');
+  expect(genderize('מינו/ה', Mode.FEMALE)).toBe('מינה');
+  expect(genderize('מינו/ה', Mode.MALE)).toBe('מינו');
 
-  expect(genderize('לגביו/ה', FEMALE)).toBe('לגביה');
-  expect(genderize('לגביו/ה', MALE)).toBe('לגביו');
+  expect(genderize('לגביו/ה', Mode.FEMALE)).toBe('לגביה');
+  expect(genderize('לגביו/ה', Mode.MALE)).toBe('לגביו');
 
   // Singular
-  expect(genderize('איש/ה', FEMALE)).toBe('אישה');
-  expect(genderize('איש/ה', MALE)).toBe('איש');
-  expect(genderize('איש/ת', FEMALE)).toBe('אשת');
-  expect(genderize('איש/ת', MALE)).toBe('איש');
+  expect(genderize('איש/ה', Mode.FEMALE)).toBe('אישה');
+  expect(genderize('איש/ה', Mode.MALE)).toBe('איש');
+  expect(genderize('איש/ת', Mode.FEMALE)).toBe('אשת');
+  expect(genderize('איש/ת', Mode.MALE)).toBe('איש');
 
-  expect(genderize('חרוץ/ה', FEMALE)).toBe('חרוצה');
-  expect(genderize('חרוץ/ה', MALE)).toBe('חרוץ');
+  expect(genderize('חרוץ/ה', Mode.FEMALE)).toBe('חרוצה');
+  expect(genderize('חרוץ/ה', Mode.MALE)).toBe('חרוץ');
 
-  expect(genderize('חרוץ/צה', FEMALE)).toBe('חרוצה');
-  expect(genderize('חרוץ/צה', MALE)).toBe('חרוץ');
-  expect(genderize('מוכן/נה', FEMALE)).toBe('מוכנה');
-  expect(genderize('מוכן/נה', MALE)).toBe('מוכן');
+  expect(genderize('חרוץ/צה', Mode.FEMALE)).toBe('חרוצה');
+  expect(genderize('חרוץ/צה', Mode.MALE)).toBe('חרוץ');
+  expect(genderize('מוכן/נה', Mode.FEMALE)).toBe('מוכנה');
+  expect(genderize('מוכן/נה', Mode.MALE)).toBe('מוכן');
 
-  expect(genderize('גבוה/ה', FEMALE)).toBe('גבוהה');
-  expect(genderize('גבוה/ה', MALE)).toBe('גבוה');
+  expect(genderize('גבוה/ה', Mode.FEMALE)).toBe('גבוהה');
+  expect(genderize('גבוה/ה', Mode.MALE)).toBe('גבוה');
 
-  expect(genderize('סטודנט/ית', FEMALE)).toBe('סטודנטית');
-  expect(genderize('סטודנט/ית', MALE)).toBe('סטודנט');
+  expect(genderize('סטודנט/ית', Mode.FEMALE)).toBe('סטודנטית');
+  expect(genderize('סטודנט/ית', Mode.MALE)).toBe('סטודנט');
 
-  expect(genderize('יזמ/ית', FEMALE)).toBe('יזמית');
-  expect(genderize('יזמ/ית', MALE)).toBe('יזם');
-  expect(genderize('יזם/ית', FEMALE)).toBe('יזמית');
-  expect(genderize('יזם/ית', MALE)).toBe('יזם');
-  expect(genderize('יזמ/ת', FEMALE)).toBe('יזמת');
-  expect(genderize('יזמ/ת', MALE)).toBe('יזם');
-  expect(genderize('יזם/ת', FEMALE)).toBe('יזמת');
-  expect(genderize('יזם/ת', MALE)).toBe('יזם');
+  expect(genderize('יזמ/ית', Mode.FEMALE)).toBe('יזמית');
+  expect(genderize('יזמ/ית', Mode.MALE)).toBe('יזם');
+  expect(genderize('יזם/ית', Mode.FEMALE)).toBe('יזמית');
+  expect(genderize('יזם/ית', Mode.MALE)).toBe('יזם');
+  expect(genderize('יזמ/ת', Mode.FEMALE)).toBe('יזמת');
+  expect(genderize('יזמ/ת', Mode.MALE)).toBe('יזם');
+  expect(genderize('יזם/ת', Mode.FEMALE)).toBe('יזמת');
+  expect(genderize('יזם/ת', Mode.MALE)).toBe('יזם');
 
-  expect(genderize('מומחה/ית', FEMALE)).toBe('מומחית');
-  expect(genderize('מומחה/ית', MALE)).toBe('מומחה');
+  expect(genderize('מומחה/ית', Mode.FEMALE)).toBe('מומחית');
+  expect(genderize('מומחה/ית', Mode.MALE)).toBe('מומחה');
 
-  expect(genderize('חוקר/ת', FEMALE)).toBe('חוקרת');
-  expect(genderize('חוקר/ת', MALE)).toBe('חוקר');
+  expect(genderize('חוקר/ת', Mode.FEMALE)).toBe('חוקרת');
+  expect(genderize('חוקר/ת', Mode.MALE)).toBe('חוקר');
 
-  expect(genderize('חבר/ה', FEMALE)).toBe('חברה');
-  expect(genderize('חבר/ה', MALE)).toBe('חבר');
+  expect(genderize('חבר/ה', Mode.FEMALE)).toBe('חברה');
+  expect(genderize('חבר/ה', Mode.MALE)).toBe('חבר');
 
-  expect(genderize('חבר/ת סגל', FEMALE)).toBe('חברת סגל');
-  expect(genderize('חבר/ת סגל', MALE)).toBe('חבר סגל');
+  expect(genderize('חבר/ת סגל', Mode.FEMALE)).toBe('חברת סגל');
+  expect(genderize('חבר/ת סגל', Mode.MALE)).toBe('חבר סגל');
 
-  expect(genderize('רואה/ת חשבון', FEMALE)).toBe('רואת חשבון');
-  expect(genderize('רואה/ת חשבון', MALE)).toBe('רואה חשבון');
+  expect(genderize('רואה/ת חשבון', Mode.FEMALE)).toBe('רואת חשבון');
+  expect(genderize('רואה/ת חשבון', Mode.MALE)).toBe('רואה חשבון');
 
-  expect(genderize('מנקה/ת בתים', FEMALE)).toBe('מנקת בתים');
-  expect(genderize('מנקה/ת בתים', MALE)).toBe('מנקה בתים');
+  expect(genderize('מנקה/ת בתים', Mode.FEMALE)).toBe('מנקת בתים');
+  expect(genderize('מנקה/ת בתים', Mode.MALE)).toBe('מנקה בתים');
 
-  expect(genderize('מורה פרטי/ת', FEMALE)).toBe('מורה פרטית');
-  expect(genderize('מורה פרטי/ת', MALE)).toBe('מורה פרטי');
+  expect(genderize('מורה פרטי/ת', Mode.FEMALE)).toBe('מורה פרטית');
+  expect(genderize('מורה פרטי/ת', Mode.MALE)).toBe('מורה פרטי');
 
-  expect(genderize('עוזר/ת אישי/ת', FEMALE)).toBe('עוזרת אישית');
-  expect(genderize('עוזר/ת אישי/ת', MALE)).toBe('עוזר אישי');
+  expect(genderize('עוזר/ת אישי/ת', Mode.FEMALE)).toBe('עוזרת אישית');
+  expect(genderize('עוזר/ת אישי/ת', Mode.MALE)).toBe('עוזר אישי');
 
-  expect(genderize('מכונאי/ת', FEMALE)).toBe('מכונאית');
-  expect(genderize('מכונאי/ת', MALE)).toBe('מכונאי');
+  expect(genderize('מכונאי/ת', Mode.FEMALE)).toBe('מכונאית');
+  expect(genderize('מכונאי/ת', Mode.MALE)).toBe('מכונאי');
 
-  expect(genderize('שומר/ת', FEMALE)).toBe('שומרת');
-  expect(genderize('שומר/ת', MALE)).toBe('שומר');
+  expect(genderize('שומר/ת', Mode.FEMALE)).toBe('שומרת');
+  expect(genderize('שומר/ת', Mode.MALE)).toBe('שומר');
 
-  expect(genderize('צלמ/ת', FEMALE)).toBe('צלמת');
-  expect(genderize('צלמ/ת', MALE)).toBe('צלם');
-  expect(genderize('צלם/ת', FEMALE)).toBe('צלמת');
-  expect(genderize('צלם/ת', MALE)).toBe('צלם');
+  expect(genderize('צלמ/ת', Mode.FEMALE)).toBe('צלמת');
+  expect(genderize('צלמ/ת', Mode.MALE)).toBe('צלם');
+  expect(genderize('צלם/ת', Mode.FEMALE)).toBe('צלמת');
+  expect(genderize('צלם/ת', Mode.MALE)).toBe('צלם');
 
-  expect(genderize('ישראלי/ת', FEMALE)).toBe('ישראלית');
-  expect(genderize('ישראלי/ת', MALE)).toBe('ישראלי');
+  expect(genderize('ישראלי/ת', Mode.FEMALE)).toBe('ישראלית');
+  expect(genderize('ישראלי/ת', Mode.MALE)).toBe('ישראלי');
 
-  expect(genderize('ארגנטינאי/ת', FEMALE)).toBe('ארגנטינאית');
-  expect(genderize('ארגנטינאי/ת', MALE)).toBe('ארגנטינאי');
+  expect(genderize('ארגנטינאי/ת', Mode.FEMALE)).toBe('ארגנטינאית');
+  expect(genderize('ארגנטינאי/ת', Mode.MALE)).toBe('ארגנטינאי');
 
-  expect(genderize('צרפתי/ת', FEMALE)).toBe('צרפתית');
-  expect(genderize('צרפתי/ת', MALE)).toBe('צרפתי');
+  expect(genderize('צרפתי/ת', Mode.FEMALE)).toBe('צרפתית');
+  expect(genderize('צרפתי/ת', Mode.MALE)).toBe('צרפתי');
 
-  expect(genderize('ברברי/ת', FEMALE)).toBe('ברברית');
-  expect(genderize('ברברי/ת', MALE)).toBe('ברברי');
-  expect(genderize('ברבארי/ת', FEMALE)).toBe('ברבארית');
-  expect(genderize('ברבארי/ת', MALE)).toBe('ברבארי');
+  expect(genderize('ברברי/ת', Mode.FEMALE)).toBe('ברברית');
+  expect(genderize('ברברי/ת', Mode.MALE)).toBe('ברברי');
+  expect(genderize('ברבארי/ת', Mode.FEMALE)).toBe('ברבארית');
+  expect(genderize('ברבארי/ת', Mode.MALE)).toBe('ברבארי');
 
-  expect(genderize('יהודי/ת', FEMALE)).toBe('יהודית');
-  expect(genderize('יהודי/ת', MALE)).toBe('יהודי');
-  expect(genderize('יהודי/ה', FEMALE)).toBe('יהודיה');
-  expect(genderize('יהודי/ה', MALE)).toBe('יהודי');
+  expect(genderize('יהודי/ת', Mode.FEMALE)).toBe('יהודית');
+  expect(genderize('יהודי/ת', Mode.MALE)).toBe('יהודי');
+  expect(genderize('יהודי/ה', Mode.FEMALE)).toBe('יהודיה');
+  expect(genderize('יהודי/ה', Mode.MALE)).toBe('יהודי');
 
   // Plural
-  expect(genderize('חיים/ות', FEMALE)).toBe('חיות');
-  expect(genderize('חיים/ות', MALE)).toBe('חיים');
+  expect(genderize('חיים/ות', Mode.FEMALE)).toBe('חיות');
+  expect(genderize('חיים/ות', Mode.MALE)).toBe('חיים');
 
-  expect(genderize('טריים/ות', FEMALE)).toBe('טריות');
-  expect(genderize('טריים/ות', MALE)).toBe('טריים');
+  expect(genderize('טריים/ות', Mode.FEMALE)).toBe('טריות');
+  expect(genderize('טריים/ות', Mode.MALE)).toBe('טריים');
 
-  expect(genderize('פנויים/ות', FEMALE)).toBe('פנויות');
-  expect(genderize('פנויים/ות', MALE)).toBe('פנויים');
+  expect(genderize('פנויים/ות', Mode.FEMALE)).toBe('פנויות');
+  expect(genderize('פנויים/ות', Mode.MALE)).toBe('פנויים');
 
-  expect(genderize('ערביים/ות', FEMALE)).toBe('ערביות');
-  expect(genderize('ערביים/ות', MALE)).toBe('ערביים');
+  expect(genderize('ערביים/ות', Mode.FEMALE)).toBe('ערביות');
+  expect(genderize('ערביים/ות', Mode.MALE)).toBe('ערביים');
 
-  expect(genderize('סטודנטים/ות', FEMALE)).toBe('סטודנטיות');
-  expect(genderize('סטודנטים/ות', MALE)).toBe('סטודנטים');
-  expect(genderize('סטודנטים/יות', FEMALE)).toBe('סטודנטיות');
-  expect(genderize('סטודנטים/יות', MALE)).toBe('סטודנטים');
+  expect(genderize('סטודנטים/ות', Mode.FEMALE)).toBe('סטודנטיות');
+  expect(genderize('סטודנטים/ות', Mode.MALE)).toBe('סטודנטים');
+  expect(genderize('סטודנטים/יות', Mode.FEMALE)).toBe('סטודנטיות');
+  expect(genderize('סטודנטים/יות', Mode.MALE)).toBe('סטודנטים');
 
-  expect(genderize('מאסטרים/ות', FEMALE)).toBe('מאסטריות');
-  expect(genderize('מאסטרים/ות', MALE)).toBe('מאסטרים');
+  expect(genderize('מאסטרים/ות', Mode.FEMALE)).toBe('מאסטריות');
+  expect(genderize('מאסטרים/ות', Mode.MALE)).toBe('מאסטרים');
 
-  expect(genderize('יזמים/ות', FEMALE)).toBe('יזמיות');
-  expect(genderize('יזמים/ות', MALE)).toBe('יזמים');
+  expect(genderize('יזמים/ות', Mode.FEMALE)).toBe('יזמיות');
+  expect(genderize('יזמים/ות', Mode.MALE)).toBe('יזמים');
 
-  expect(genderize('מומחים/ות', FEMALE)).toBe('מומחיות');
-  expect(genderize('מומחים/ות', MALE)).toBe('מומחים');
+  expect(genderize('מומחים/ות', Mode.FEMALE)).toBe('מומחיות');
+  expect(genderize('מומחים/ות', Mode.MALE)).toBe('מומחים');
 
-  expect(genderize('עורכים/ות', FEMALE)).toBe('עורכות');
-  expect(genderize('עורכים/ות', MALE)).toBe('עורכים');
+  expect(genderize('עורכים/ות', Mode.FEMALE)).toBe('עורכות');
+  expect(genderize('עורכים/ות', Mode.MALE)).toBe('עורכים');
 
-  expect(genderize('שופטים/ות', FEMALE)).toBe('שופטות');
-  expect(genderize('שופטים/ות', MALE)).toBe('שופטים');
+  expect(genderize('שופטים/ות', Mode.FEMALE)).toBe('שופטות');
+  expect(genderize('שופטים/ות', Mode.MALE)).toBe('שופטים');
 
-  expect(genderize('בעלות/י', FEMALE)).toBe('בעלות');
-  expect(genderize('בעלות/י', MALE)).toBe('בעלי');
-  expect(genderize('בעלי/ות', FEMALE)).toBe('בעלות');
-  expect(genderize('בעלי/ות', MALE)).toBe('בעלי');
-  expect(genderize('בעלים/ות', FEMALE)).toBe('בעלות');
-  expect(genderize('בעלים/ות', MALE)).toBe('בעלים');
+  expect(genderize('בעלות/י', Mode.FEMALE)).toBe('בעלות');
+  expect(genderize('בעלות/י', Mode.MALE)).toBe('בעלי');
+  expect(genderize('בעלי/ות', Mode.FEMALE)).toBe('בעלות');
+  expect(genderize('בעלי/ות', Mode.MALE)).toBe('בעלי');
+  expect(genderize('בעלים/ות', Mode.FEMALE)).toBe('בעלות');
+  expect(genderize('בעלים/ות', Mode.MALE)).toBe('בעלים');
 
-  expect(genderize('מעצבי/ות־על', FEMALE)).toBe('מעצבות־על');
-  expect(genderize('מעצבי/ות־על', MALE)).toBe('מעצבי־על');
+  expect(genderize('מעצבי/ות־על', Mode.FEMALE)).toBe('מעצבות־על');
+  expect(genderize('מעצבי/ות־על', Mode.MALE)).toBe('מעצבי־על');
 
-  expect(genderize('רואי/ות חשבון', FEMALE)).toBe('רואות חשבון');
-  expect(genderize('רואי/ות חשבון', MALE)).toBe('רואי חשבון');
+  expect(genderize('רואי/ות חשבון', Mode.FEMALE)).toBe('רואות חשבון');
+  expect(genderize('רואי/ות חשבון', Mode.MALE)).toBe('רואי חשבון');
 
-  expect(genderize('מנקי/ות בתים', FEMALE)).toBe('מנקות בתים');
-  expect(genderize('מנקי/ות בתים', MALE)).toBe('מנקי בתים');
+  expect(genderize('מנקי/ות בתים', Mode.FEMALE)).toBe('מנקות בתים');
+  expect(genderize('מנקי/ות בתים', Mode.MALE)).toBe('מנקי בתים');
 
-  expect(genderize('מורים/ות פרטיים/ות', FEMALE)).toBe('מורות פרטיות');
-  expect(genderize('מורים/ות פרטיים/ות', MALE)).toBe('מורים פרטיים');
+  expect(genderize('מורים/ות פרטיים/ות', Mode.FEMALE)).toBe('מורות פרטיות');
+  expect(genderize('מורים/ות פרטיים/ות', Mode.MALE)).toBe('מורים פרטיים');
 
-  expect(genderize('עוזרים/ות אישיים/ות', FEMALE)).toBe('עוזרות אישיות');
-  expect(genderize('עוזרים/ות אישיים/ות', MALE)).toBe('עוזרים אישיים');
+  expect(genderize('עוזרים/ות אישיים/ות', Mode.FEMALE)).toBe('עוזרות אישיות');
+  expect(genderize('עוזרים/ות אישיים/ות', Mode.MALE)).toBe('עוזרים אישיים');
 
-  expect(genderize('עוזרות/ים אישיות/ים', FEMALE)).toBe('עוזרות אישיות');
-  expect(genderize('עוזרות/ים אישיות/ים', MALE)).toBe('עוזרים אישיים');
+  expect(genderize('עוזרות/ים אישיות/ים', Mode.FEMALE)).toBe('עוזרות אישיות');
+  expect(genderize('עוזרות/ים אישיות/ים', Mode.MALE)).toBe('עוזרים אישיים');
 
-  expect(genderize('מכונאים/ות', FEMALE)).toBe('מכונאיות');
-  expect(genderize('מכונאים/ות', MALE)).toBe('מכונאים');
+  expect(genderize('מכונאים/ות', Mode.FEMALE)).toBe('מכונאיות');
+  expect(genderize('מכונאים/ות', Mode.MALE)).toBe('מכונאים');
 
-  expect(genderize('שומרים/ות', FEMALE)).toBe('שומרות');
-  expect(genderize('שומרים/ות', MALE)).toBe('שומרים');
+  expect(genderize('שומרים/ות', Mode.FEMALE)).toBe('שומרות');
+  expect(genderize('שומרים/ות', Mode.MALE)).toBe('שומרים');
 
-  expect(genderize('צלמים/ות', FEMALE)).toBe('צלמות');
-  expect(genderize('צלמים/ות', MALE)).toBe('צלמים');
-  expect(genderize('צלמים/יות', FEMALE)).toBe('צלמיות');
-  expect(genderize('צלמים/יות', MALE)).toBe('צלמים');
+  expect(genderize('צלמים/ות', Mode.FEMALE)).toBe('צלמות');
+  expect(genderize('צלמים/ות', Mode.MALE)).toBe('צלמים');
+  expect(genderize('צלמים/יות', Mode.FEMALE)).toBe('צלמיות');
+  expect(genderize('צלמים/יות', Mode.MALE)).toBe('צלמים');
 
-  expect(genderize('ישראלים/ות', FEMALE)).toBe('ישראליות');
-  expect(genderize('ישראלים/ות', MALE)).toBe('ישראלים');
-  expect(genderize('ישראליים/ות', FEMALE)).toBe('ישראליות');
-  expect(genderize('ישראליים/ות', MALE)).toBe('ישראליים');
+  expect(genderize('ישראלים/ות', Mode.FEMALE)).toBe('ישראליות');
+  expect(genderize('ישראלים/ות', Mode.MALE)).toBe('ישראלים');
+  expect(genderize('ישראליים/ות', Mode.FEMALE)).toBe('ישראליות');
+  expect(genderize('ישראליים/ות', Mode.MALE)).toBe('ישראליים');
 
-  expect(genderize('ברברים/ות', FEMALE)).toBe('ברבריות');
-  expect(genderize('ברברים/ות', MALE)).toBe('ברברים');
-  expect(genderize('ברבארים/ות', FEMALE)).toBe('ברבאריות');
-  expect(genderize('ברבארים/ות', MALE)).toBe('ברבארים');
+  expect(genderize('ברברים/ות', Mode.FEMALE)).toBe('ברבריות');
+  expect(genderize('ברברים/ות', Mode.MALE)).toBe('ברברים');
+  expect(genderize('ברבארים/ות', Mode.FEMALE)).toBe('ברבאריות');
+  expect(genderize('ברבארים/ות', Mode.MALE)).toBe('ברבארים');
 
-  expect(genderize('סחים/ות', FEMALE)).toBe('סחיות');
-  expect(genderize('סחים/ות', MALE)).toBe('סחים');
-  expect(genderize('סאחים/ות', FEMALE)).toBe('סאחיות');
-  expect(genderize('סאחים/ות', MALE)).toBe('סאחים');
+  expect(genderize('סחים/ות', Mode.FEMALE)).toBe('סחיות');
+  expect(genderize('סחים/ות', Mode.MALE)).toBe('סחים');
+  expect(genderize('סאחים/ות', Mode.FEMALE)).toBe('סאחיות');
+  expect(genderize('סאחים/ות', Mode.MALE)).toBe('סאחים');
 
-  expect(genderize('ח"כים/ות', FEMALE)).toBe('ח"כיות');
-  expect(genderize('ח"כים/ות', MALE)).toBe('ח"כים');
+  expect(genderize('ח"כים/ות', Mode.FEMALE)).toBe('ח"כיות');
+  expect(genderize('ח"כים/ות', Mode.MALE)).toBe('ח"כים');
 
-  expect(genderize('משת”פים/ות', FEMALE)).toBe('משת”פיות');
-  expect(genderize('משת”פים/ות', MALE)).toBe('משת”פים');
+  expect(genderize('משת”פים/ות', Mode.FEMALE)).toBe('משת”פיות');
+  expect(genderize('משת”פים/ות', Mode.MALE)).toBe('משת”פים');
 
-  expect(genderize('כשהגננים/ות', FEMALE)).toBe('כשהגננות');
-  expect(genderize('כשהגננים/ות', MALE)).toBe('כשהגננים');
+  expect(genderize('כשהגננים/ות', Mode.FEMALE)).toBe('כשהגננות');
+  expect(genderize('כשהגננים/ות', Mode.MALE)).toBe('כשהגננים');
 
-  expect(genderize('תל אביבים/ות', FEMALE)).toBe('תל אביביות');
-  expect(genderize('תל אביבים/ות', MALE)).toBe('תל אביבים');
-  expect(genderize('תל־אביבים/ות', FEMALE)).toBe('תל־אביביות');
-  expect(genderize('תל־אביבים/ות', MALE)).toBe('תל־אביבים');
+  expect(genderize('תל אביבים/ות', Mode.FEMALE)).toBe('תל אביביות');
+  expect(genderize('תל אביבים/ות', Mode.MALE)).toBe('תל אביבים');
+  expect(genderize('תל־אביבים/ות', Mode.FEMALE)).toBe('תל־אביביות');
+  expect(genderize('תל־אביבים/ות', Mode.MALE)).toBe('תל־אביבים');
 
-  expect(genderize('ברברים/ות', FEMALE)).toBe('ברבריות');
-  expect(genderize('ברברים/ות', MALE)).toBe('ברברים');
-  expect(genderize('ברבארים/ות', FEMALE)).toBe('ברבאריות');
-  expect(genderize('ברבארים/ות', MALE)).toBe('ברבארים');
+  expect(genderize('ברברים/ות', Mode.FEMALE)).toBe('ברבריות');
+  expect(genderize('ברברים/ות', Mode.MALE)).toBe('ברברים');
+  expect(genderize('ברבארים/ות', Mode.FEMALE)).toBe('ברבאריות');
+  expect(genderize('ברבארים/ות', Mode.MALE)).toBe('ברבארים');
 
-  expect(genderize('סחים/ות', FEMALE)).toBe('סחיות');
-  expect(genderize('סחים/ות', MALE)).toBe('סחים');
-  expect(genderize('סאחים/ות', FEMALE)).toBe('סאחיות');
-  expect(genderize('סאחים/ות', MALE)).toBe('סאחים');
+  expect(genderize('סחים/ות', Mode.FEMALE)).toBe('סחיות');
+  expect(genderize('סחים/ות', Mode.MALE)).toBe('סחים');
+  expect(genderize('סאחים/ות', Mode.FEMALE)).toBe('סאחיות');
+  expect(genderize('סאחים/ות', Mode.MALE)).toBe('סאחים');
 
-  expect(genderize('ח"כים/ות', FEMALE)).toBe('ח"כיות');
-  expect(genderize('ח"כים/ות', MALE)).toBe('ח"כים');
+  expect(genderize('ח"כים/ות', Mode.FEMALE)).toBe('ח"כיות');
+  expect(genderize('ח"כים/ות', Mode.MALE)).toBe('ח"כים');
 
-  expect(genderize('משת”פים/ות', FEMALE)).toBe('משת”פיות');
-  expect(genderize('משת”פים/ות', MALE)).toBe('משת”פים');
+  expect(genderize('משת”פים/ות', Mode.FEMALE)).toBe('משת”פיות');
+  expect(genderize('משת”פים/ות', Mode.MALE)).toBe('משת”פים');
 
-  expect(genderize('כשהגננים/ות', FEMALE)).toBe('כשהגננות');
-  expect(genderize('כשהגננים/ות', MALE)).toBe('כשהגננים');
+  expect(genderize('כשהגננים/ות', Mode.FEMALE)).toBe('כשהגננות');
+  expect(genderize('כשהגננים/ות', Mode.MALE)).toBe('כשהגננים');
 
-  expect(genderize('ארגנטינאים/ות', FEMALE)).toBe('ארגנטינאיות');
-  expect(genderize('ארגנטינאים/ות', MALE)).toBe('ארגנטינאים');
+  expect(genderize('ארגנטינאים/ות', Mode.FEMALE)).toBe('ארגנטינאיות');
+  expect(genderize('ארגנטינאים/ות', Mode.MALE)).toBe('ארגנטינאים');
 
-  expect(genderize('צרפתים/ות', FEMALE)).toBe('צרפתיות');
-  expect(genderize('צרפתים/ות', MALE)).toBe('צרפתים');
+  expect(genderize('צרפתים/ות', Mode.FEMALE)).toBe('צרפתיות');
+  expect(genderize('צרפתים/ות', Mode.MALE)).toBe('צרפתים');
 
-  expect(genderize('אחיינים/ות', FEMALE)).toBe('אחייניות');
-  expect(genderize('אחיינים/ות', MALE)).toBe('אחיינים');
+  expect(genderize('אחיינים/ות', Mode.FEMALE)).toBe('אחייניות');
+  expect(genderize('אחיינים/ות', Mode.MALE)).toBe('אחיינים');
 
-  expect(genderize('הודים/ות', FEMALE)).toBe('הודיות');
-  expect(genderize('הודים/ות', MALE)).toBe('הודים');
-  expect(genderize('יהודים/ות', FEMALE)).toBe('יהודיות');
-  expect(genderize('יהודים/ות', MALE)).toBe('יהודים');
-  expect(genderize('יהודיים/ות', FEMALE)).toBe('יהודיות');
-  expect(genderize('יהודיים/ות', MALE)).toBe('יהודיים');
+  expect(genderize('הודים/ות', Mode.FEMALE)).toBe('הודיות');
+  expect(genderize('הודים/ות', Mode.MALE)).toBe('הודים');
+  expect(genderize('יהודים/ות', Mode.FEMALE)).toBe('יהודיות');
+  expect(genderize('יהודים/ות', Mode.MALE)).toBe('יהודים');
+  expect(genderize('יהודיים/ות', Mode.FEMALE)).toBe('יהודיות');
+  expect(genderize('יהודיים/ות', Mode.MALE)).toBe('יהודיים');
 
-  expect(genderize('קלפטומנים/ות', FEMALE)).toBe('קלפטומניות');
-  expect(genderize('קלפטומנים/ות', MALE)).toBe('קלפטומנים');
-  expect(genderize('קלפטומנים/יות', FEMALE)).toBe('קלפטומניות');
-  expect(genderize('קלפטומנים/יות', MALE)).toBe('קלפטומנים');
+  expect(genderize('קלפטומנים/ות', Mode.FEMALE)).toBe('קלפטומניות');
+  expect(genderize('קלפטומנים/ות', Mode.MALE)).toBe('קלפטומנים');
+  expect(genderize('קלפטומנים/יות', Mode.FEMALE)).toBe('קלפטומניות');
+  expect(genderize('קלפטומנים/יות', Mode.MALE)).toBe('קלפטומנים');
 
-  expect(genderize('שפים/ות', FEMALE)).toBe('שפיות');
-  expect(genderize('שפים/ות', MALE)).toBe('שפים');
-  expect(genderize('מכשפים/ות', FEMALE)).toBe('מכשפות');
-  expect(genderize('מכשפים/ות', MALE)).toBe('מכשפים');
+  expect(genderize('שפים/ות', Mode.FEMALE)).toBe('שפיות');
+  expect(genderize('שפים/ות', Mode.MALE)).toBe('שפים');
+  expect(genderize('מכשפים/ות', Mode.FEMALE)).toBe('מכשפות');
+  expect(genderize('מכשפים/ות', Mode.MALE)).toBe('מכשפים');
 
-  expect(genderize('שווים/ות, שוויםות, שוות/ים, שווי/ות זכויות', FEMALE)).toBe('שוות, שוות, שוות, שוות זכויות');
-  expect(genderize('שווים/ות, שוויםות, שוות/ים, שווי/ות זכויות', MALE)).toBe('שווים, שווים, שווים, שווי זכויות');
+  expect(genderize('שווים/ות, שוויםות, שוות/ים, שווי/ות זכויות', Mode.FEMALE)).toBe('שוות, שוות, שוות, שוות זכויות');
+  expect(genderize('שווים/ות, שוויםות, שוות/ים, שווי/ות זכויות', Mode.MALE)).toBe('שווים, שווים, שווים, שווי זכויות');
 });

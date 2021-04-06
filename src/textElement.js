@@ -1,5 +1,5 @@
 import TextObject, { IncompatibleTypeError } from './textObject';
-import { MALE, FEMALE, NEUTRAL } from './ivrita';
+import { Mode } from './ivrita';
 
 export const MALE_DATA_ATTR = 'ivritaMale';
 export const FEMALE_DATA_ATTR = 'ivritaFemale';
@@ -26,13 +26,13 @@ export default class TextElement extends TextObject {
   init() {
     super.init();
     if (this.element.dataset[MALE_DATA_ATTR]) {
-      this.storedValues[MALE] = this.element.dataset[MALE_DATA_ATTR];
+      this.storedValues[Mode.MALE] = this.element.dataset[MALE_DATA_ATTR];
     }
     if (this.element.dataset[FEMALE_DATA_ATTR]) {
-      this.storedValues[FEMALE] = this.element.dataset[FEMALE_DATA_ATTR];
+      this.storedValues[Mode.FEMALE] = this.element.dataset[FEMALE_DATA_ATTR];
     }
     if (this.element.dataset[NEUTRAL_DATA_ATTR]) {
-      this.storedValues[NEUTRAL] = this.element.dataset[NEUTRAL_DATA_ATTR];
+      this.storedValues[Mode.NEUTRAL] = this.element.dataset[NEUTRAL_DATA_ATTR];
     }
   }
 

@@ -1,6 +1,6 @@
 import Ivrita from '../src/element';
 
-import { FEMALE } from '../src/ivrita';
+import { Mode } from '../src/ivrita';
 
 const template = `
   <div id="content">
@@ -22,7 +22,7 @@ test('Input placeholder', () => {
   const city = document.getElementById('city');
 
   const ivrita = new Ivrita(document.body);
-  ivrita.setMode(FEMALE);
+  ivrita.setMode(Mode.FEMALE);
 
   expect(name.getAttribute('placeholder')).toBe('הכניסי את שמך כאן');
   expect(city.getAttribute('placeholder')).toBe('הכניסי את העיר שבה את גרה כאן');
@@ -33,7 +33,7 @@ test('Link title', () => {
   const link = document.querySelector('a');
 
   const ivrita = new Ivrita(document.body);
-  ivrita.setMode(FEMALE);
+  ivrita.setMode(Mode.FEMALE);
 
   expect(link.innerHTML).toBe('התנתקי');
   expect(link.getAttribute('title')).toBe('לחצי כאן כדי להתנתק');
@@ -46,7 +46,7 @@ test('Buttons', () => {
   const inputButton = document.querySelector('input[type=button]');
 
   const ivrita = new Ivrita(document.body);
-  ivrita.setMode(FEMALE);
+  ivrita.setMode(Mode.FEMALE);
 
   expect(button.innerHTML).toBe('נקי את הטופס');
   expect(inputSubmit.value).toBe('שלחי');
@@ -60,7 +60,7 @@ test('Custom attribute', () => {
   const ivrita = new Ivrita(document.body);
   ivrita.relavantAttributes['button[data-custom-text]'] = ['data-custom-text'];
   ivrita.registerTextAttributes(document.body);
-  ivrita.setMode(FEMALE);
+  ivrita.setMode(Mode.FEMALE);
 
   expect(button.getAttribute('data-custom-text')).toBe('לא יודעת איך?');
 });

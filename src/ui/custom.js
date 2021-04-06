@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import dom from 'jsx-render';
 import IvritaElement from '../element';
-import { MALE, FEMALE, NEUTRAL } from '../ivrita';
+import { Mode } from '../ivrita';
 import IvritaSwitch from './switch';
 
 export default class CustomSwitch extends IvritaSwitch {
@@ -27,15 +27,15 @@ export default class CustomSwitch extends IvritaSwitch {
       let btnMode;
       switch (btnModeStr.toUpperCase()) {
         case 'MALE':
-          btnMode = MALE;
+          btnMode = Mode.MALE;
           break;
 
         case 'FEMALE':
-          btnMode = FEMALE;
+          btnMode = Mode.FEMALE;
           break;
 
         case 'NEUTRAL':
-          btnMode = NEUTRAL;
+          btnMode = Mode.NEUTRAL;
           break;
 
         default:

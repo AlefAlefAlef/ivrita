@@ -1,23 +1,23 @@
-import { genderize, FEMALE, MALE } from '../../src/ivrita';
+import { genderize, Mode } from '../../src/ivrita';
 
 test('Word beginnings', () => {
-  expect(genderize('י/תכתוב', FEMALE)).toBe('תכתוב');
-  expect(genderize('י/תכתוב', MALE)).toBe('יכתוב');
-  expect(genderize('שי/תכתוב', FEMALE)).toBe('שתכתוב');
-  expect(genderize('שי/תכתוב', MALE)).toBe('שיכתוב');
+  expect(genderize('י/תכתוב', Mode.FEMALE)).toBe('תכתוב');
+  expect(genderize('י/תכתוב', Mode.MALE)).toBe('יכתוב');
+  expect(genderize('שי/תכתוב', Mode.FEMALE)).toBe('שתכתוב');
+  expect(genderize('שי/תכתוב', Mode.MALE)).toBe('שיכתוב');
 
-  expect(genderize('ת/יכתוב', FEMALE)).toBe('תכתוב');
-  expect(genderize('ת/יכתוב', MALE)).toBe('יכתוב');
-  expect(genderize('שת/יכתוב', FEMALE)).toBe('שתכתוב');
-  expect(genderize('שת/יכתוב', MALE)).toBe('שיכתוב');
+  expect(genderize('ת/יכתוב', Mode.FEMALE)).toBe('תכתוב');
+  expect(genderize('ת/יכתוב', Mode.MALE)).toBe('יכתוב');
+  expect(genderize('שת/יכתוב', Mode.FEMALE)).toBe('שתכתוב');
+  expect(genderize('שת/יכתוב', Mode.MALE)).toBe('שיכתוב');
 
-  expect(genderize('ת/ירצה', FEMALE)).toBe('תרצה');
-  expect(genderize('ת/ירצה', MALE)).toBe('ירצה');
-  expect(genderize('י/תרצה', FEMALE)).toBe('תרצה');
-  expect(genderize('י/תרצה', MALE)).toBe('ירצה');
+  expect(genderize('ת/ירצה', Mode.FEMALE)).toBe('תרצה');
+  expect(genderize('ת/ירצה', Mode.MALE)).toBe('ירצה');
+  expect(genderize('י/תרצה', Mode.FEMALE)).toBe('תרצה');
+  expect(genderize('י/תרצה', Mode.MALE)).toBe('ירצה');
 
-  expect(genderize('י/תבוא', FEMALE)).toBe('תבוא');
-  expect(genderize('י/תבוא', MALE)).toBe('יבוא');
-  expect(genderize('ת/יבוא', FEMALE)).toBe('תבוא');
-  expect(genderize('ת/יבוא', MALE)).toBe('יבוא');
+  expect(genderize('י/תבוא', Mode.FEMALE)).toBe('תבוא');
+  expect(genderize('י/תבוא', Mode.MALE)).toBe('יבוא');
+  expect(genderize('ת/יבוא', Mode.FEMALE)).toBe('תבוא');
+  expect(genderize('ת/יבוא', Mode.MALE)).toBe('יבוא');
 });

@@ -1,5 +1,5 @@
 import {
-  MALE, FEMALE, NEUTRAL, ORIGINAL, GENDERS, genderize,
+  Mode, genderize,
 } from './ivrita';
 import TextAttribute from './textAttribute';
 import TextElement, { MALE_DATA_ATTR, FEMALE_DATA_ATTR, NEUTRAL_DATA_ATTR } from './textElement';
@@ -10,27 +10,25 @@ import { HEB, SYNTAX } from './utils/characters';
 const hebrewRegex = new RegExp(HEB);
 const ivritaSyntaxRegex = new RegExp(SYNTAX);
 
-const MULTI = GENDERS.length; // ENUM-like
-
 export default class IvritaElement {
   static EVENT_MODE_CHANGED = 'ivrita-mode-changed';
 
-  static ORIGINAL = ORIGINAL;
+  static ORIGINAL = Mode.ORIGINAL;
 
-  static MALE = MALE;
+  static MALE = Mode.MALE;
 
-  static FEMALE = FEMALE;
+  static FEMALE = Mode.FEMALE;
 
-  static NEUTRAL = NEUTRAL;
+  static NEUTRAL = Mode.NEUTRAL;
 
   // MULTI is a special with FFS enabled, but is essentialy the NEUTRAL mode.
-  static MULTI = MULTI;
+  static MULTI = Object.keys(Mode).length;
 
-  static GENDERS = [...GENDERS, MULTI];
+  static GENDERS = [...Object.values(Mode), this.MULTI];
 
   static instances = new Map();
 
-  static defaultMode = NEUTRAL;
+  static defaultMode = Mode.NEUTRAL;
 
   static genderize = genderize;
 
@@ -94,7 +92,7 @@ export default class IvritaElement {
   }
 
   destroy() {
-    this.setMode(ORIGINAL);
+    this.setMode(Mode.ORIGINAL);
     this.setFontFeatureSettings(false);
     if (this.observer) {
       this.observer.disconnect();
@@ -109,18 +107,21 @@ export default class IvritaElement {
     this.defaultMode = newMode;
   }
 
-  setMode(newMode = NEUTRAL) {
+  setMode(newMode = Mode.NEUTRAL) {
     if (!this.constructor.GENDERS.includes(newMode)) {
       return this;
     }
 
-    if ((this.mode === MULTI && newMode !== MULTI) || (this.mode !== MULTI && newMode === MULTI)) {
-      this.setFontFeatureSettings(newMode === MULTI);
+    if ((this.mode === IvritaElement.MULTI && newMode !== IvritaElement.MULTI)
+        || (this.mode !== IvritaElement.MULTI && newMode === IvritaElement.MULTI)) {
+      this.setFontFeatureSettings(newMode === IvritaElement.MULTI);
     }
 
     this.mode = newMode;
     // If the new mode is MULTI, mask it from the child nodes - for them it's a NEUTRAL mode.
-    this.nodes.forEach((node) => node.setMode(newMode === MULTI ? NEUTRAL : newMode));
+    this.nodes.forEach(
+      (node) => node.setMode(newMode === IvritaElement.MULTI ? Mode.NEUTRAL : newMode),
+    );
 
     this.dispatchModeChangedEvent(newMode);
 

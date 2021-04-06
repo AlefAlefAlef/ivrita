@@ -1,4 +1,4 @@
-import { genderize, ORIGINAL } from './ivrita';
+import { genderize, Mode } from './ivrita';
 
 export const IncompatibleTypeError = new Error('Incompatible node passed to the node constructor');
 
@@ -29,7 +29,7 @@ export default class TextObject {
 
     if (this.storedValues[newMode] !== undefined) {
       newVal = this.storedValues[newMode];
-    } else if (newMode === ORIGINAL) {
+    } else if (newMode === Mode.ORIGINAL) {
       newVal = this.originalText;
     } else {
       newVal = genderize(this.originalText, newMode);
