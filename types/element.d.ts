@@ -11,7 +11,7 @@ export default class IvritaElement {
     };
     static instances: Map<any, any>;
     static defaultMode: number;
-    static genderize: (originalText: string, newMode: number, doneFunc: any) => string;
+    static genderize: (originalText: string, newMode: number, doneFunc: (rules: import("./rules").BakedRule[]) => any) => string;
     static textObjects: WeakMap<object, any>;
     static setDefaultMode(newMode: any): void;
     static setMode(newMode: any): void;

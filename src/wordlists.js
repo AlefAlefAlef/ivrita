@@ -1,7 +1,13 @@
+// @ts-check
 import {
   G, SEP, EXTSEP, B,
 } from './utils/characters';
 
+/**
+ * Custom word list of manual overrides
+ *
+ * @type {import('./rules').Rule[]}
+ */
 export const custom = [
   [`א${EXTSEP}נשים`, 'אנשים', 'נשים'], // א.נשים
   [`א${EXTSEP}נש(?:ות|י)${B}`, 'אנשי', 'נשות'], // א.נשי
@@ -30,13 +36,23 @@ export const custom = [
   [`חשוב${SEP}י${SEP}ו${B}`, 'חשוב', 'חשבי', 'חשבו'], // חשוב/י/ו (exception because of שוב/י which is in verbsFemaleKeepVav)
 ];
 
-// For most verbs (Unless found in *verbsFemaleKeepVav*), we follow the rules of:
-// כתוב/י => Vav before last letter => Vav removed => כתבי
-// else:
-// לך/י => Yod added after original word => לכי
-// However, some verbs need an aditional Yod before their last letter:
-// הקשב => Add Yod before and after Bet => הקשיבי
-// This is the list of words which need that extra Yod:
+/**
+ * For most verbs (Unless found in *verbsFemaleKeepVav*), we follow the rules of:
+ *
+ * כתוב/י => Vav before last letter => Vav removed => כתבי
+ *
+ * else:
+ *
+ * לך/י => Yod added after original word => לכי
+ *
+ * However, some verbs need an aditional Yod before their last letter:
+ *
+ * הקשב => Add Yod before and after Bet => הקשיבי
+ *
+ * This is the list of words which need that extra Yod
+ *
+ * @type {string[]}
+ */
 export const verbsFemaleExtraYod = [
   'האר',
   'הבא',
@@ -72,7 +88,9 @@ export const verbsFemaleExtraYod = [
   'העתק',
   'הדבק',
 ];
-
+/**
+ * @type {string[]}
+ */
 export const verbsFemaleKeepVav = [
   'קום',
   'רוץ',
@@ -84,8 +102,12 @@ export const verbsFemaleKeepVav = [
   'בוא',
 ];
 
-// Most plurals don't need an extra Yod on their female form: מורים->מורות
-// These are the exceptions which need a Yod:
+/**
+ * Most plurals don't need an extra Yod on their female form: מורים->מורות
+ * These are the exceptions which need a Yod:
+ *
+ * @type {string[]}
+ */
 export const pluralsWithExtraYod = [
   '(א|ס)ובי(י?)קטיב', // אוביקטיבי וסוביקטיבי
   `אחמ([${G}]?)ש`,

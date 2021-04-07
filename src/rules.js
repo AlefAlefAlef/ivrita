@@ -1,3 +1,4 @@
+// @ts-check
 import {
   SEP, G, W, FIN, B, HEB, NCB, CB,
 } from './utils/characters';
@@ -10,6 +11,11 @@ import {
   custom, verbsFemaleExtraYod, verbsFemaleKeepVav, pluralsWithExtraYod,
 } from './wordlists';
 
+/**
+ * @typedef {[pattern: string, male: string, female: string, neutral?: string]} Rule
+ * @typedef {[pattern: RegExp, male: string, female: string, neutral: string]} BakedRule
+ */
+
 // Marks are used by early rules to specify a position in a text
 // which should be addressed later by later rules.
 // For example, M_WORDFIN marks an artificial end of a word,
@@ -18,18 +24,39 @@ import {
 const M_WORDFIN = '\u05c8'; // Not a real character
 const M_NOT_WORDFIN = '\u05c9'; // Not a real character
 
-const regexize = (p) => {
-  p[0] = new RegExp(p[0], 'g');
+/**
+ * Convert a Rule pattern into a JS Regular Expression Object, and add the neutral option
+ * @param {Rule} rule The rule to be converted
+ * @returns {BakedRule}
+ */
+const regexize = (rule) => {
+  /**
+   * @type {BakedRule}
+   */
+  const result = [
+    new RegExp(rule[0], 'g'),
+    rule[1],
+    rule[2],
+    rule[3]];
 
-  if (p[3] === true) {
-    p[3] = `${p[1]}/${p[2]}`;
-  }
-  return p;
+  return result;
 };
 
-// Unisex rules match always replace the same string, mode-ignorantly.
+/**
+ * Unisex rules match always replace the same string, mode-ignorantly.
+ * @param {string} pattern The pattern to match
+ * @param {string} replacement The replacement string
+ * @returns {Rule}
+ */
 const unisex = (pattern, replacement) => [pattern, replacement, replacement, replacement];
 
+/**
+ * Turns a word from a wordlist into rules to match the different variations of the word,
+ * and replace it with the proper replacements. Mostly for verbs.
+ * @param {string} word The word from the word list
+ * @param {boolean} addYod Whether or not to add a Yod, e.g. in the case of "כתבי" vs "הקשיבי"
+ * @returns {Rule[]} An array of rules to be added to the list of rules
+ */
 const matchAndNormalizeVerb = (word, addYod) => {
   const wordWithoutLastLetter = word.slice(0, word.length - 1);
   const lastLetter = word.slice(word.length - 1);
@@ -46,6 +73,9 @@ const matchAndNormalizeVerb = (word, addYod) => {
   ];
 };
 
+/**
+ * @type {BakedRule[]}
+ */
 export default [
   // Whole Words
   ...custom,
@@ -125,7 +155,7 @@ export default [
 
   // Special Syntax
   ['\\[([^|]*?)\\|([^|]*?)\\|([^|]*?)\\]', '$1', '$2', '$3'], // [בן|בת|ילד]
-  ['\\[([^|]*?)\\|([^|]*?)\\]', '$1', '$2', true], // [בן|בת]
+  ['\\[([^|]*?)\\|([^|]*?)\\]', '$1', '$2', '$1/$2'], // [בן|בת]
 
   // Final Letters fixes
   unisex(`ץ${M_NOT_WORDFIN}`, 'צ'), // חרוץה

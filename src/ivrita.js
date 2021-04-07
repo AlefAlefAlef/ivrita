@@ -1,3 +1,4 @@
+// @ts-check
 import rules from './rules';
 
 const PROTECTED = '__IVRITA_PROTECTED__';
@@ -12,10 +13,10 @@ export const Mode = {
 };
 
 /**
- *
  * @param {string} originalText The original text, un-genderized
  * @param {Mode} newMode The new mode to genderize the string into
- * @param {*} doneFunc An optional callback to be executed after the genderization,
+ * @param {(rules: import('./rules').BakedRule[]) => any} doneFunc
+ * An optional callback to be executed after the genderization,
  * which will receive an array of matched rules
  */
 export const genderize = (originalText, newMode, doneFunc) => {
@@ -31,8 +32,12 @@ export const genderize = (originalText, newMode, doneFunc) => {
   }
 
   let prev = originalText;
+  /**
+   * @type {import('./rules').BakedRule[]}
+   */
   const used = [];
-  rules.forEach(([pattern, male, female, neutral]) => {
+  rules.forEach((rule) => {
+    const [pattern, male, female, neutral] = rule;
     let replacement;
     switch (newMode) {
       case Mode.FEMALE:
@@ -53,7 +58,7 @@ export const genderize = (originalText, newMode, doneFunc) => {
     }
 
     if (typeof doneFunc === 'function' && prev !== genderized) {
-      used.push(pattern);
+      used.push(rule);
       prev = genderized;
     }
   });
