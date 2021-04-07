@@ -6,6 +6,7 @@ import {
   defaultMaleLabel,
   defaultFemaleLabel,
   defaultNeutralLabel,
+  ariaLabel,
 } from './hebrew';
 
 import './style.scss';
@@ -30,6 +31,7 @@ export default class DefaultSwitch extends IvritaSwitch {
     position: 'left',
     iconTitle,
     aboutLinkText,
+    ariaLabel,
     aboutLinkURL: 'https://alefalefalef.co.il/ivrita/',
     style: 0,
     logoIcon: '&#x26A5;&#xFE0E;',
@@ -57,8 +59,10 @@ export default class DefaultSwitch extends IvritaSwitch {
     this.element.querySelectorAll('a.ivrita-mode-changer').forEach((e) => {
       if (parseInt(e.dataset.ivritaMode, 10) === mode) {
         e.classList.add('ivrita-active');
+        e.setAttribute('aria-selected', 'true');
       } else {
         e.classList.remove('ivrita-active');
+        e.removeAttribute('aria-selected');
       }
     });
     this.element.querySelector(`a[data-ivrita-mode="${mode}"]`).classList.add('ivrita-active');
@@ -79,6 +83,9 @@ export default class DefaultSwitch extends IvritaSwitch {
               class={`ivrita-mode-changer ivrita-button ivrita-button-style-${this.config.style}`}
               data-ivrita-mode={ mode }
               title={ this.config.modes[mode].label }
+              aria-label={ this.config.ariaLabel && this.config.ariaLabel.includes('%s')
+                ? this.config.ariaLabel.replace('%s', this.config.modes[mode].label)
+                : this.config.modes[mode].label }
               ref={ super.ref }
               onClick={ (e) => { e.preventDefault(); this.setMode(mode); } }
               dangerouslySetInnerHTML={{ __html: this.config.modes[mode].icon }}
