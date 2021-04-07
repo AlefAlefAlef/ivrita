@@ -1,6 +1,9 @@
 import TextObject, { IncompatibleTypeError } from './textObject';
 
 export default class TextAttribute extends TextObject {
+  /**
+   * @type {Attr}
+   */
   attr = {};
 
   constructor(attr) {
@@ -13,7 +16,7 @@ export default class TextAttribute extends TextObject {
 
     this.attr = attr;
 
-    if (!this.currentMode) {
+    if (!this.initialized) {
       this.init();
     }
   }

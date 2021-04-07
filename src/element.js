@@ -1,3 +1,4 @@
+// @ts-check
 import {
   Mode, genderize,
 } from './ivrita';
@@ -11,45 +12,94 @@ const hebrewRegex = new RegExp(HEB);
 const ivritaSyntaxRegex = new RegExp(SYNTAX);
 
 export default class IvritaElement {
+  /**
+   * This is the name of the event which will be fired when the ivrita mode changes.
+   * The event will fire on each and every element connected to this Ivrita instance.
+   */
   static EVENT_MODE_CHANGED = 'ivrita-mode-changed';
 
+  /**
+   * These are just references to other variables, for exportability.
+   */
+
+  /**
+   * A map between an Ivrita Mode and the corresponding 'data-' overriding attribute name (exported)
+   */
+  static DataAttrs = DataAttr;
+
+  /**
+   * A map of all the TextObject instances on this page, mapped by all of their TextNodes (exported)
+   */
+  static textObjects = TextObject.instances;
+
+  /**
+   * The genderize function from the Ivrita core (exported)
+   */
+  static genderize = genderize;
+
   static ORIGINAL = Mode.ORIGINAL;
-
   static MALE = Mode.MALE;
-
   static FEMALE = Mode.FEMALE;
-
   static NEUTRAL = Mode.NEUTRAL;
 
   // MULTI is a special with FFS enabled, but is essentialy the NEUTRAL mode.
   static MULTI = Object.keys(Mode).length;
 
-  static GENDERS = [...Object.values(Mode), this.MULTI];
+  /**
+   * A list of all valid modes
+   */
+  static GENDERS = [...Object.values(Mode), IvritaElement.MULTI];
 
-  static DataAttrs = DataAttr;
-
+  /**
+   * A (static) map of all the Ivrita instances on this page, mapped by all of their elements
+   * @type {Map<Node, IvritaElement>}
+   */
   static instances = new Map();
 
+  /**
+   * The default mode for all new ivrita instances (unless a mode is passed to the constructor)
+   */
   static defaultMode = Mode.NEUTRAL;
 
-  static genderize = genderize;
-
-  static textObjects = TextObject.instances;
-
+  /**
+   * A set of all the Ivrita TextObjects this instance tracks
+   * @type {Set<TextObject>}
+   */
   nodes = new Set();
 
+  /**
+   * An array of all the elements this instance tracks (the elements passed to its construtor)
+   * @type {Node[]}
+   */
   elements = [];
 
+  /**
+   * The current mode of this Ivrita instance
+   * @type {Mode}
+   */
   mode;
 
+  /**
+   * Whether or not 'font-feature-setting' is set to 'titl' for this Ivrita instance
+   * @type {boolean}
+   */
   fontFeatureSettings;
 
+  /**
+   * A map between DOM selectors to all their possible attributes which need to be genderized
+   * @type {{[domSelector: string]: string[]}}
+  */
   relavantAttributes = {
     'a, img, button, input': ['title'],
     [`input:not([type=${['submit', 'button', 'checkbox', 'radio', 'hidden', 'image', 'range', 'reset', 'file'].join(']):not([type=')}])`]: ['placeholder'],
     'input[type=submit], input[type=button], input[type=reset]': ['value'],
   };
 
+  /**
+   * Construct a new Ivrita instance.
+   * @param {Iterable<Node>|JQuery} [elem] The element (or elements) which need to be genderized
+   * @param {Mode} [mode] The initial mode to start with
+   */
   constructor(elem, mode) {
     if (typeof elem === 'undefined') {
       this.elements = [document.body];
@@ -63,14 +113,16 @@ export default class IvritaElement {
       this.elements = Array.from(elem);
     } else if (elem instanceof HTMLElement) {
       this.elements = [elem];
+    // @ts-ignore
     } else if (typeof jQuery === 'function' && elem instanceof jQuery && typeof elem.toArray === 'function') {
+      // @ts-ignore
       this.elements = elem.toArray();
     } else {
       throw new Error('Passed argument is not an HTMLElement.');
     }
 
-    if (this.elements.length === 1 && this.constructor.instances.has(this.elements[0])) {
-      const preExistingInstance = this.constructor.instances.get(this.elements[0]);
+    if (this.elements.length === 1 && IvritaElement.instances.has(this.elements[0])) {
+      const preExistingInstance = IvritaElement.instances.get(this.elements[0]);
       preExistingInstance.registerTextObjects(this.elements[0]); // Make sure nodes are registered
       return preExistingInstance;
     }
@@ -82,17 +134,20 @@ export default class IvritaElement {
         subtree: true,
         characterData: false,
       });
-      this.constructor.instances.set(el, this);
+      IvritaElement.instances.set(el, this);
       this.registerTextObjects(el);
     });
 
     if (typeof mode !== 'undefined') {
       this.setMode(mode);
-    } else if (this.constructor.defaultMode) {
-      this.setMode(this.constructor.defaultMode);
+    } else if (IvritaElement.defaultMode) {
+      this.setMode(IvritaElement.defaultMode);
     }
   }
 
+  /**
+   * Disable this Ivrita instance and return everything to its original state
+   */
   destroy() {
     this.setMode(Mode.ORIGINAL);
     this.setFontFeatureSettings(false);
@@ -101,16 +156,23 @@ export default class IvritaElement {
     }
     this.nodes.clear();
     this.elements.forEach((el) => {
-      this.constructor.instances.delete(el);
+      IvritaElement.instances.delete(el);
     });
   }
 
+  /**
+   * @param {Mode} newMode
+   */
   static setDefaultMode(newMode) {
     this.defaultMode = newMode;
   }
 
+  /**
+   * Change the mode of this ivrita instance and genderize all the strings accordingly
+   * @param {Mode} newMode The new mode to change into
+   */
   setMode(newMode = Mode.NEUTRAL) {
-    if (!this.constructor.GENDERS.includes(newMode)) {
+    if (!IvritaElement.GENDERS.includes(newMode)) {
       return this;
     }
 
@@ -130,33 +192,53 @@ export default class IvritaElement {
     return this;
   }
 
+  /**
+   * Set the mode for all Ivrita instances on this page
+   * @param {number} newMode
+   */
   static setMode(newMode) {
     this.instances.forEach((instance) => instance.setMode(newMode));
   }
 
+  /**
+   * Genderize a string with the current mode of this Ivrita instance
+   * @param {any} text
+   */
   genderize(text) {
-    return this.constructor.genderize(text, this.mode);
+    return IvritaElement.genderize(text, this.mode);
   }
 
+  /**
+   * Fire the mode-changed event on all of this instance's events
+   * @param {Mode} mode The new mode
+   */
   dispatchModeChangedEvent(mode = this.mode) {
     this.elements.forEach(
-      (el) => el.dispatchEvent(new CustomEvent(this.constructor.EVENT_MODE_CHANGED,
+      (el) => el.dispatchEvent(new CustomEvent(IvritaElement.EVENT_MODE_CHANGED,
         { bubbles: true, detail: { mode, firingInstance: this } })),
     );
   }
 
+  /**
+   * @param {Node} element
+   */
   registerTextObjects(element) {
     this.registerTextNodes(element);
-    this.registerTextAttributes(element);
+    if (element instanceof Element) {
+      this.registerTextAttributes(element);
+    }
   }
 
+  /**
+   * @param {Node} element
+   */
   registerTextNodes(element) {
     let currentNode;
     const walk = document.createTreeWalker(
       element,
       NodeFilter.SHOW_ELEMENT + NodeFilter.SHOW_TEXT,
       {
-        acceptNode: (node) => (this.constructor.acceptNodeFilter(node)),
+        acceptNode: (node) => (IvritaElement.acceptNodeFilter(node)),
       },
     );
 
@@ -176,6 +258,9 @@ export default class IvritaElement {
     }
   }
 
+  /**
+   * @param {Element} element
+   */
   registerTextAttributes(element) {
     Object.entries(this.relavantAttributes).forEach(([selector, attributes]) => {
       Array.from(element.querySelectorAll(selector)).forEach((input) => {
@@ -188,8 +273,12 @@ export default class IvritaElement {
     });
   }
 
+  /**
+   * @param {Text|Node} node
+   */
   static acceptNodeFilter(node) {
-    if (TextObject.instances.has(node)) { // Already indexed, will be a pointer to existing node
+    // Already indexed, will be a pointer to existing node
+    if (node instanceof Text && TextObject.instances.has(node)) {
       return NodeFilter.FILTER_ACCEPT;
     }
 
@@ -197,7 +286,7 @@ export default class IvritaElement {
       return NodeFilter.FILTER_REJECT; // If there's no content, reject all child nodes
     }
 
-    if (node.nodeType === Node.ELEMENT_NODE) {
+    if (node instanceof HTMLElement) {
       if (node.dataset.ivritaDisable) {
         return NodeFilter.FILTER_REJECT;
       }
@@ -205,7 +294,7 @@ export default class IvritaElement {
         .filter((attr) => node.dataset[attr]).length) {
         return NodeFilter.FILTER_ACCEPT;
       }
-    } else if (node.nodeType === Node.TEXT_NODE) {
+    } else if (node instanceof Text) {
       if (hebrewRegex.test(node.textContent) // Test for Hebrew Letters
       && ivritaSyntaxRegex.test(node.textContent)) {
         return NodeFilter.FILTER_ACCEPT;
@@ -214,13 +303,23 @@ export default class IvritaElement {
     return NodeFilter.FILTER_SKIP;
   }
 
+  /**
+   * @param {MutationRecord[]} mutationsList
+   */
   onElementChange(mutationsList) {
+    /**
+     * A polyfill for jQuery.closest(),
+     * which starts from an element and searches for the closest parent which matches a selector
+     * @param {Node} el The element to begin the search from
+     * @param {string} s The selector to look for
+     * @returns {Node|null}
+     */
     const closest = (el, s) => {
       do {
         if (el instanceof Element && Element.prototype.matches.call(el, s)) return el;
         // eslint-disable-next-line no-param-reassign
         el = el.parentElement || el.parentNode;
-      } while (el !== null && el.nodeType === 1);
+      } while (el !== null && el.nodeType === Node.ELEMENT_NODE);
       return null;
     };
 
@@ -230,11 +329,13 @@ export default class IvritaElement {
         const removed = Array.from(mutation.removedNodes);
         if (added.length === removed.length) { // Probably just changed, not really removed
           removed.forEach((oldNode, i) => {
-            if (oldNode.nodeType === Node.TEXT_NODE) {
+            if (oldNode instanceof Text) {
               const newNode = added[i];
-              if (TextNode.instances.has(oldNode) && newNode.nodeType === Node.TEXT_NODE) {
+              if (TextNode.instances.has(oldNode) && newNode instanceof Text) {
                 const nodeObj = TextNode.instances.get(oldNode);
-                nodeObj.node = newNode; // This is dangerous, make sure it makes sense
+                if (nodeObj instanceof TextNode) {
+                  nodeObj.node = newNode; // This is dangerous, make sure it makes sense
+                }
                 TextNode.instances.set(newNode, nodeObj);
                 TextNode.instances.delete(oldNode);
               }
@@ -245,8 +346,8 @@ export default class IvritaElement {
             if (closest(node, '[data-ivrita-disable]')) {
               return;
             }
-            if (node.nodeType === Node.TEXT_NODE
-              && this.constructor.acceptNodeFilter(node) === NodeFilter.FILTER_ACCEPT) {
+            if (node instanceof Text
+              && IvritaElement.acceptNodeFilter(node) === NodeFilter.FILTER_ACCEPT) {
               const ivritaTextNode = new TextNode(node);
               this.nodes.add(ivritaTextNode);
               // Set the new node's mode to the current mode, to get in line with everything else
@@ -262,9 +363,14 @@ export default class IvritaElement {
     });
   }
 
+  /**
+   * Turn on/off the "multi" feature
+   * @param {boolean} isActive
+   */
   setFontFeatureSettings(isActive) {
     this.fontFeatureSettings = isActive;
     this.elements.forEach((el) => {
+      if (!(el instanceof HTMLElement)) return;
       const originalFFS = el.style.fontFeatureSettings;
       let result = originalFFS.slice().replace('normal', '');
 
@@ -289,7 +395,8 @@ export default class IvritaElement {
 }
 
 if (typeof jQuery === 'function') {
-  jQuery.fn.ivrita = function ivritajQueryFn(gender) {
+  // @ts-ignore
+  jQuery.fn.ivrita = function ivritajQueryFn(/** @type {Mode} */ gender) {
     return new IvritaElement(this, gender);
   };
 }

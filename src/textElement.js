@@ -1,7 +1,11 @@
+// @ts-check
 import TextObject, { IncompatibleTypeError } from './textObject';
 import { Mode } from './ivrita';
 
-/** @enum {string} */
+/**
+ * A map between an Ivrita Mode and the corresponding 'data-' overriding attribute name
+ * @enum {string}
+ * */
 export const DataAttr = {
   [Mode.MALE]: 'ivritaMale',
   [Mode.FEMALE]: 'ivritaFemale',
@@ -9,11 +13,17 @@ export const DataAttr = {
 };
 
 export default class TextElement extends TextObject {
+  /**
+   * @type {HTMLElement}
+   */
+  // @ts-ignore
   element = {};
 
+  // @ts-ignore
   constructor(element) {
+    // @ts-ignore
     if (!element) return false;
-    if (!(element instanceof Element)) {
+    if (!(element instanceof HTMLElement)) {
       throw IncompatibleTypeError;
     }
 
@@ -21,7 +31,7 @@ export default class TextElement extends TextObject {
 
     this.element = element;
 
-    if (!this.currentMode) {
+    if (!this.initialized) {
       this.init();
     }
   }

@@ -1,9 +1,19 @@
+// @ts-check
 import TextObject, { IncompatibleTypeError } from './textObject';
 
 export default class TextNode extends TextObject {
+  /**
+   * @type {Text}
+   */
+  // @ts-ignore
   node = {};
 
+  /**
+   * @param {Text} node
+   */
+  // @ts-ignore
   constructor(node) {
+    // @ts-ignore
     if (!node) return false;
     if (!(node instanceof Text)) {
       throw IncompatibleTypeError;
@@ -13,7 +23,7 @@ export default class TextNode extends TextObject {
 
     this.node = node;
 
-    if (!this.currentMode) {
+    if (!this.initialized) {
       this.init();
     }
   }

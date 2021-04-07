@@ -5,4 +5,4 @@ export namespace Mode {
     const FEMALE: number;
     const NEUTRAL: number;
 }
-export function genderize(originalText: string, newMode: Mode, doneFunc: (rules: import('./rules').BakedRule[]) => any): string;
+export function genderize(originalText: string, newMode: Mode, doneFunc?: (rules: import('./rules').BakedRule[]) => any): string;

@@ -37,6 +37,7 @@
     "@babel/plugin-syntax-jsx": "^7.12.1",
     "@babel/plugin-transform-react-jsx": "^7.12.12",
     "@babel/preset-env": "^7.12.1",
+    "@types/jquery": "^3.5.5",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",

@@ -1,4 +1,8 @@
 export default class TextAttribute extends TextObject {
-    attr: {};
+    constructor(attr: any);
+    /**
+     * @type {Attr}
+     */
+    attr: Attr;
 }
 import TextObject from "./textObject";

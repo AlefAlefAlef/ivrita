@@ -15,7 +15,7 @@ export const Mode = {
 /**
  * @param {string} originalText The original text, un-genderized
  * @param {Mode} newMode The new mode to genderize the string into
- * @param {(rules: import('./rules').BakedRule[]) => any} doneFunc
+ * @param {(rules: import('./rules').BakedRule[]) => any} [doneFunc]
  * An optional callback to be executed after the genderization,
  * which will receive an array of matched rules
  */

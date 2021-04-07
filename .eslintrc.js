@@ -22,5 +22,6 @@ module.exports = {
     'no-new': [0],
     'no-underscore-dangle': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/setup-jest.js'] }], // Allow importing jQuery in Jest setup file
+    'lines-between-class-members': 0,
   },
 };

@@ -1,4 +1,11 @@
 export default class TextNode extends TextObject {
-    node: {};
+    /**
+     * @param {Text} node
+     */
+    constructor(node: Text);
+    /**
+     * @type {Text}
+     */
+    node: Text;
 }
 import TextObject from "./textObject";

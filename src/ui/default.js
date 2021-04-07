@@ -55,6 +55,10 @@ export default class DefaultSwitch extends IvritaSwitch {
     default: Ivrita.NEUTRAL,
   }
 
+  /**
+   * Set the mode for this switch and the Ivrita instances attached to it
+   * @param {Mode} mode The new mode
+   */
   setMode(mode) {
     this.element.querySelectorAll('a.ivrita-mode-changer').forEach((e) => {
       if (parseInt(e.dataset.ivritaMode, 10) === mode) {
