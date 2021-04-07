@@ -56,6 +56,11 @@ export default class DefaultSwitch extends IvritaSwitch {
   }
 
   /**
+   * @type {HTMLElement}
+   */
+  element;
+
+  /**
    * Set the mode for this switch and the Ivrita instances attached to it
    * @param {Mode} mode The new mode
    */
