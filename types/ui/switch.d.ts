@@ -4,20 +4,20 @@ export default class IvritaSwitch {
      */
     static EVENT_INIT: string;
     /**
-     * @param  {...Ivrita} ivritaInstances
+     * @param  {...import('../element').default} ivritaInstances
      */
-    constructor(...ivritaInstances: any[]);
+    constructor(...ivritaInstances: import('../element').default[]);
     /**
-     * @property {Ivrita[]} ivritaInstances
+     * @type {import('../element').default[]}
      */
-    ivritaInstances: any[];
+    ivritaInstances: import('../element').default[];
     /**
-     * @param  {...Ivrita} ivritaInstances
+     * @param  {...import('../element').default} ivritaInstances
      */
-    setIvritaInstances(...ivritaInstances: any[]): void;
+    setIvritaInstances(...ivritaInstances: import('../element').default[]): void;
     /**
      * Sets the mode for all ivritaInstances of this switch
-     * @param {string} modeStr The new mode
+     * @param {import('../ivrita').Mode} mode The new mode
      */
-    setMode(mode: any): void;
+    setMode(mode: import('../ivrita').Mode): void;
 }

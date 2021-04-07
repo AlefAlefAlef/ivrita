@@ -1,3 +1,4 @@
+// @ts-check
 import JSXComponent from 'jsx-render/lib/JSXComponent';
 
 export default class IvritaSwitch extends JSXComponent {
@@ -7,12 +8,12 @@ export default class IvritaSwitch extends JSXComponent {
   static EVENT_INIT = 'ivrita-ui-ready';
 
   /**
-   * @property {Ivrita[]} ivritaInstances
+   * @type {import('../element').default[]}
    */
   ivritaInstances = [];
 
   /**
-   * @param  {...Ivrita} ivritaInstances
+   * @param  {...import('../element').default} ivritaInstances
    */
   constructor(...ivritaInstances) {
     super();
@@ -22,7 +23,7 @@ export default class IvritaSwitch extends JSXComponent {
   }
 
   /**
-   * @param  {...Ivrita} ivritaInstances
+   * @param  {...import('../element').default} ivritaInstances
    */
   setIvritaInstances(...ivritaInstances) {
     this.ivritaInstances = ivritaInstances;
@@ -30,10 +31,10 @@ export default class IvritaSwitch extends JSXComponent {
 
   /**
    * Sets the mode for all ivritaInstances of this switch
-   * @param {string} modeStr The new mode
+   * @param {import('../ivrita').Mode} mode The new mode
    */
   setMode(mode) {
     this.ivritaInstances.forEach((i) => i.setMode(mode));
-    window.localStorage.setItem('ivrita-mode', mode);
+    window.localStorage.setItem('ivrita-mode', mode.toString());
   }
 }
