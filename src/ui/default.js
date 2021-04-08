@@ -68,7 +68,7 @@ export default class DefaultSwitch extends IvritaSwitch {
         document.getElementById('ivrita-default-switch').setAttribute('aria-activedescendant', e.getAttribute('id'));
       } else {
         e.classList.remove('ivrita-active');
-        e.removeAttribute('aria-selected');
+        e.setAttribute('aria-selected', 'false');
       }
     });
     this.element.querySelector(`a[data-ivrita-mode="${mode}"]`).classList.add('ivrita-active');
@@ -78,7 +78,7 @@ export default class DefaultSwitch extends IvritaSwitch {
 
   render() {
     return (
-      <div id="ivrita-default-switch" class={`ivrita-switch ivrita-switch--${this.config.position}`} tabindex="0" title={ this.config.iconTitle } aria-role="listbox">
+      <div id="ivrita-default-switch" class={`ivrita-switch ivrita-switch--${this.config.position}`} tabindex="0" title={ this.config.iconTitle } role="listbox">
         <a href="#" class="ivrita-logo" tabindex="-1" title={ this.config.iconTitle } dangerouslySetInnerHTML={{ __html: this.config.logoIcon }}></a>
         {
           Object.keys(this.config.modes)
@@ -93,7 +93,7 @@ export default class DefaultSwitch extends IvritaSwitch {
               aria-label={ this.config.ariaLabel && this.config.ariaLabel.includes('%s')
                 ? this.config.ariaLabel.replace('%s', this.config.modes[mode].label)
                 : this.config.modes[mode].label }
-              aria-role="option"
+              role="option"
               ref={ super.ref }
               onClick={ (e) => { e.preventDefault(); this.setMode(mode); } }
               dangerouslySetInnerHTML={{ __html: this.config.modes[mode].icon }}
