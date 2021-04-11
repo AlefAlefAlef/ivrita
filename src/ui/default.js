@@ -55,11 +55,17 @@ export default class DefaultSwitch extends IvritaSwitch {
     default: Ivrita.NEUTRAL,
   }
 
+  /**
+   * @type {HTMLElement}
+   */
+  element;
+
   setMode(mode) {
     this.element.querySelectorAll('a.ivrita-mode-changer').forEach((e) => {
       if (parseInt(e.dataset.ivritaMode, 10) === mode) {
         e.classList.add('ivrita-active');
         e.setAttribute('aria-selected', 'true');
+        document.getElementById('ivrita-default-switch').setAttribute('aria-activedescendant', e.getAttribute('id'));
       } else {
         e.classList.remove('ivrita-active');
         e.removeAttribute('aria-selected');
@@ -72,7 +78,7 @@ export default class DefaultSwitch extends IvritaSwitch {
 
   render() {
     return (
-      <div class={`ivrita-switch ivrita-switch--${this.config.position}`} tabindex="0" title={ this.config.iconTitle }>
+      <div id="ivrita-default-switch" class={`ivrita-switch ivrita-switch--${this.config.position}`} tabindex="0" title={ this.config.iconTitle } aria-role="listbox">
         <a href="#" class="ivrita-logo" tabindex="-1" title={ this.config.iconTitle } dangerouslySetInnerHTML={{ __html: this.config.logoIcon }}></a>
         {
           Object.keys(this.config.modes)
@@ -80,12 +86,14 @@ export default class DefaultSwitch extends IvritaSwitch {
             .map((mode) => parseInt(mode, 10))
             .map((mode) => (
             <a href="#"
+              id={`ivrita-default-switch-button-${mode}`}
               class={`ivrita-mode-changer ivrita-button ivrita-button-style-${this.config.style}`}
               data-ivrita-mode={ mode }
               title={ this.config.modes[mode].label }
               aria-label={ this.config.ariaLabel && this.config.ariaLabel.includes('%s')
                 ? this.config.ariaLabel.replace('%s', this.config.modes[mode].label)
                 : this.config.modes[mode].label }
+              aria-role="option"
               ref={ super.ref }
               onClick={ (e) => { e.preventDefault(); this.setMode(mode); } }
               dangerouslySetInnerHTML={{ __html: this.config.modes[mode].icon }}
