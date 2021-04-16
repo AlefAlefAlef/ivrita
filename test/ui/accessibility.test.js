@@ -20,11 +20,11 @@ test('All buttons in default switch contain aria-labels', () => {
 });
 
 test('The selected button has an aria-selected attribute', () => {
-  expect(Array.from(document.getElementsByClassName('ivrita-button')).filter((el) => el.getAttribute('aria-selected') == 'true').length).toEqual(1);
+  expect(Array.from(document.getElementsByClassName('ivrita-button')).filter((el) => el.getAttribute('aria-selected') === 'true').length).toEqual(1);
 
   defaultSwitch.setMode(FEMALE);
 
-  expect(Array.from(document.getElementsByClassName('ivrita-button')).filter((el) => el.getAttribute('aria-selected') == 'true').length).toEqual(1);
+  expect(Array.from(document.getElementsByClassName('ivrita-button')).filter((el) => el.getAttribute('aria-selected') === 'true').length).toEqual(1);
   expect(document.querySelector('.ivrita-mode-changer[data-ivrita-mode="2"]').getAttribute('aria-selected')).toEqual('true');
 });
 
