@@ -38,7 +38,7 @@ Installing the library on your website requires 3 steps:
 
 3. Change the gender later with `setMode` on the object instance:
     ```JavaScript
-    ivrita.setMode(Ivrita.MALE); // Possible options: Ivrita.MALE, Ivrita.FEMALE, Ivrita.NEUTRAL, Ivrita.ORIGNAL
+    ivrita.setMode(Ivrita.MALE); // Possible options: Ivrita.MALE, Ivrita.FEMALE, Ivrita.NEUTRAL, Ivrita.ORIGINAL
     ```
 That's it!
 
